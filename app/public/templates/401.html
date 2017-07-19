@@ -1,0 +1,15 @@
+{% extends "layouts/plain.html" %}
+{% block body %}
+	
+	{% include 'partials/modals.html' %}
+
+  <a class="w-hidden button--register" data-ix="register"></a>
+
+  <div class="utility-page-wrap">
+    <div class="utility-page-content"><a href="/"><img src="/images/logo-panoram.png"></a>
+      <h2>Autentificación requerida</h2>
+      <div>La página a la que intentas acceder requiere autorización. Esto puede deberse a que no ingresaste o tu sesión puede haber expirado. <a href="/">Regresa al inicio</a> para volver a ingresar.</div>
+    </div>
+  </div>
+
+{% endblock %}

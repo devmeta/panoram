@@ -1,0 +1,10 @@
+app/.env
+app/vendor/
+app/composer.lock
+app/public/js/config.js
+api/.env
+api/vendor/
+api/logs/
+api/composer.lock
+api/config/client_id.json
+bucket/*

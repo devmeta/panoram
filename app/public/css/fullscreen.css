@@ -1,0 +1,42 @@
+html, body {
+	margin:0;
+	padding: 0;
+	height: 100%;
+	background-color: #000;
+}
+
+.videoContainer 
+{
+    position:absolute;
+    height:100%;
+    width:100%;
+    overflow: hidden;
+}
+
+.videoContainer video,  .videoContainer canvas
+{
+	position: absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom: 0;
+	display: inherit;
+	margin: auto;
+}
+
+canvas {
+	z-index: 99;
+}
+
+.toolbar {
+	position: absolute;
+	z-index: 10;
+	top: 10px;
+	right:10px;
+}
+
+.bottom {
+	position: absolute;
+	top: 10px;
+	left:10px;
+}

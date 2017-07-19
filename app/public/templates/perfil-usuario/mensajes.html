@@ -1,0 +1,82 @@
+{% extends "layouts/default.html" %}
+
+{% block head %}
+  <meta content="Perfil usuario :: Autos" property="og:title">
+{% endblock %}
+
+{% block body %}
+  <div class="profile__container">
+    <div class="profile__menu">
+      <a class="profile__menu--item w-inline-block" href="/perfil-usuario/transmisiones"><img class="profile__menu--img" src="/images/publicaciones.svg">
+      </a>
+      <a class="profile__menu--item w-inline-block" href="/perfil-usuario/datos"><img class="profile__menu--img" src="/images/profile.svg">
+      </a>
+      <a class="profile__menu--item w-inline-block" href="/perfil-usuario/mensajes"><img class="profile__menu--img" src="/images/mensajes-active.svg">
+      </a>
+      <a class="profile__menu--item w-inline-block button--logout" href="#"><img class="profile__menu--img" src="/images/logout.svg">
+      </a>
+    </div>
+    <div class="messages profile__content">
+      <div class="tabs-vertical w-tabs" data-duration-in="300" data-duration-out="100">
+        <div class="tabsmenuvertical w-tab-menu">
+        </div>
+        <div class="tabscontentvertical w-tab-content">
+            <div class="noinfo">No hay mensajes que mostrar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script id="message-tab" type="text/x-jsrender">
+    <a class="tabslinkvertical w-inline-block w-tab-link [[:vehicle.code]]-[[:user_id]]-[[:recipient_id]]" data-w-tab="[[:vehicle.code]]-[[:user_id]]-[[:recipient_id]]">
+      <div class="tabprofilepicture"><img src="[[:~isInterlocutor(#index,user_id,'picture')]]">
+      </div>
+      <div>
+        <div class="tabslinkvertical--h">[[:~isInterlocutor(#index,user_id,'title')]]</div>
+        <div class="tabslinkvertical--p">[[:vehicle.title]]</div>
+        <div class="tabslinkvertical--p">[[:~isPrice(vehicle.currency,vehicle.price)]]</div>
+      </div>
+    </a>
+  </script>
+
+  <script id="message" type="text/x-jsrender">
+    <div class="msj__container">
+      <div class="msj--name[[if ~isOther(user.id)]] other[[/if]]">[[if ~isOther(user.id)]][[:user.title]] <em>dice:</em>[[else]]Vos:[[/if]]
+      </div>
+      <p>[[:content]] <span class="notif--small">hace [[:timespan]]</span></p>
+    </div>
+  </script>
+
+  <script id="message-content" type="text/x-jsrender">
+    <div class="w-tab-pane [[:vehicle.code]]-[[:user_id]]-[[:recipient_id]]" data-w-tab="[[:vehicle.code]]-[[:user_id]]-[[:recipient_id]]">
+    [[for lines.data]]
+      <div class="msj__container">
+        <div class="msj--name[[if ~isOther(user.id)]] other[[/if]]">[[if ~isOther(user.id)]][[:user.title]] <em>dice:</em>[[else]]Vos:[[/if]]
+        </div>
+        <p>[[:content]] <span class="notif--small">hace [[:timespan]]</span></p>
+      </div>
+    [[/for]]
+      <div class="msj__container">
+        <div class="w-form2">
+          <form class="w-clearfix" id="perfil-form-message">
+            <input type="hidden" name="recipient_id" value="[[:~isRecipient(user_id,recipient_id)]]">
+            <label class="form--label" for="name-2">Mensaje</label>
+            <textarea class="form-area w-input" data-name="mensaje" maxlength="5000" name="mensaje" placeholder="Escribe un mensaje..." required></textarea>
+            <input class="nomargin principalbutton totheright w-button" data-wait="Enviando..." type="submit" value="Enviar">
+          </form>
+          <div class="form__succes w-form-done">
+            <div>Se envió tu mensaje</div>
+          </div>
+          <div class="form__error w-form-fail">
+            <div>Hubo un error. Vuelve a intentar más tarde por favor.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+{% endblock %}
+
+{% block assets %}
+  <script src="/js/perfil-mensajes.js" type="text/javascript"></script>
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends "layouts/light.html" %}
+
+{% block head %}
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{app_title}} Perfil" />
+  <meta property="og:description" content="Publica desde tu celular gratis, encontrá la oportunidad que estabas esperando." />
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="https://panoram.com/images/IMG_3504bfree.jpg" />
+{% endblock %}
+
+{% block body %}
+
+  <div class="modalwrapper register">
+    <div class="modalwrapper__container"><img class="close" data-ix="close" src="/images/cancel.svg"><img src="/images/logo-panoram.png">
+      <p class="modal--p">Crea tu cuenta! Te enviaremos un email para verificar tus datos.&nbsp; Recuerda completar un email válido ya que será el medio de comunicación entre vendedor y comprador.</p>
+      <div class="modalwrapper__container--btns">
+        <a class="facebook social-btn w-inline-block" href="#"><img src="/images/facebook.svg">
+          <div class="social-btn--p">Continuar con Facebook</div>
+        </a>
+        <a class="google social-btn w-inline-block" href="#"><img src="/images/google-plus.svg">
+          <div class="social-btn--p">Continuar con Google</div>
+        </a>
+      </div>
+      <div class="formwrapper w-form2">
+        <form class="w-clearfix" data-name="register" id="wf-form-register" name="wf-form-register">
+          <label class="form--label" for="name">Ingresa tu email</label>
+          <div class="form__field"><img src="/images/email.svg">
+            <input class="form-field w-input" data-name="email" id="email" maxlength="256" name="email" placeholder="Ej: matias@panoram.com" type="email" required>
+          </div>
+          <label class="form--label" for="email">Ingresa tu contraseña</label>
+          <div class="form__field"><img src="/images/unlock.svg">
+            <input class="form-field w-input" data-name="password" id="password" maxlength="256" name="password" placeholder="****" type="password" required>
+          </div>
+          <label class="form--label" for="email">repetir contraseña</label>
+          <div class="form__field"><img src="/images/unlock.svg">
+            <input class="form-field w-input" data-name="confirm-password" id="confirm-password" maxlength="256" name="confirm-password" placeholder="****" type="password" required>
+          </div>
+          <div class="form__buttons">
+            <a class="secundarybutton w-inline-block" data-ix="gotologin" href="#">
+              <div>Ya tengo cuenta</div>
+            </a>
+            <input class="principalbutton w-button" data-wait="Un segundo por favor..." type="submit" value="Crear mi cuenta">
+          </div>
+        </form>
+        <div class="form__succes w-form-done">
+          <div>Ingresa a tu casilla de email y verifica tu cuenta. No olvides chequear la carpeta de spam.</div><a class="principalbutton w-button" data-ix="gotologin" href="#">Listo!</a><a class="form_textlink" href="#">No me llegó nada,
+vuelve a enviarme el email.</a>
+        </div>
+        <div class="form__error w-form-fail">
+          <div>Hay un error de datos. Chequeá tu email y contraseña.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="login modalwrapper">
+    <div class="modalwrapper__container"><img class="close" data-ix="close" src="/images/cancel.svg"><img src="/images/logo-panoram.png">
+      <p class="modal--p">Inicia sesión. Ingresa con el email que has creado tu cuenta.</p>
+      <div class="modalwrapper__container--btns">
+        <a class="facebook social-btn w-inline-block" href="#"><img src="/images/facebook.svg">
+          <div class="social-btn--p">Continuar con Facebook</div>
+        </a>
+        <a class="google social-btn w-inline-block" href="#"><img src="/images/google-plus.svg">
+          <div class="social-btn--p">Continuar con Google</div>
+        </a>
+      </div>
+      <div class="formwrapper w-form">
+        <form class="w-clearfix" data-name="login" data-redirect="perfil-usuario" id="wf-form-login" name="wf-form-login" redirect="perfil-usuario">
+          <label class="form--label" for="name">Ingresa tu email</label>
+          <div class="form__field"><img src="/images/email.svg">
+            <input class="form-field w-input" data-name="email" id="email" maxlength="256" name="email" placeholder="Ej: matias@panoram.com" type="email" required>
+          </div>
+          <label class="form--label" for="email">Ingresa tu contraseña</label>
+          <div class="form__field"><img src="/images/unlock.svg">
+            <input class="form-field w-input" data-name="Password" id="password" maxlength="256" name="password" placeholder="****" type="password" required>
+          </div><a class="form_textlink" href="/olvide-mi-contrasena">No recuerdo mi contraseña</a>
+          <div class="form__buttons">
+            <a class="secundarybutton w-inline-block" data-ix="gotoregister" href="#">
+              <div>No tengo cuenta</div>
+            </a>
+            <input class="principalbutton w-button" data-wait="Un segundo por favor..." type="submit" value="Ingresar">
+          </div>
+        </form>
+        <div class="form__succes w-form-done">
+          <div>Estamos cargando los datos de tu perfil!</div>
+        </div>
+        <div class="form__error w-form-fail">
+          <div>Tu email y contraseña no coinciden.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="utility-page-wrap">
+    <div class="utility-page-content"><!--img src="/images/logo-panoram.png"-->
+      <div class="perfil"></div>
+  		<a class="favorite-active button--infotopublish" data-ix="infotopublish"></a>
+  		<a class="favorite-active button--register" data-ix="register"></a>
+    </div>
+  </div>
+  
+  <script id="perfil" type="text/x-jsrender">
+  [[if status=='success']]
+    <div class="profile__profile-picture">
+      <img src="[[if data.picture]][[:data.picture]][[else]][[:~isDummy()]][[/if]]" width="60" height="60">
+    </div>
+    <h2>[[:data.first_name]] [[:data.last_name]]</h2>
+    <div>Miembo desde hace [[:data.member_since]]</div>
+  [[else]]
+    <div class="profile__profile-picture">
+      <img src="[[:~isDummy()]]" width="60" height="60">
+    </div>
+    <h2>Usuario no encontrado</h2>
+    <div>No pudimos encontrar el usuario que buscás.</div>
+  [[/if]]
+  </script>
+
+{% endblock %}
+
+{% block assets %}
+  <script src="/js/perfil.js" type="text/javascript"></script>
+{% endblock %}    

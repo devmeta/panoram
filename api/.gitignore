@@ -1,0 +1,8 @@
+.env
+/vendor/
+composer.lock
+.vagrant/
+node_modules/
+config/client_id.json
+npm-debug.log
+bucket/

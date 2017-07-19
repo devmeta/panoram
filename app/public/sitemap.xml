@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+	<url>
+	  <loc>https://www.panoram.com.ar/</loc>
+    <lastmod>2017-05-11T16:31:28+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+	</url>
+	<url>
+	  <loc>https://www.panoram.com.ar/un-auto-para-vos</loc>
+    <lastmod>2017-05-11T16:31:28+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+	</url>
+	<url>
+	  <loc>https://www.panoram.com.ar/asegura-con-nosotros</loc>
+    <lastmod>2017-05-11T16:31:28+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+	</url>
+	<url>
+	  <loc>https://www.panoram.com.ar/preguntas-frecuentes</loc>
+    <lastmod>2017-05-11T16:31:28+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+	</url>
+	<url>
+	  <loc>https://www.panoram.com.ar/terminos-y-condiciones</loc>
+    <lastmod>2017-05-11T16:31:28+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+	</url>
+	<url>
+	  <loc>https://www.panoram.com.ar/politica-de-privacidad</loc>
+    <lastmod>2017-05-11T16:31:28+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+	</url>
+</urlset>

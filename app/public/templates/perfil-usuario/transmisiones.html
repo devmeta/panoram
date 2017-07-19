@@ -1,0 +1,205 @@
+{% extends "layouts/default.html" %}
+
+{% block head %}
+  <title>Perfil usuario :: Autos</title>
+  <meta content="Perfil usuario :: Autos" property="og:title">
+{% endblock %}
+
+{% block body %}
+  <div class="profile__container">
+    <div class="profile__menu">
+      <a class="profile__menu--item w-inline-block" href="/perfil-usuario/transmisiones"><img class="profile__menu--img" src="/images/publicaciones-active.svg">
+      </a>
+      <a class="profile__menu--item w-inline-block" href="/perfil-usuario/datos"><img class="profile__menu--img" src="/images/profile.svg">
+      </a>
+      <a class="profile__menu--item w-inline-block" href="/perfil-usuario/mensajes"><img class="profile__menu--img" src="/images/mensajes.svg">
+      </a>
+      <a class="profile__menu--item w-inline-block button--logout" href="#"><img class="profile__menu--img" src="/images/logout.svg">
+      </a>
+    </div>
+    <div class="publish__uploadimages--info">
+    </div>
+    <div class="profile__content">
+      <div class="tabs w-tabs" data-duration-in="300" data-duration-out="100">
+        <div class="w-tab-menu">
+          <a class="tabmenu w--current w-inline-block w-tab-link" data-w-tab="tus publicaciones">
+            <div>Tus Publicaciones</div>
+          </a>
+          <a class="tabmenu w-inline-block w-tab-link" data-w-tab="tus favoritos">
+            <div>Favoritos</div>
+          </a>
+          <a class="tabmenu w-inline-block w-tab-link" data-w-tab="configuración de alertas">
+            <div>Alertas</div>
+          </a>
+        </div>
+        <div class="tabscontent w-tab-content">
+          <div class="tabpane w--tab-active w-tab-pane tab-pane__publicaciones" data-w-tab="tus publicaciones">
+            <div class="publicaciones__caritem__actions">
+              <div class="publish__section">
+                <div class="publish__twoinone">
+                  <div class="publicaciones__caritem__search">
+                    <input class="w-input form__field publicaciones--filtro" maxlength="256" placeholder="Buscar publicación" type="text">
+                  </div>
+                </div>
+                <div class="publish__twoinone">
+                  <div class="publicaciones__caritem__options">
+                    <a class="principalbutton w-button publicaciones__pausar" href="">Pausar</a>
+                    <a class="principalbutton w-button publicaciones__despausar" href="">Quitar de Pausa</a>
+                    <a class="principalbutton w-button publicaciones__renovar" href="">Renovar</a>
+                    <a class="principalbutton w-button publicaciones__vendido" href="">Vendido</a>
+                    <a class="principalbutton w-button publicaciones__disponible" href="">Disponible</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content_publicaciones">
+              <div class="noinfo">Todavía no creaste ninguna publicación. Publicá tu auto en Ver Usados y vendelo sin pagar comisión.
+                <a href="/transmitir" class="header-top--button button--publish w-inline-block">
+                  <div>Transmitir en vivo ahora</div>
+                </a>
+                <!--a class="header-top--button button--publish w-inline-block">
+                  <div>Programar transmisión</div>
+                </a>                
+                <a class="header-top--button button--publish w-inline-block">
+                  <div>Anunciar transmisión</div>
+                </a-->                
+                <a class="w-hidden button--infotopublish" data-ix="infotopublish"></a>
+                <a class="w-hidden button--register" data-ix="register"></a>
+              </div>
+            </div>
+          </div>
+          <div class="tabpane w-tab-pane tab-pane__fav" data-w-tab="tus favoritos">
+            <div class="noinfo">Todavía no agregaste ningún auto a tus favoritos.
+              <br/>
+              <img src="/images/favoritos-empty.svg"  />
+              <a href="https://panoram.com" class="header-top--button">Agregar autos a mis favoritos</a>
+            </div>
+          </div>
+          <div class="tabpane w-tab-pane" data-w-tab="configuración de alertas">
+            <div class="caralerts tab-pane__alert">
+            </div>
+            <div class="noinfo">Cuando veas un auto que te guste agregalo a tus alertas para no perderte ninguna publicación similar.
+              <br/>
+              <img src="/images/alerta-noinfo.png"  />
+              <a href="https://panoram.com" class="header-top--button">Buscar autos para agregar autos a mis alertas</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script id="alert" type="text/x-jsrender">
+    <div class="itemalerta">
+      <a class="carlisting__caritem nomargin w-inline-block" href="[[:links.self]]" title="Ingresa para ver los detalles">
+      [[if warranty]]
+        <div class="garantizado"><img src="/images/garantia.svg">
+        </div>
+      [[/if]]
+        <div class="caritem--image" [[if photo]]style="background-image:url([[:~getBucketSize('500x375',photo.photo_url)]])"[[/if]]></div>
+        <div class="caritem--profilepicture"><img src="[[if user.picture]][[:~getBucketSize('80x80',user.picture)]][[else]][[:~isDummy()]][[/if]]">
+        </div>
+        <div class="caritem__data">
+          <h1 class="caritem__data--h">[[:brand.title]] [[:model.title]]</h1>
+          <div class="caritem__data--description">
+            <div class="caritem__data--descr__n">
+              <div>[[:kms]]km</div>
+              <div>[[:mt_year]] | [[:region.title]]</div>
+            </div>
+          [[if ~isOwned(id) == false]]
+            <img class="caritem__data--descr__fav" data-type="fav" data-id="[[:id]]" src="/images/fav[[if ~isFav(id)]]-active[[else]]orite[[/if]].svg">
+          [[/if]]
+          </div>
+          <div class="caritem__data--price">[[:~isPrice(currency,price)]]</div>
+        </div>
+      </a>
+      <div class="togglebutton caritem__data--descr__alert" data-type="alert" data-id="[[:id]]" data-ix="toggle">
+        <div class="togglebuttongreen" style="transition: opacity 500ms; opacity: 1;"></div>
+        <div class="buttontoggle" style="transform-style: preserve-3d; transition: transform 500ms ease-in-out; transform: translateX(51px) translateY(0px) translateZ(0px);"></div>
+        <div class="buttontext-off" style="transition: opacity 175ms; opacity: 0;">off</div>
+      </div>
+    </div>
+  </script>
+
+  <script id="fav" type="text/x-jsrender">
+    <a class="carlisting__caritem w-inline-block" href="[[:links.self]]" title="Ingresa para ver los detalles">
+    [[if warranty]]
+      <div class="garantizado">
+        <img src="/images/garantia.svg">
+      </div>
+    [[/if]]
+      <div class="caritem--image" [[if photo]]style="background-image:url([[:~getBucketSize('500x375',photo.photo_url)]])"[[/if]]></div>
+      <div class="caritem--profilepicture"><img src="[[if user.picture]][[:~getBucketSize('80x80',user.picture)]][[else]][[:~isDummy()]][[/if]]">
+      </div>
+      <div class="caritem__data">
+        <h1 class="caritem__data--h">[[:brand.title]] [[:model.title]]</h1>
+        <div class="caritem__data--description">
+          <div class="caritem__data--descr__n">
+            <div>[[:kms]]km</div>
+            <div>[[:mt_year]] | [[:region.title]]</div>
+          </div>
+        [[if ~isOwned(id) == false]]
+          <img class="caritem__data--descr__fav" data-type="fav" data-id="[[:id]]" src="/images/fav[[if ~isFav(id)]]-active[[else]]orite[[/if]].svg">
+        [[/if]]
+        </div>
+        <div class="caritem__data--price">[[:~isPrice(currency,price)]]</div>
+      </div>
+    </a>
+  </script>
+
+  <script id="publicaciones" type="text/x-jsrender">
+    <div class="publicaciones__caritem [[:code]][[if sold]] vendido[[/if]][[if paused]] pausado[[/if]][[if ~isDraft(price,kms,tel,mt_year,region.id,city.id)]] faltandatos[[/if]]" id="[[:code]]" data-active="[[:active]]" data-paused="[[:paused]]" data-sold="[[:sold]]">
+      <a href="[[:links.self]]" target="_blank">
+        <div class="caritem--img" [[if photo]]style="background-image: url([[:~getBucketSize('500x375',photo.photo_url)]])"[[/if]]></div>
+      </a>
+      <div class="caritem__principalinfo w-hidden-small w-hidden-tiny ">
+        <h4 class="caritem__principalinfo--h">[[:brand.title]] [[:model.title]]&nbsp;|&nbsp;[[:~isPrice(currency,price)]]</h4>
+      [[if warranty]]
+        <a class="congarantia w-inline-block" href="/garantia-mecanica"><img src="/images/flame.svg">
+          <div class="congarantia--text">Este auto aplica al plan de garantías</div>
+        </a>
+      [[/if]]
+      </div>
+      <div class="caritem__details">
+        <div class="caritem__detail__top">
+        [[if ~isDraft(price,kms,tel,mt_year,region.id,city.id)]]
+          <div class="destaque--h">Faltan datos</div>
+        [[else]]
+          <div>Publicación clásica</div>
+        [[/if]]
+          <div class="caritem--division"></div>
+          <div>#[[:public_id]]</div>
+          <div class="caritem--division"></div>
+          <div>[[if sold]]Vendido[[else]] [[if paused]]Pausado[[else]] [[if active]]Vence en [[:enabled_until]][[else]]Caducado[[/if]][[/if]][[/if]]</div>
+        </div>
+        <div class="caritem__detail__bottom">
+        [[if !sold]]
+          <div>[[:hits]] vistas</div>
+          <div class="black caritem--division"></div>
+          <div>Solicitaron tus datos [[:requests]] veces</div>
+        [[/if]]
+        [[if (!enabled)]]
+          <div class="black caritem--division"></div>
+          <div><strong>esperando aprobar</strong></div>
+        [[/if]]
+        </div>
+      </div>
+      <div class="caritem__buttons">
+        <div class="w-hidden-main w-hidden-medium  w-col">
+          <h6>[[:brand.title]] [[:model.title]]&nbsp; |&nbsp; [[:~isPrice(currency,price)]]</h6>
+        </div>
+        [[if !sold]]
+        <div class="w-col">
+          <a class="principalbutton w-button" href="/vender/[[:code]][[if (!kms||kms==''||!mt_year||mt_year<=1950||!region.id||!city.id)]]#paso2[[else]]#paso4[[/if]]">Editar</a>
+          <a href="#" class="caritem--textlink caritem--eliminar" data-code="[[:code]]">Eliminar</a>
+        </div>
+        [[/if]]
+      </div>
+    </div>
+  </script>
+
+{% endblock %}
+
+{% block assets %}
+  <script src="/js/perfil-autos.js" type="text/javascript"></script>
+{% endblock %}

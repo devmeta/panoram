@@ -1,0 +1,25 @@
+  <div class="header-top">
+    <a class="w-inline-block" href="/"><img class="header-top--logo" src="/images/logo-panoram.png">
+    </a>
+  </div>
+
+  {% include 'partials/modals.html' %}
+
+  <script id="profileactions" type="text/x-jsrender">
+  [[if ~is_token()]]
+    <a class="item-right item-w-image listnav--item logged w-inline-block button--profile" href="/perfil-usuario/transmisiones">
+      <div class="header--profilepicture"><img src="[[if picture]][[:~getBucketSize('80x80',picture)]][[else]][[:~is_dummy()]][[/if]]">
+      </div>
+      <div class="item-w-image--p">[[if first_name]][[:first_name]][[else]]Mi cuenta[[/if]]</div>
+    </a>
+    <a class="item-right item-w-image listnav--item w-inline-block button--login w-hidden-important" href="#" data-ix="register">
+      <img class="item--img" src="/images/icono-ingresar.svg">
+      <div class="item-w-image--p">Ingresar</div>
+    </a>
+  [[else]]
+    <a class="item-right item-w-image listnav--item w-inline-block button--login" href="#" data-ix="register">
+      <img class="item--img" src="/images/icono-ingresar.svg">
+      <div class="item-w-image--p">Ingresar</div>
+    </a>
+  [[/if]]
+  </script>

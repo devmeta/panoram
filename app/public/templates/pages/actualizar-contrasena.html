@@ -1,0 +1,39 @@
+{% extends "layouts/light.html" %}
+
+{% block head %}
+  <title>{{app_title}} Actualiza tu Contraseña</title>
+  <meta content="Compra y venta de autos usados y 0km.  Descbrí cuál es el mejor auto para vos y encontrá la mejor oferta simple y rápido." name="description">  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{app_title}} Actualizar mi contraseña" />
+  <meta property="og:description" content="Publica desde tu celular gratis, encontrá la oportunidad que estabas esperando." />
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="https://panoram.com/images/IMG_3505bfree.jpg" />
+{% endblock %}
+
+{% block body %}
+
+<div class="missinginfo">
+    <div class="formwrapper w-form2">
+      <form class="w-clearfix" data-name="email-pass" id="wf-form-email-pass" name="wf-form-email-pass">
+        <input type="hidden" name="token" value="{{params.token}}" />
+        <label class="form--label" for="name">Ingresa una nueva contraseña para tu cuenta</label>
+        <div class="form__field"><img src="images/email.svg">
+          <input class="form-field w-input" data-name="new_password" id="new_password" maxlength="256" name="new_password" placeholder="********" type="password" required>
+        </div>
+        <div class="form__buttons">
+          <input class="principalbutton w-button" data-wait="Un segundo por favor..." type="submit" value="Enviar">
+        </div>
+      </form>
+      <div class="form__succes w-form-done">
+        <div>Tu constraseña fue actualizada correctamente.<br/>Redireccionando, por favor espere... </div>
+      </div>
+      <div class="form__error w-form-fail">
+        <div>Esta solicitud de actualización de contraseña no tiene autorización o ha caducado.</div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block assets %}
+  <script src="/js/actualizar-contrasena.js" type="text/javascript"></script>
+{% endblock %}  

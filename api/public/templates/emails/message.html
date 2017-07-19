@@ -1,0 +1,44 @@
+{% extends "layouts/email.html" %}
+
+{% block body %}
+            <!-- START CENTERED WHITE CONTAINER -->
+            <span class="preheader">Recibiste un nuevo mensaje</span>
+            <table class="main">
+
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="wrapper">
+                  <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td>
+                        <h2>{{recipient.first_name}}: Recibiste un mensaje</h2>
+                        <p>Es acerca de tu publicación {{item.brand.title}} {{item.model.title}}</p>
+                        <p>&nbsp;</p>
+                        <p><strong>{{created}}</p>
+                        <p><strong>{{sender.first_name}} {{sender.last_name}} ({{sender.username}})</strong> dice:</p>
+                        <blockquote>{{content}}</blockquote>
+                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                          <tbody>
+                            <tr>
+                              <td align="left">
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                  <tbody>
+                                    <tr>
+                                      <td> <a href="{{app_url}}/perfil-usuario/mensajes#{{item.code}}-{{sender.id}}-{{recipient.id}}" target="_blank">Clic para responder este mensaje</a> </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <p>Cordialmente, el equipo Verusados.com</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- END MAIN CONTENT AREA -->
+              </table>
+{% endblock %}              

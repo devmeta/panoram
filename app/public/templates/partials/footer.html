@@ -1,0 +1,63 @@
+    <div class="footer__link"><a class="footer__link--a" href="/preguntas-frecuentes">Preguntas Frecuentes</a>
+      <div class="footer__link--division"></div><a class="footer__link--a" href="/terminos-y-condiciones">Términos y condiciones</a>
+      <div class="footer__link--division"></div><a class="footer__link--a" href="/politica-de-privacidad">Política de privacidad</a>
+      <div class="footer__link--division"></div><a class="footer__link--a" data-option="Contacto" data-ix="gotocontact" href="#">Contacto</a>
+    </div>
+    <div class="footer__link"><a class="footer__link--a" data-ix="gotocontact" href="#">Chapa y Pintura</a>
+      <div class="footer__link--division"></div><a class="footer__link--a" data-option="Talleres" data-ix="gotocontact" href="#">Talleres</a>
+      <div class="footer__link--division"></div><a class="footer__link--a" data-option="Seguro" data-ix="gotocontact" href="#">Seguros</a>
+      <div class="footer__link--division"></div><a class="footer__link--a" data-option="revision" data-ix="gotocontact" href="#">Revisión mecánica</a>
+      <div class="footer__link--division"></div><a class="footer__link--a" data-option="accesorios" data-ix="gotocontact" href="#">Accesorios y Repuestos</a>
+    </div>
+    
+    <div class="footer__link">
+      <div>Ver Usados {{ currentyear }} ©</div>&nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="session--links">
+      </div>
+    </div>
+    <div class="contact modalwrapper" id="contact">
+      <div class="modalwrapper__container"><img class="close" data-ix="close" src="/images/cancel.svg"><img src="/images/logo-panoram.png">
+        <p class="modal--p">Escribinos tu consulta o feedback.</p>
+        <div class="formwrapper w-form2">
+          <form class="w-clearfix" data-name="contact" id="wf-form-contact" name="wf-form-contact">
+            <label class="form--label" for="name">Ingresa tu email</label>
+            <div class="form__field"><img src="/images/email.svg">
+              <input class="form-field w-input" data-name="Email" id="Email-2" maxlength="256" name="email" placeholder="Ej: matias@panoram.com" type="email" required>
+            </div>
+            <label class="form--label" for="email">¿Con qué podemos ayudarte?</label>
+            <div class="form__field">
+              <select class="form-field w-select" id="area" name="area" required>
+                <option value="">Selecciona un tema...</option>
+                <option value="Contacto">Contacto</option>
+                <option value="Chapa y pintura">Chapa y pintura</option>
+                <option value="Talleres">Talleres</option>
+                <option value="Seguro">Seguro de auto</option>
+                <option value="revision">Revisión mecánica</option>
+                <option value="accesorios">Accesorios y Repuestos</option>
+                <option value="Concesionario">Concesionario Oficial </option>
+                <option value="otra">Otro motivo</option>
+              </select>
+            </div>
+            <label class="form--label" for="consulta">Tu consulta</label>
+            <textarea class="form-area w-input" data-name="consulta" id="consulta" maxlength="5000" name="consulta" placeholder="Ej: Quiero conocer talleres adheridos por Villa Adelina"></textarea>
+            <div class="form__buttons">
+              <input class="principalbutton w-button" data-wait="Un segundo por favor..." type="submit" value="Enviar consulta" required>
+            </div>
+          </form>
+          <div class="form__succes w-form-done">
+            <div>Gracias por escribirnos! Te escribiremos lo antes posible.</div><a class="principalbutton w-button" data-ix="close" href="#">Listo!</a>
+          </div>
+          <div class="form__error w-form-fail">
+            <div>Hubo un error, por favor revisá tu email para estar seguros que es correcto :)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script id="sessionlinks" type="text/x-jsrender">
+    [[if ~is_token()]]
+      <a href="#" class="footer__link--a button--logout">Cerrar sesión</a>
+    [[else]]
+      <a href="#" class="footer__link--a" data-ix="register">Iniciar sesión</a>
+    [[/if]]
+    </script>

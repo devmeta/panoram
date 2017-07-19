@@ -1,0 +1,32 @@
+{% extends "layouts/fullscreen.html" %}
+
+{% block head %}
+  <title>{{app_title}} Transmitir</title>
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{app_title}} Transmitir" />
+  <meta property="og:description" content="Publica desde tu celular gratis, encontrá la oportunidad que estabas esperando." />
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="https://panoram.com/images/IMG_3505bfree.jpg" />
+  <script>
+    var code = '{{ code }}';
+  </script>
+{% endblock %}
+
+{% block body %}
+
+<div class="toolbar">
+  <label>Disparo manual</label>
+  <button id="snap">Snap Photo</button>
+  <label>Una foto cada cuántos segundos?</label>
+  <input type="number" maxlength="5" max="9999" min="5" placeholder="min:5, max:9999">
+</div>
+
+<div class="videoContainer">
+  <canvas id="canvas" hidden></canvas>
+  <video id="video" autoplay></video>
+</div>
+
+{% endblock %}
+
+{% block assets %}
+  <script src="/js/transmitir.js" type="text/javascript"></script>
+{% endblock %}

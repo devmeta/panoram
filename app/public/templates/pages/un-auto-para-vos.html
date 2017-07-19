@@ -1,0 +1,246 @@
+{% extends "layouts/default.html" %}
+
+{% block head %}
+  <title>{{app_title}} Un auto para vos</title>
+  <meta content="Compra y venta de autos usados y 0km.  Descbrí cuál es el mejor auto para vos y encontrá la mejor oferta simple y rápido." name="description">    
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{app_title}} Un auto para vos" />
+  <meta property="og:description" content="Publica desde tu celular gratis, encontrá la oportunidad que estabas esperando." />
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="https://panoram.com/images/banner-paravos.png" />
+{% endblock %}
+
+{% block body %}
+  <div class="paravos">
+    <div class="paravos__banner">
+      <div class="colorhover"></div>
+      <div class="banner__sectiontitle w-clearfix">
+        <div class="sectiontitle--line"></div>
+        <h6 class="sectiontitle--h">UN AUTO PARA VOS</h6>
+        <div class="sectiontitle--line"></div>
+      </div>
+    </div>
+    <div class="paravos__container">
+      <h5 class="titlesection">Contanos sobre vos para que te ayudemos a encontrar un auto ideal</h5>
+      <div class="paravos__container--form">
+        <div class="w-form2">
+          <form action="" class="w-clearfix" data-name="un auto para vos" data-redirect="home" id="wf-form-un-auto-para-vos" name="wf-form-un-auto-para-vos" redirect="home">
+            <!--div class="paravor__formitem">
+              <label class="form--label" for="range_04">¿Cuánto te gustaría invertir en tu próximo auto?</label>
+              <input class="w-input" data-name="precio" id="range_04" maxlength="256" name="precio" placeholder="Escribí el precio aproximado" type="text">
+            </div-->
+            <div class="paravor__formitem">
+              <label class="form--label" for="name-2">¿CUÁL ES TU PRIORIDAD A LA HORA DE COMPRAR UN AUTO?</label>
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" id="prop-59" name="prop-59" type="checkbox">
+                <label class="w-form-label" for="prop-59">Que el auto esté en muy buen estado.</label>
+              </div>
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" id="prop-57" name="prop-57" type="checkbox">
+                <label class="w-form-label" for="prop-57">Que tenga garantía.</label>
+              </div>
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" id="prop-61" name="prop-61" type="checkbox">
+                <label class="w-form-label" for="prop-61">Que nunca me haga renegar ni me deje tirado.</label>
+              </div>
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" id="prop-62" name="prop-62" type="checkbox">
+                <label class="w-form-label" for="prop-62">Que el dueño anterior lo haya mimado.</label>
+              </div>
+              <!--div class="w-checkbox">
+                <input class="w-checkbox-input" data-name="Checkbox 3" id="prop-3" name="prop-3" type="checkbox">
+                <label class="w-form-label" for="prop-3">Busco un auto por concesionario</label>
+              </div-->
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" id="prop-68" name="prop-68" type="checkbox">
+                <label class="w-form-label" for="prop-68">Que sea de primera mano</label>
+              </div>
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" id="financing" name="financing" type="checkbox">
+                <label class="w-form-label" for="financing">Que se pueda financiar la compra</label>
+              </div>
+            </div>
+            <div class="paravor__formitem">
+              <label class="form--label" for="name-2">¿CON QUIEN COMPARTIRÍAS MAS TIEMPO EN EL AUTO?</label>
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" id="prop-70" name="prop-70" type="checkbox">
+                <label class="w-form-label" for="prop-70">En Familia</label>
+              </div>
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" id="prop-77" name="prop-77" type="checkbox">
+                <label class="w-form-label" for="prop-77">Sol@</label>
+              </div>
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" id="prop-71" name="prop-71" type="checkbox">
+                <label class="w-form-label" for="prop-71">Con mi pareja</label>
+              </div>
+              <div class="w-checkbox">
+                <input class="w-checkbox-input" id="prop-78" name="prop-78" type="checkbox">
+                <label class="w-form-label" for="prop-78">Con amigos</label>
+              </div>
+              <!--div class="w-checkbox">
+                <input class="w-checkbox-input" id="prop-140" name="prop-140" type="checkbox">
+                <label class="w-form-label" for="prop-140">Otros</label>
+              </div-->
+            </div>
+            <div class="paravor__formitem">
+              <label class="form--label" for="name-2">¿CUÁLES SON TUS INTERESES?&nbsp;</label>
+              <div class="paravos_formitem__container">
+                <div class="paravos_formitem__list">
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-79" name="prop-79" type="checkbox">
+                    <label class="w-form-label" for="prop-79">Musica</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" d="prop-81" name="prop-81" type="checkbox">
+                    <label class="w-form-label" for="prop-81">Conectividad</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-86" name="prop-86" type="checkbox">
+                    <label class="w-form-label" for="prop-86">Confort</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-87" name="prop-87" type="checkbox">
+                    <label class="w-form-label" for="prop-87">Velocidad</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-89" name="prop-89" type="checkbox">
+                    <label class="w-form-label" for="prop-89">Exclusividad</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-88" name="prop-88" type="checkbox">
+                    <label class="w-form-label" for="prop-88">Potencia</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-90" name="prop-90" type="checkbox">
+                    <label class="w-form-label" for="prop-90">Electrico</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-340" name="prop-340" type="checkbox">
+                    <label class="w-form-label" for="prop-340">GNC</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-350" name="prop-350" type="checkbox">
+                    <label class="w-form-label" for="prop-350">Diesel</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-360" name="prop-360" type="checkbox">
+                    <label class="w-form-label" for="prop-360">Nafta</label>
+                  </div>
+                </div>
+                <div class="paravos_formitem__list">
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-63" name="prop-63" type="checkbox">
+                    <label class="w-form-label" for="prop-63">Clasicos</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-64" name="prop-64" type="checkbox">
+                    <label class="w-form-label" for="prop-64">Colección</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-65" name="prop-65" type="checkbox">
+                    <label class="w-form-label" for="prop-65">Trabajo</label>
+                  </div>
+                  <!--div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-410" name="prop-410" type="checkbox">
+                    <label class="w-form-label" for="prop-410">Oportunidad</label>
+                  </div-->
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-68-2" name="prop-68" type="checkbox">
+                    <label class="w-form-label" for="prop-68-2">Primer auto</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-69" name="prop-69" type="checkbox">
+                    <label class="w-form-label" for="prop-69">Segundo auto</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-73" name="prop-73" type="checkbox">
+                    <label class="w-form-label" for="prop-73">Económico</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-74" name="prop-74" type="checkbox">
+                    <label class="w-form-label" for="prop-74">Bajo consumo</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-67" name="prop-67" type="checkbox">
+                    <label class="w-form-label" for="prop-67">Seguridad</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-80" name="prop-80" type="checkbox">
+                    <label class="w-form-label" for="prop-80">Alto rendimiento</label>
+                  </div>
+                </div>
+                <div class="paravos_formitem__list">
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-470" name="prop-470" type="checkbox">
+                    <label class="w-form-label" for="prop-470">Automatico</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-480" name="prop-480" type="checkbox">
+                    <label class="w-form-label" for="prop-480">Manual</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-82" name="prop-82" type="checkbox">
+                    <label class="w-form-label" for="prop-82">Ciudad</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-83" name="prop-83" type="checkbox">
+                    <label class="w-form-label" for="prop-83">Montaña y naturaleza</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-91" name="prop-91" type="checkbox">
+                    <label class="w-form-label" for="prop-91">Para viajar</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-92" name="prop-92" type="checkbox">
+                    <label class="w-form-label" for="prop-92">Calle de tierra</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-93" name="prop-93" type="checkbox">
+                    <label class="w-form-label" for="prop-93">Ruta y autopista</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-94" name="prop-94" type="checkbox">
+                    <label class="w-form-label" for="prop-94">Bajo perfil</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-84" name="prop-84" type="checkbox">
+                    <label class="w-form-label" for="prop-84">Fin de semana</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-85" name="prop-85" type="checkbox">
+                    <label class="w-form-label" for="prop-85">Paseo</label>
+                  </div>
+                </div>
+                <div class="paravos_formitem__list">
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-75" name="prop-75" type="checkbox">
+                    <label class="w-form-label" for="prop-75">Trabajo diario</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-76" name="prop-76" type="checkbox">
+                    <label class="w-form-label" for="prop-76">Dar la vuelta al mundo</label>
+                  </div>
+                  <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="prop-66" name="prop-66" type="checkbox">
+                    <label class="w-form-label" for="prop-66">Pantallas</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <input class="principalbutton totheright w-button" data-wait="Un segundo por favor..." type="submit" value="Buscar mi auto">
+          </form>
+          <div class="form__succes w-form-done">
+            <div>Estamos buscando tu auto ideal!</div>
+          </div>
+          <div class="form__error w-form-fail">
+            <div>Ui, algo salió mal. Por favor revisa los campos :)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block assets %}
+  <script src="/js/un-auto-para-vos.js" type="text/javascript"></script>
+{% endblock %}

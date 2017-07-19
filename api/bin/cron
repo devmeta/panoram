@@ -1,0 +1,104 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * This file is part of the Slim API skeleton package
+ *
+ * Copyright (c) 2016 Mika Tuupola
+ *
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Project home:
+ *   https://github.com/tuupola/slim-api-skeleton
+ *
+ */
+
+date_default_timezone_set("UTC");
+
+#error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+
+require __DIR__ . "/../vendor/autoload.php";
+
+$dotenv = new Dotenv\Dotenv(__DIR__ . "/..");
+$dotenv->load();
+
+/* Setup Slim */
+$app = new Slim\App();
+$container = $app->getContainer();
+
+require __DIR__ . "/../config/dependencies.php";
+
+use App\Cron;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+
+$console = new Application();
+
+$console
+    ->register("run")
+    ->setDescription("Scheduled tasks")
+    ->setCode(function (InputInterface $input, OutputInterface $output) use ($container) {
+        print "Running scheduled tasks.\n";
+        Cron::run();
+    })
+;
+
+$console
+    ->register("check_usernames")
+    ->setDescription("Scheduled tasks")
+    ->setCode(function (InputInterface $input, OutputInterface $output) use ($container) {
+        print "Checking usernames.\n";
+        Cron::check_usernames();
+    })
+;
+
+$console
+    ->register("check_titles")
+    ->setDescription("Scheduled tasks")
+    ->setCode(function (InputInterface $input, OutputInterface $output) use ($container) {
+        print "Checking titles.\n";
+        Cron::check_titles();
+    })
+;
+
+$console
+    ->register("alerts")
+    ->setDescription("Alerts")
+    ->setCode(function (InputInterface $input, OutputInterface $output) use ($container) {
+        print "Sending emails.\n";
+        Cron::alerts();
+    })
+;
+
+$console
+    ->register("resize_photos")
+    ->setDescription("Resize again all local existent photos (if any)")
+    ->setCode(function (InputInterface $input, OutputInterface $output) use ($container) {
+        print "Resizing publications photos.\n";
+        Cron::resize_photos();
+    })
+;
+
+$console
+    ->register("resize_profile_photos")
+    ->setDescription("Resize again all local existent profile photos (if any)")
+    ->setCode(function (InputInterface $input, OutputInterface $output) use ($container) {
+        print "Resizing profile photos.\n";
+        Cron::resize_profile_photos();
+    })
+;
+
+$console
+    ->register("currency_convert")
+    ->setDescription("Resize all local existent profile photos from amazons3 (if any)")
+    ->setCode(function (InputInterface $input, OutputInterface $output) use ($container) {
+        print "Convirtiendo monedas....\n";
+        Cron::currency_convert();
+    })
+;
+
+$console->run();

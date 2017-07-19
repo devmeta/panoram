@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="35px" height="35px" viewBox="0 0 35 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41 (35326) - http://www.bohemiancoding.com/sketch -->
+    <title>garantia</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="34.9994167 34.99125 0 34.99125 0 17.495625 0 0 34.9994167 0 34.9994167 34.99125"></polygon>
+    </defs>
+    <g id="Diseños-finales" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="02-Perfil" transform="translate(-751.000000, -211.000000)">
+            <g id="garantia" transform="translate(751.000000, 211.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <polygon id="Fill-1" fill="#9BC53D" mask="url(#mask-2)" points="14.1897292 16.757125 12.5986875 18.1574167 16.4164583 22.4128333 16.4244792 22.4053958 16.4295833 22.4128333 23.2763125 15.4543958 22.054375 13.8478958 16.489375 18.4279375"></polygon>
+                <path d="M17.4994167,0 C7.83460417,0 0,7.835625 0,17.4994167 C0,27.1637917 7.83460417,35 17.4994167,35 C27.1637917,35 34.9994167,27.164375 34.9994167,17.4994167 C34.9994167,7.8351875 27.1637917,0 17.4994167,0 Z M17.4994167,27.1700625 C8.49479167,27.1700625 7.85341667,11.9344167 7.85341667,11.9344167 L17.4994167,7.8295 L27.1455625,11.9344167 C27.1455625,11.9344167 26.5040417,27.1700625 17.4994167,27.1700625 Z" id="Fill-3" fill="#9BC53D" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

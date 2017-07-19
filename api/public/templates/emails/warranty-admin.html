@@ -1,0 +1,49 @@
+{% extends "layouts/email.html" %}
+
+{% block body %}
+            <!-- START CENTERED WHITE CONTAINER -->
+            <span class="preheader">Nueva Solicitud de Garantía Verusados</span>
+            <table class="main">
+
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="wrapper">
+                  <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td>
+                        <h2>Nueva Solicitud de Garantía Verusados</h2>
+                        <p>Se registró una nueva solicitud de Garantía</p>
+                        <p>Sección: Seguros</p>
+                        <blockquote>
+                          <p>Solicitante: {{user.first_name}} {{user.last_name}} ({{user.username}})</p>
+                          <p>Email: <a href="mailto:{{user.email}}" target="_blank">{{user.email}}</a></p>
+                          <p>Teléfono: <a href="tel:{{form.tel}}">{{form.tel}}</a></p>
+                          <p>Horario: {{form.schedule}}</p>                          
+                          <p>Código de Vehículo: {{form.code}}</p>
+                          <p>Vehículo: <a href="{{app_url}}/{{form.code}}---{{form.title}}" target="_blank">{{form.brand.title}} {{form.model.title}} {{form.mt_year}} - {{form.title}}</a></p>
+                        </blockquote>
+                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                          <tbody>
+                            <tr>
+                              <td align="left">
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                  <tbody>
+                                    <tr>
+                                      <td><a href="{{api_url}}/editor/?username=root&edit=users&where%5Bid%5D={{user.id}}" target="_blank">Ver datos del usuario en Backend</a> </td>
+                                      <td><a href="{{api_url}}/editor/?username=root&edit=forms&where%5Bid%5D={{form.id}}" target="_blank">Editar vehículo en Backend</a> </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+            <!-- END MAIN CONTENT AREA -->
+            </table>
+{% endblock %}              

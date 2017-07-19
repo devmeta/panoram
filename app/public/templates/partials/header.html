@@ -1,0 +1,65 @@
+  <div class="header-top">
+    <a class="w-inline-block" href="/"><img class="header-top--logo" src="/images/logo-panoram.png">
+    </a>
+    <div class="header-top__buscador">
+      <div class="_w-form2 w-form2">
+        <form class="buscador__form" data-name="Email Form" id="email-form" name="email-form">
+          <div class="buscador__fields"><img src="/images/magnifier.svg">
+            <input class="fields--input w-input" data-name="search" id="search" maxlength="256" name="search" placeholder="Busca transmisiones pasadas y en vivo" type="text">
+            <!--select class="fields--select w-select" data-name="Desde" id="Desde" name="Desde">
+              <option value="40000">Desde 40.000 ARS</option>
+              <option value="100000">Desde 100.000 ARS</option>
+              <option value="150000">Desde 150.000 ARS</option>
+              <option value="200000">Desde 200.000 ARS</option>
+              <option value="300000">Desde 300.000 ARS</option>
+              <option value="350000">Desde 350.000 ARS</option>
+            </select>
+            <select class="fields--select w-select" data-name="Hasta" id="Hasta" name="Hasta">
+              <option value="500000+">500.000+ ARS</option>
+              <option value="450000">Hasta 450.000 ARS</option>
+              <option value="300000">Hasta 300.000 ARS</option>
+              <option value="250000">Hasta 250.000 ARS</option>
+              <option value="150000">Hasta 150.000 ARS</option>
+              <option value="90000">Hasta 90.000 ARS</option>
+            </select-->
+          </div>
+          <input class="principalbutton w-button" data-wait="Aguarda por favor.." type="submit" value="Buscar">
+        </form>
+      </div>
+    </div>
+    <a class="header-top--button button--publish w-inline-block">
+      <div>Transmitir EN VIVO</div>
+    </a>
+    <a class="w-hidden button--infotopublish" data-ix="infotopublish"></a>
+    <a class="w-hidden button--register" data-ix="register"></a>
+  </div>
+  <div class="header-bottom">
+    <div class="header-button__listnav"><a class="item-border-right item-red listnav--item" href="/#_=a&filtro=nuevas-oportunidades">Nuevas oportunidades!</a><a class="listnav--item" href="/#t=sb&km=0">Autos 0km</a>
+    </div>
+    <div class="header-button__listnav">
+      <a onclick="_gaq.push(['_trackEvent', 'sugerencia', 'clic', 'un auto para vos'])" class="item-border-right item-w-image listnav--item w-inline-block" href="/un-auto-para-vos"><img class="item--img" src="/images/icono-sugeridos.svg">
+        <div class="item-w-image--p">Un auto para vos</div>
+      </a>
+      <div class="container--profile">
+      </div>
+    </div>
+  </div>
+
+  <script id="profileactions" type="text/x-jsrender">
+  [[if ~is_token()]]
+    <a class="item-right item-w-image listnav--item logged w-inline-block button--profile" href="/perfil-usuario/transmisiones">
+      <div class="header--profilepicture"><img src="[[if picture]][[:~getBucketSize('80x80',picture)]][[else]][[:~is_dummy()]][[/if]]">
+      </div>
+      <div class="item-w-image--p">[[if first_name]][[:first_name]][[else]]Mi cuenta[[/if]]</div>
+    </a>
+    <a class="item-right item-w-image listnav--item w-inline-block button--login w-hidden-important" href="#" data-ix="register">
+      <img class="item--img" src="/images/icono-ingresar.svg">
+      <div class="item-w-image--p">Ingresar</div>
+    </a>
+  [[else]]
+    <a class="item-right item-w-image listnav--item w-inline-block button--login" href="#" data-ix="register">
+      <img class="item--img" src="/images/icono-ingresar.svg">
+      <div class="item-w-image--p">Ingresar</div>
+    </a>
+  [[/if]]
+  </script>

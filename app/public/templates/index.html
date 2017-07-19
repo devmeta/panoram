@@ -1,0 +1,218 @@
+{% extends "layouts/default.html" %}
+
+{% block head %}
+  <title>{{app_title}} Transmite en vivo desde tu smartphone</title>
+  <meta content="Compra y venta de autos usados y 0km.  Descbrí cuál es el mejor auto para vos y encontrá la mejor oferta simple y rápido." name="description">
+  <link rel="stylesheet" href="/css/ion.rangeSlider.skinFlat.css">
+  <link rel="stylesheet" href="/css/ion.rangeSlider.css">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{app_title}} Transmite en vivo desde tu smartphone" />
+  <meta property="og:description" content="Publica desde tu celular gratis, encontrá la oportunidad que estabas esperando." />
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="https://panoram.com/images/IMG_3495bfree.jpg" />
+
+{% endblock %}
+
+{% block body %}
+  <div class="w-slider" data-animation="slide" data-autoplay="1" data-delay="4000" data-duration="500" data-infinite="1">
+    <div class="w-slider-mask">
+    </div>
+    <div class="arrow w-slider-arrow-left">
+      <div class="w-icon-slider-left"></div>
+    </div>
+    <div class="arrow w-slider-arrow-right">
+      <div class="w-icon-slider-right"></div>
+    </div>
+    <div class="w-round w-slider-nav"></div>
+  </div>
+  <div class="carlisting">
+    <div class="carlisting-indicator">
+      <div class="carlisting-indicator__amount">
+        <div class="carlisting-indicator__amount--n"></div>
+        <div class="carlisting-indicator__filter--n"></div>
+      </div>
+      <div class="carlisting-indicator__sorting">
+        <div class="sorting--p">ORDENAR POR:</div>
+        <div class="sorting__dropdown w-dropdown" data-delay="0">
+          <div class="sorting__dropdown--toggle w-dropdown-toggle">
+            <div class="sorting__dropdown--p" id="mas-vistos">Más vistos</div>
+            <div class="sorting__dropdown--arrow w-icon-dropdown-toggle"></div>
+          </div>
+          <nav class="w-dropdown-list">
+            <a class="sorting__dropdown--link w-dropdown-link" href="#" id="menor-precio">Menor precio</a>
+            <a class="sorting__dropdown--link w-dropdown-link" href="#" id="mayor-precio">Mayor precio</a>
+            <a class="sorting__dropdown--link w-dropdown-link" href="#" id="con-garantia">Con garantía</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="carlisting__container">
+      <div class="carlisting__cont__filter">
+        <div class="carlisting__filter-container w-form">
+          <form class="sidebar__form" data-name="Email Form 2" id="email-form-2" name="email-form-2">
+            <div class="filter__item">
+              <h6 class="filter__item--h">Condición</h6>
+              <div class="filter__checklist">
+                <div class="checklist-field w-checkbox">
+                  <input class="w-checkbox-input" data-name="condition-2" id="condition-2" name="condition-2" type="checkbox">
+                  <label class="w-form-label" for="condition-2">Usado</label>
+                </div>
+                <div class="checklist-field w-checkbox">
+                  <input class="w-checkbox-input" data-name="Checkbox" id="condition-1" name="condition-1" type="checkbox">
+                  <label class="w-form-label" for="condition-1">Nuevo</label>
+                </div>
+              </div>
+            </div>
+            <div class="filter__item">
+              <h6 class="filter__item--h">AÑO</h6>
+              <input class="w-input" data-name="ano" id="range_01" maxlength="256" name="ano" placeholder="ano" type="text">
+            </div>
+            <div class="filter__item">
+              <h6 class="filter__item--h">PRECIO</h6>
+              <input class="w-input" data-name="precio" id="range_02" maxlength="256" name="precio" placeholder="precio" type="text">
+            </div>
+            <div class="filter__item">
+              <h6 class="filter__item--h">KMS</h6>
+              <input class="w-input" data-name="km" id="range_03" maxlength="256" name="km" placeholder="km" type="text">
+            </div>
+            <div class="filter__item">
+              <h6 class="filter__item--h">puertas</h6>
+              <div class="filter__checklist filter--puertas">
+              </div>
+            </div>
+            <div class="filter__item--checks"></div>
+            <div class="filter__item--selects"></div>
+            <a href="#_=sb&sort=mas-vistos" class="filter-button principalbutton w-button" type="reset">Reset Filtro</a>
+            <!--input class="filter-button principalbutton w-button" data-wait="Please wait..." type="submit" value="Aplicar Filtro"-->
+          </form>
+        </div>
+        <div class="filter__banners--top">
+        </div>
+        <div class="oportunidades-destacadas">
+          <div class="destaque--h">Oportunidades destacadas</div>
+        </div>
+        <div class="filter__banners--bottom">
+        </div>
+      </div>
+      <div class="carlisting__cont__cars">
+        <div class="noinfo">No hay transmisiones públicas activas</div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block assets %}
+
+  <script src="/js/ion.rangeSlider.min.js"></script>
+  <script src="/js/ion.rangeSlider.config.js"></script>
+  
+  <script id="banner" type="text/x-jsrender">
+    <a class="filter__banner w-block" href="[[:url]]"[[if newtab]] target="_blank"[[/if]]>
+      <img src="[[:photo_url]]">
+    </a>
+  </script>
+
+  <script id="doors" type="text/x-jsrender">
+    <div class="checklist-field w-checkbox">
+      <input class="w-checkbox-input" data-name="doors-[[>#data]]" id="doors-[[>#data]]" name="doors-[[>#data]]" type="checkbox"[[if ~isChecked('doors-'+#data,'on')]] checked[[/if]]>
+      <label class="w-form-label" for="doors-[[>#data]]">[[>#data]]</label>
+    </div>
+  </script>
+
+  <script id="slide" type="text/x-jsrender">
+    <div class="slide[[>#index+1]] w-slide" style="background-image:url([[:photo_url]])">
+      <div class="slider__content">
+        <div class="slider__content--text-container">
+          <h2 class="slider__content--h">[[:title]]</h2>
+          <div class="slider__content--p">[[:content]]</div>
+          <a class="slider__button w-button" href="[[:url]]">[[:button]]</a>
+        </div>
+        <div class="slider__content--diagonal"></div>
+      </div>
+    </div>
+  </script>
+
+  <script id="featured" type="text/x-jsrender">
+    <div class="destaque__item"><a class="destaque__item--h" href="[[:links.self]]">[[:brand.title]] [[:model.title]]</a>
+      <div>[[if kms]][[:kms]][[else]]0[[/if]]Km</div>
+      <div>[[:mt_year]] | [[:region.title]]</div>
+      <div class="destaque__item--price">[[:~isPrice(currency,price)]]</div>
+    </div>
+  </script>
+
+  <script id="checks" type="text/x-jsrender">
+    <div class="filter__item w-clearfix">
+      <h6 class="filter__item--h">[[:~isLabel(slug)]]</h6>
+      <div class="filter__items [[:slug]]">
+      [[for items]]
+        <div class="checklist-field w-checkbox [[if ~isLimited(#index,#parent.parent.data.limit)]]w-hidden-important[[/if]]">
+          <input class="w-checkbox-input" id="[[:#parent.parent.data.slug]]-[[:id]]" name="[[:#parent.parent.data.slug]]-[[:id]]" type="checkbox"[[if ~isChecked(#parent.parent.data.slug+'-'+id,'on')]] checked[[/if]]>
+          <label class="w-form-label" for="[[:#parent.parent.data.slug]]-[[:id]]">[[:title]]</label>
+        </div>
+      [[/for]]
+      </div>
+    [[if ~isLimited(items.length,limit)]]
+      <a class="filter--moreoptions" href="#">Más opciones</a>      
+    [[/if]]
+    </div>
+  </script>
+
+  <script id="selects" type="text/x-jsrender">
+    <div class="filter__item">
+      <h6 class="filter__item--h">[[:~isLabel(slug)]]</h6>
+      <select class="w-select" id="[[:slug]]" name="[[:slug]]">
+        <option value="">Seleccionar...</option>
+      [[for items]]
+        <option value="[[:id]]" [[if ~isChecked(#parent.parent.data.slug,id)]] selected[[/if]]>[[:title]]</option>
+      [[/for]]
+      </select>
+    </div>
+  </script>
+
+  <script id="pagination" type="text/x-jsrender">
+    <ul class="paggination__list w-list-unstyled">
+    [[if ~currentPage() > 1]]
+      <li><a class="pagination__list--item" data-p="[[:~currentPage()-1]]" href="#">Anterior</a>
+      </li>
+      [[/if]]
+    [[for pages]]
+      <li><a class="[[if ~currentPage()==#index+1]]active [[/if]]pagination__list--item" data-p="[[>#index+1]]" href="#">[[>#index+1]]</a>
+      </li>
+    [[/for]]
+    [[if ~currentPage() < pages.length]]
+      <li><a class="pagination__list--item" data-p="[[:~currentPage()+1]]" href="#">Siguiente</a>
+      </li>
+    [[/if]]
+    </ul>
+  </script>
+
+  <script id="listing" type="text/x-jsrender">
+    <a class="carlisting__caritem w-inline-block" href="[[:links.self]]" title="Ingresa para ver los detalles">
+    [[if warranty]]
+      <div class="garantizado">
+        <img src="/images/garantia.svg">
+      </div>
+    [[/if]]
+      <div class="caritem--image" [[if photo]]style="background-image:url([[:~getBucketSize('500x375',photo.photo_url)]])"[[/if]]></div>
+      <div class="caritem--profilepicture"><img src="[[if user.picture]][[:~getBucketSize('80x80',user.picture)]][[else]][[:~isDummy()]][[/if]]" width="50" height="50">
+      </div>
+      <div class="caritem__data">
+        <h1 class="caritem__data--h">[[:brand.title]] [[:model.title]]</h1>
+        <div class="caritem__data--description">
+          <div class="caritem__data--descr__n">
+            <div>[[:~format(kms)]]km</div>
+            <div>[[:mt_year]] | [[:region.title]]</div>
+          </div>
+        [[if ~isOwned(id) == false]]
+          <img class="caritem__data--descr__fav" data-type="fav" data-id="[[:id]]" src="/images/fav[[if ~isFav(id)]]-active[[else]]orite[[/if]].svg">
+        [[/if]]
+        </div>
+        <div class="caritem__data--price">[[:~isPrice(currency,price)]]</div>
+      </div>
+    </a>    
+  </script>
+  
+  <script src="/js/index.js" type="text/javascript"></script>
+  
+{% endblock %}

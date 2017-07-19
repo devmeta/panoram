@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="21px" viewBox="0 0 19 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41 (35326) - http://www.bohemiancoding.com/sketch -->
+    <title>magnifier</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Buscador" transform="translate(-13.000000, -22.000000)" fill="#EF4039">
+            <g transform="translate(0.000000, 14.000000)" id="magnifier">
+                <g transform="translate(13.000000, 8.000000)">
+                    <path d="M15.5,8 C15.5,3.85786438 12.1421356,0.5 8,0.5 C3.85786438,0.5 0.5,3.85786438 0.5,8 C0.5,12.1421356 3.85786438,15.5 8,15.5 C12.1421356,15.5 15.5,12.1421356 15.5,8 Z M1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 Z" id="Oval"></path>
+                    <path d="M17.2317787,20.6401844 C17.5853428,21.0644613 18.2159075,21.1217854 18.6401844,20.7682213 C19.0644613,20.4146572 19.1217854,19.7840925 18.7682213,19.3598156 L13.7682213,13.3598156 C13.4146572,12.9355387 12.7840925,12.8782146 12.3598156,13.2317787 C11.9355387,13.5853428 11.8782146,14.2159075 12.2317787,14.6401844 L17.2317787,20.6401844 Z" id="Line"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

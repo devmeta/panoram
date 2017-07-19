@@ -1,0 +1,112 @@
+{% extends "layouts/default.html" %}
+
+{% block head %}
+  <meta content="Perfil usuario :: Autos" property="og:title">
+{% endblock %}
+
+{% block body %}
+  <div class="profile__container">
+    <div class="profile__menu">
+      <a class="profile__menu--item w-inline-block" href="/perfil-usuario/transmisiones"><img class="profile__menu--img" src="/images/publicaciones.svg">
+      </a>
+      <a class="profile__menu--item w-inline-block" href="/perfil-usuario/datos"><img class="profile__menu--img" src="/images/profile-active.svg">
+      </a>
+      <a class="profile__menu--item w-inline-block" href="/perfil-usuario/mensajes"><img class="profile__menu--img" src="/images/mensajes.svg">
+      </a>
+      <a class="profile__menu--item w-inline-block button--logout" href="#"><img class="profile__menu--img" src="/images/logout.svg">
+      </a>
+    </div>
+    <div class="profile__content">
+      <div class="profile__content__personal-info">
+        <form method="post" action="" name="photo" id="imageuploadform" enctype="multipart/form-data">
+          <input hidden="true" id="fileupload" type="file" name="image">
+        </form>
+        <div class="profilepicture">
+          <a class="profilepicture--img w-inline-block" href="#"><img src="/images/placeholder-profile-picture.jpg" width="80" height="80">
+          </a><a class="profilepicture--link" href="#">Cambiar Foto</a>
+        </div>
+        <div class="profile__formwrapper w-form">
+          <form class="w-clearfix" data-name="Email Form 2" id="form-datos" name="email-form-2">
+            <label class="form--label" for="name">tu nombre</label>
+            <div class="form__field"><img src="/images/name.svg">
+              <input class="form-field w-input" data-name="name" id="name" maxlength="256" name="name" placeholder="Ej: Matias" type="text">
+            </div>
+            <label class="form--label" for="email-3">Dirección de email</label>
+            <div class="form__field"><img src="/images/email.svg">
+              <input class="form-field w-input" data-name="email" id="email" maxlength="256" name="email" placeholder="Ej: matias@panoram.com" type="email">
+            </div>
+            <label class="form--label" for="email-3">Contraseña anterior</label>
+            <div class="form__field"><img src="/images/unlock.svg">
+              <input class="form-field w-input" data-name="password" id="password-6" maxlength="256" name="password" placeholder="*****" type="password">
+            </div>
+            <label class="form--label" for="email-3">Nueva contraseña</label>
+            <div class="form__field"><img src="/images/unlock.svg">
+              <input class="form-field w-input" data-name="NewPassword" id="NewPassword" maxlength="256" name="NewPassword" placeholder="****" type="password">
+            </div>
+            <input class="principalbutton totheright w-button" data-wait="Guardando cambios..." type="submit" value="Guardar">
+          </form>
+          <div class="w-form-done">
+            <div>Thank you! Your submission has been received!</div>
+          </div>
+          <div class="w-form-fail">
+            <div>Oops! Something went wrong while submitting the form</div>
+          </div>
+        </div>
+      </div>
+      <div class="profile__content__dashboard">
+        <div class="dashboard__top">
+          <h3 class="dashboard--h">¿Cómo mejorar tu perfil?</h3>
+          <h5 class="textred">Completaste un <span class="dashboard--amount">20%</span> de tu perfil</h5>
+          <div class="dashboard__graphic">
+            <div class="graphic--complete"></div>
+          </div>
+          <div class="dashboard__text">
+            <div class="dashboard__text--triangle"></div>
+            <div>20%</div>
+          </div>
+        </div>
+        <div class="dashboard__bottom">
+          <h4>Próximos pasos</h4>
+          <ul class="dashboard__list">
+            <li class="dashboard__list-item">
+              <div>Sube una foto! Es importante para crear una comunidad de confianza.</div>
+            </li>
+            <li class="dashboard__list-item">
+              <div>Escribile a alguien para saber más sobre su auto.</div>
+            </li>
+            <li class="dashboard__list-item">
+              <div>Publicá un auto.</div>
+            </li>
+            <li class="dashboard__list-item">
+              <div>Asegurá tu auto.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="profile_content__notifications">
+        <h4>Notificaciones</h4>
+        <div class="notifications__container">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script id="message" type="text/x-jsrender">
+    <div class="notifications__container__notif gotomessage" data-code="[[:vehicle.code]]">
+      <div class="notif--image" style="background-image:url([[:~getBucketSize('500x375',vehicle.photo_url)]])"></div>
+
+      <div class="notif--text">
+        <h4>[[if (count>1)]]Respondieron tu mensaje![[else]]Te enviaron un mensaje nuevo.[[/if]]</h4>
+        <div>[[:vehicle.title]]</div>
+        <div class="notif--p2">[[:vehicle.mt_year]] | [[:~format(vehicle.kms)]]km</div>
+        <h4>$[[:~format(vehicle.price)]]</h4>
+        <div class="notif--date">[[:timespan]]</div>
+      </div>
+    </div>
+  </script>
+
+{% endblock %}
+
+{% block assets %}
+  <script src="/js/perfil-datos.js" type="text/javascript"></script>
+{% endblock %}
