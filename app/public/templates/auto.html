@@ -155,7 +155,7 @@
         <img src="/images/garantia.svg">
       </div>
     [[/if]]
-      <div class="caritem--image" [[if photo]]style="background-image:url([[:~getBucketSize('500x375',photo.photo_url)]])"[[/if]]></div>
+      <div class="caritem--image" [[if photo]]style="background-image:url([[:~getBucketSize('480x360',photo.photo_url)]])"[[/if]]></div>
       <div class="caritem--profilepicture"><img src="[[if user.picture]][[:~getBucketSize('80x80',user.picture)]][[else]][[:~isDummy()]][[/if]]">
       </div>
       <div class="caritem__data">
@@ -180,7 +180,7 @@
 
   <script id="slide" type="text/x-jsrender">
     <div class="w-slide">
-      <a class="lightbox w-inline-block w-lightbox" href="#"><img class="w-lightbox-image-fixed" sizes="(max-width: 767px) 100vw, 60vw" src="[[:photo_url]]" srcset="[[:~getBucketSize('500x375',photo_url)]] 500w, [[:~getBucketSize('800x600',photo_url)]] 800w, [[:~getBucketSize('1080x810',photo_url)]] 1080w, [[:photo_url]] 1200w">
+      <a class="lightbox w-inline-block w-lightbox" href="#"><img class="w-lightbox-image-fixed" sizes="(max-width: 767px) 100vw, 60vw" src="[[:photo_url]]" srcset="[[:~getBucketSize('480x360',photo_url)]] 500w, [[:~getBucketSize('800x600',photo_url)]] 800w, [[:~getBucketSize('1080x810',photo_url)]] 1080w, [[:photo_url]] 1200w">
       <script class="w-json" type="application/json">{ "group": "car", "items": [{
         "type": "image",
         "_id": "[[>#index]]",
@@ -197,7 +197,7 @@
 
   <script id="slide-nav" type="text/x-jsrender">
     <div class="bestinfo__slider--nav--img">
-      <a class="lightbox w-inline-block w-lightbox" href="#"><img sizes="(max-width: 479px) 18vw, (max-width: 767px) 19vw, 11vw" src="[[:photo_url]]" srcset="[[:~getBucketSize('500x375',photo_url)]] 500w, [[:~getBucketSize('800x600',photo_url)]] 800w, [[:~getBucketSize('1080x810',photo_url)]] 1080w, [[:photo_url]] 1200w">
+      <a class="lightbox w-inline-block w-lightbox" href="#"><img sizes="(max-width: 479px) 18vw, (max-width: 767px) 19vw, 11vw" src="[[:photo_url]]" srcset="[[:~getBucketSize('480x360',photo_url)]] 500w, [[:~getBucketSize('800x600',photo_url)]] 800w, [[:~getBucketSize('1080x810',photo_url)]] 1080w, [[:photo_url]] 1200w">
       <script class="w-json" type="application/json">{ "group": "car-thumb", "items": [{
         "type": "image",
         "_id": "[[:photo_url]]",

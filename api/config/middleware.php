@@ -40,7 +40,7 @@ $container["token"] = function ($container) {
 $container["jwt"] = function ($container) {
     return new JwtAuthentication([
         "path" => [
-            "/vender",
+            "/transmitir",
             "/perfil",
             "/upload",
             "/update",

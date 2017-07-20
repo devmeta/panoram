@@ -391,6 +391,10 @@ $app->post("/transmitir/inicio", function ($request, $response, $arguments) {
         $code = strtolower(Base62::encode(random_bytes(6)));
     }
 
+    $oldmask = umask(0);
+    mkdir(getenv('BUCKET_PATH') . '/cams/' . $code, 0777);
+    umask($oldmask);
+
     $body = [
         'code' => $code,
         'title' => $code,
@@ -398,8 +402,8 @@ $app->post("/transmitir/inicio", function ($request, $response, $arguments) {
         'enabled_until' => new \DateTime("now +" . getenv('APP_AD_DUE'))
     ];
 
-    $vehicle = new Panoram($body);
-    $id = $this->spot->mapper("App\Panoram")->save($vehicle);
+    $panoram = new Panoram($body);
+    $id = $this->spot->mapper("App\Panoram")->save($panoram);
     $data['id'] = $id;
     $data['code'] = $code;
 

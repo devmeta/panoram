@@ -23,7 +23,7 @@
       <div class="tabs w-tabs" data-duration-in="300" data-duration-out="100">
         <div class="w-tab-menu">
           <a class="tabmenu w--current w-inline-block w-tab-link" data-w-tab="tus publicaciones">
-            <div>Tus Publicaciones</div>
+            <div>Tus Transmisiones</div>
           </a>
           <a class="tabmenu w-inline-block w-tab-link" data-w-tab="tus favoritos">
             <div>Favoritos</div>
@@ -96,7 +96,7 @@
         <div class="garantizado"><img src="/images/garantia.svg">
         </div>
       [[/if]]
-        <div class="caritem--image" [[if photo]]style="background-image:url([[:~getBucketSize('500x375',photo.photo_url)]])"[[/if]]></div>
+        <div class="caritem--image" [[if photo]]style="background-image:url([[:~getBucketSize('480x360',photo.photo_url)]])"[[/if]]></div>
         <div class="caritem--profilepicture"><img src="[[if user.picture]][[:~getBucketSize('80x80',user.picture)]][[else]][[:~isDummy()]][[/if]]">
         </div>
         <div class="caritem__data">
@@ -128,7 +128,7 @@
         <img src="/images/garantia.svg">
       </div>
     [[/if]]
-      <div class="caritem--image" [[if photo]]style="background-image:url([[:~getBucketSize('500x375',photo.photo_url)]])"[[/if]]></div>
+      <div class="caritem--image" [[if photo]]style="background-image:url([[:~getBucketSize('480x360',photo.photo_url)]])"[[/if]]></div>
       <div class="caritem--profilepicture"><img src="[[if user.picture]][[:~getBucketSize('80x80',user.picture)]][[else]][[:~isDummy()]][[/if]]">
       </div>
       <div class="caritem__data">
@@ -150,7 +150,7 @@
   <script id="publicaciones" type="text/x-jsrender">
     <div class="publicaciones__caritem [[:code]][[if sold]] vendido[[/if]][[if paused]] pausado[[/if]][[if ~isDraft(price,kms,tel,mt_year,region.id,city.id)]] faltandatos[[/if]]" id="[[:code]]" data-active="[[:active]]" data-paused="[[:paused]]" data-sold="[[:sold]]">
       <a href="[[:links.self]]" target="_blank">
-        <div class="caritem--img" [[if photo]]style="background-image: url([[:~getBucketSize('500x375',photo.photo_url)]])"[[/if]]></div>
+        <div class="caritem--img" [[if file]]style="background-image: url([[:~getBucketSize('480x360',file.photo_url)]])"[[/if]]></div>
       </a>
       <div class="caritem__principalinfo w-hidden-small w-hidden-tiny ">
         <h4 class="caritem__principalinfo--h">[[:brand.title]] [[:model.title]]&nbsp;|&nbsp;[[:~isPrice(currency,price)]]</h4>

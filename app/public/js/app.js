@@ -15,15 +15,30 @@ if (typeof localStorage === 'object') {
 var scroll_count = 0
 , endpoints = undefined
 , files = []
+, ads = []
+, ads_inserted = 0
 , settings = {
 	currency: '<span class="currency">ARS</span>'
+}
+, fix_date_zeros = function (date){
+	return date < 10 ? "0" + date : date 
+}
+, get_timestamp = function (){
+	var currentdate = new Date()
+	, timestamp = currentdate.getFullYear() + "/"
+        + fix_date_zeros(currentdate.getMonth()+1)  + "/" 
+        + fix_date_zeros(currentdate.getDate()) + " "  
+        + fix_date_zeros(currentdate.getHours()) + ":"  
+        + fix_date_zeros(currentdate.getMinutes()) + ":" 
+        + fix_date_zeros(currentdate.getSeconds())
+	return timestamp
 }
 , refresh_token = function(){
 	var token = get_token()
 	$.server({ 
 		url: '/refresh-token',
 		success: function (resp){
-			if(resp && resp.data){
+			if(resp){
 				localStorage.setItem("token_data",JSON.stringify(resp.data))
 				setTimeout(function (){
 					$('body').trigger('token_updated')	
@@ -42,6 +57,9 @@ var scroll_count = 0
 			}
 		}
 	})
+}
+, getRandomInt = function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 , getBucketSize = function (size,url){
 	if(url == undefined || url.indexOf('/')==-1) return
@@ -157,7 +175,7 @@ var scroll_count = 0
 			return typeof Intl=='object' ? new Intl.NumberFormat().format(number) : number
 		}
 		, isPrice : function (currency,price){
-			return ''
+			return '<span class="currency">' + price + '</span> '
 		}
 		, getBucketSize : getBucketSize
 		, isFav : function (id){
@@ -230,6 +248,32 @@ var scroll_count = 0
 			localStorage.clear()
 		}
 	}
+}
+, add_preference = function (type,id){
+	var token = get_token()
+	if($.isEmptyObject(token)) return
+	var preferences = token.preferences || {}
+	if(preferences[type] && ! preferences[type][id]){
+		preferences[type].push(id)
+	}
+	localStorage.setItem("token_data",JSON.stringify(token))
+	return preferences
+}
+, remove_preference = function (type,id){
+	var token = get_token()
+	if($.isEmptyObject(token)) return
+	var preferences = token.preferences[type] || {}
+	, save = []
+
+	if(preferences.length){
+		for(var i in preferences){
+			if(preferences[i]!=id) save.push(preferences[i])
+		}
+	}
+
+	token.preferences[type] = save
+	localStorage.setItem("token_data",JSON.stringify(token))
+	return save
 }
 , parseJwt = function (token) {
 	if(!token) return null
@@ -304,6 +348,7 @@ var scroll_count = 0
 	})	
 }
 , showTick = function () {
+	$(".tick-asset").css({'display':'block'})
 	$(".trigger").addClass("drawn")
 	setTimeout(function (){
 		$(".trigger").removeClass("drawn")
@@ -337,7 +382,7 @@ var scroll_count = 0
 	  {"slug":"gotocontact","name":"GoToContact","value":{"style":{},"triggers":[{"type":"click","selector":".contact","stepsA":[{"display":"block"},{"wait":"200ms"},{"opacity":1,"transition":"opacity 500ms ease 0"}],"stepsB":[]}]}},
 	  {"slug":"used","name":"used","value":{"style":{},"triggers":[{"type":"click","stepsA":[{"display":"none"}],"stepsB":[]},{"type":"click","selector":".togglenew","stepsA":[{"display":"flex"}],"stepsB":[]}]}},
 	  {"slug":"new","name":"new","value":{"style":{},"triggers":[{"type":"click","stepsA":[{"display":"none"}],"stepsB":[]},{"type":"click","selector":".toggleused","stepsA":[{"display":"flex"}],"stepsB":[]}]}},
-	  {"slug":"garantia","name":"garantia","value":{"style":{},"triggers":[{"type":"click","selector":".aplicoagarantia","stepsA":[{"display":"flex"}],"stepsB":[]},{"type":"click","selector":".aplicagarantia","stepsA":[{"display":"none"}],"stepsB":[]}]}}
+	  //{"slug":"garantia","name":"garantia","value":{"style":{},"triggers":[{"type":"click","selector":".aplicoagarantia","stepsA":[{"display":"flex"}],"stepsB":[]},{"type":"click","selector":".aplicagarantia","stepsA":[{"display":"none"}],"stepsB":[]}]}}
 	])					
 }
 , check_controls = function () {
@@ -496,21 +541,28 @@ var scroll_count = 0
 
 	return reduced.join(' > ')
 }
+, get_rowsize = function(){
+	var size = 4
+	, width = $(window).width()
+	if(width < 991 && width > 424) size = 2
+	if(width < 424) size = 1
+	return size
+}
+// take = rowsize * 4
 , fetch = function (pos) {
 	
-	var take = 8
+	var rowsize = get_rowsize()
+	, take = rowsize * 4
 	, i = helpers.getParameterByNameGroup('i')
 
 	if(pos==undefined) pos = 0
-
 	showLoader()
-
+	
 	if(pos==0) {
-		take*= 2
-		$('.carlisting__cont__cars').fadeOut(200)
 		scroll_count = 0
+		ads_inserted = 0
 		sidebar()
-	}
+	} 
 
 	$('.noinfo').hide()
 	$('.carlisting-indicator__filter--n').html(check_controls())
@@ -526,21 +578,51 @@ var scroll_count = 0
 			hideLoader()
 			scroll_count = response.pagination.count
 			if(pos==0){
-				$('.carlisting__cont__cars').hide().html($.templates("#listing").render(response.listing.data,helpers.listing)).fadeIn(600, function (){
-					window.scrollTo(0,0)
-				})
+				if(!$.isEmptyObject(response.listing.data)){
+					$('.carlisting__cont__cars').hide().html($.templates("#listing").render(response.listing.data,helpers.listing)).fadeIn(600, function (){
+						window.scrollTo(0,0)
+						if(ads.length){
+							//insert_next_ad(1)
+						}
+					})
+				}
 			} else {
-				$('.carlisting__cont__cars').append($.templates("#listing").render(response.listing.data,helpers.listing))
+				$('.carlisting__cont__cars').append($.templates("#listing").render(response.listing.data,helpers.listing)).promise().done(function (){
+					//insert_next_ad(getRandomInt(0,take / rowsize))
+				})
 			}
+
 			$('.carlisting-indicator__amount--n').text(response.pagination.position + ' de ' + response.pagination.count + ' resultado de:')
 
 			if($.isEmptyObject(response.listing.data)){
-				$('.carlisting__cont__cars').html('<div class="noinfo">No hay transmisiones públicas activas</div>').promise().done(function (){
+				$('.carlisting__cont__cars').html('<div class="noinfo">No hay resultados</div>').promise().done(function (){
 					$(this).find('.noinfo').fadeIn()
 				})
 			}
 		}
 	})
+}
+, insert_next_ad = function(pos){
+	if(pos==undefined) pos = 'before'
+	var ad = ads[ads_inserted]
+
+	if(!ad) return null
+
+	var template = $.templates('#embedded_ad').render(ad)
+	, rowsize = get_rowsize()
+	, take = rowsize * 4
+	, done = function(){
+		ads_inserted++
+	}
+
+	if(pos=='before'){
+		$('.carlisting__caritem').first().before(template).promise().done(done)
+	} else if(pos=='after') {
+		$('.carlisting__caritem').last().after(template).promise().done(done)
+	} else {
+		var index = $('.carlisting__caritem').length - take + rowsize - 1 + ((pos-1) * rowsize)
+		$($('.carlisting__caritem').get(index)).after(template).promise().done(done)
+	}
 }
 , sidebar = function () {
 	$.ajax({
@@ -627,7 +709,6 @@ $(function (){
 	$('.session--links').html($.templates("#sessionlinks").render(token,helpers.token))
 
 	// dom actions
-
 
 	$(document).on('submit','#wf-form-login',function (e){
 		e.preventDefault() 
@@ -744,12 +825,16 @@ $(function (){
 		var token = get_token()
 
 		if($.isEmptyObject(token)){
-			$('.button--register').click()
+			if($('.button--register').length){
+				setTimeout(function (){ $('.button--register').click()}, 100)
+				$('.button--register').trigger("mousedown")
+			}
+
 			return false
 		}
 
 		var type = $(this).data('type')
-		var id = $(this).data('id')
+		, id = $(this).data('id')
 
 		if(type=='fav'){
 			var state = $(this).attr('src')=='/images/fav-active.svg'?0:1
@@ -761,8 +846,12 @@ $(function (){
 		$.server({
 			url: '/perfil/' + type + '/' + id,
 			data : {state: state}, 
-			success: function (){
-				showTick()
+			success: function (resp){
+				if(resp.status=="success"){
+					if(state) add_preference(type,id)
+					else remove_preference(type,id)
+					showTick()
+				}
 			}
 		})	
 	
@@ -776,6 +865,17 @@ $(function (){
 	$(document).on('change','.sidebar__form select',function (){
 		$('.sidebar__form').submit()
 	})
+
+    $(document).on('click', '.data-url', function (){
+    	var a=''
+    	if(!$(this).data('url')) return 
+    	a+='<a id="link" href="' + $(this).data('url') + '"'
+    	if($(this).hasClass('data-url-blank')) a+=' target="blank"'
+    	a+='></a>'
+    	$('body').append(a)
+    	$('#link')[0].click()
+    	return false
+    })
 
 	// static actions
 	$('.close__alert--link').click(function (){
@@ -862,6 +962,13 @@ $(function (){
 		return false
 	})
 
+	// close modal on negative space not covered in wf
+	
+	$('.modalwrapper').click(function (e){
+		if($(e.target).parents('.modalwrapper__container').length) return
+		$('.modalwrapper').fadeOut(300)
+	})
+
 	// footer actions
 
 	$('.footer__link--a').click(function (){
@@ -892,6 +999,7 @@ $(function (){
 		return false
 	})
 
+
     $(window).on('hashchange', function (){
     	if(location.pathname=='/'){
 			fetch()
@@ -899,6 +1007,7 @@ $(function (){
     })
 
     // check and keep session alive
+
     refresh_token()
 
     setInterval(function (){
@@ -961,3 +1070,4 @@ $.ajaxSetup({
     	}
     }
 })
+

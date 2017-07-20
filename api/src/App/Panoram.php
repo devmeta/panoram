@@ -93,7 +93,7 @@ class Panoram extends \Spot\Entity
         foreach($form->files as $photo){
             $files[] = [
                 'id' => $photo->id,
-                'photo_url' => $photo->photo_url,
+                'photo_url' => $photo->file_url,
                 'position' => $photo->position,
                 'filesize'  => $photo->filesize
             ];
