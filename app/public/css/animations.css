@@ -3,8 +3,8 @@
     height: 75px;
     position: fixed;
     z-index: 100;
-    top: 120px;
-    right: 10px;
+    top: 10px;
+    left: 10px;
 }
 
 .loader{
@@ -35,7 +35,7 @@
 }
 
 #loader:after{
-  border: 10px solid rgba(255,255,255,0.5);
+  border: 10px solid rgba(0,0,0,0.1);
 }
 
 .circ{
@@ -95,3 +95,26 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes wheel-driving{
+  0%{
+    -webkit-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+  }
+  50%{
+    -webkit-transform: rotate(10deg);
+    -ms-transform: rotate(10deg);
+    -o-transform: rotate(10deg);
+    transform: rotate(10deg);
+  }
+
+  100%{
+    -webkit-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+  }
+}
+

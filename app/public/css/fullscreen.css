@@ -28,6 +28,11 @@ canvas {
 	z-index: 99;
 }
 
+#map {
+	width: 100%;
+	height: 200px;
+}
+
 .toolbar {
 	position: absolute;
 	z-index: 10;

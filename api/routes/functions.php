@@ -401,6 +401,33 @@ function html2text($Document) {
   return preg_replace($Rules, $Replace, $Document);
 }
 
+
+function human_timespan_short($time){
+
+    $str = "";
+    $diff = time() - $time; // to get the time since that moment
+    $diff = ($diff<1)? $diff*-1 : $diff;
+
+    $Y = date('Y', $time);
+    $n = date('n', $time);
+    $w = date('w', $time);
+    $wdays = ['dom','lun','mar','mié','jue','sáb'];
+
+    if($diff < 86400){
+        $str = date('H:i',$time); 
+    } elseif($diff < 604800){
+        $str = $wdays[$w];
+    } elseif($Y <> date('Y')){
+        $str = date('j/n/y',$time);  
+    } elseif($n <> date('n')){
+        $str = date('j/n',$time); 
+    } else {
+        $str = date('j',$time);  
+    }
+
+    return $str;
+}
+
 function human_timespan($time){
 
     $time = time() - $time; // to get the time since that moment

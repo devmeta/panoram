@@ -177,6 +177,9 @@ var scroll_count = 0
 		, isPrice : function (currency,price){
 			return '<span class="currency">' + price + '</span> '
 		}
+		, decode : function(a){
+			return decodeURIComponent(a)
+		}
 		, getBucketSize : getBucketSize
 		, isFav : function (id){
 			var token = get_token()

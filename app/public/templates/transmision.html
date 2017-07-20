@@ -19,22 +19,18 @@
       </div>
     </div>
   [[/if]]
-    <div class="container-profile justone">
+    <!--div class="container-profile justone">
       <div class="container-profile__title"><img class="container-profile--img" src="/images/visible.svg">
         <h5 class="container-profile--h">Detalles</h5>
       </div>
       <div class="container-profile__detail">
         <div class="container__detail">
           <h6 class="container-profile__detail--h">Marca</h6>
-          <div>[[:brand.title]]</div>
-        </div>
-        <div class="container__detail">
-          <h6 class="container-profile__detail--h">Modelo</h6>
-          <div>[[:model.title]]</div>
+          <div>[[:title]]</div>
         </div>
         <div class="container__detail">
           <h6 class="container-profile__detail--h">Año</h6>
-          <div>[[:mt_year]]</div>
+          <div>[[:created]]</div>
         </div>
         <div class="container__detail">
           <h6 class="container-profile__detail--h">Kilometro</h6>
@@ -61,7 +57,7 @@
           <div>[[:version.title]]</div>
         </div>
       </div>
-    </div>
+    </div-->
   </script>
 
   <script id="datosvendedor" type="text/x-jsrender">
@@ -100,11 +96,11 @@
     <div>
       <div class="profile__profile-picture"><img src="[[if user.picture]][[:~getBucketSize('80x80',user.picture)]][[else]][[:~isDummy()]][[/if]]" width="60" height="60">
       </div>
-      <h1 class="profile--name" data-code="[[:code]]">[[:brand.title]] [[:model.title]]</h1>
-      <h3 class="profile--km-year">[[:mt_year]] | [[:kms]]</span> <span class="profile--used">[[if (condition==1)]]nuevo[[else]]usado[[/if]]</span></h3>
-      <div class="profile--place">[[:region.title]], [[:city.title]]</div>
+      <h1 class="profile--name" data-code="[[:code]]">[[:~decode(title)]]</h1>
+      <h3 class="profile--km-year">[[:created]]</span></h3>
+      <!--div class="profile--place">[[:region.title]], [[:city.title]]</div>
       <h1 class="profile--price">[[:~isPrice(currency,price)]]</h1>
-      <a onclick="_gaq.push(['_trackEvent', 'contacto', 'clic', 'contacto vendedor'])" class="principalbutton profile--button w-button" data-ix="gotodatos" href="#">Contactar al vendedor</a>
+      <a onclick="_gaq.push(['_trackEvent', 'contacto', 'clic', 'contacto vendedor'])" class="principalbutton profile--button w-button" data-ix="gotodatos" href="#">Contactar al vendedor</a-->
       <div class="profile__share">
         <a href="whatsapp://send?text=Mirá este auto en panoram {{shorturl}}" class="whatsapp">
           <img src="../images/whatsapp-share.png" />Compartir con Whatsapp
@@ -117,14 +113,14 @@
         </a>
       </div>
     </div>
-    <div class="profile__alertas">
+    <!--div class="profile__alertas">
       <div class="togglebutton caritem__data--descr__alert" data-type="alert" data-id="[[:id]]" data-ix="toggle">
         <div class="togglebuttongreen[[if ~isAlert(id)]] checked[[/if]][[if ~isGuest()]] disabled[[/if]]"></div>
         <div class="buttontoggle[[if ~isAlert(id)]] checked[[/if]][[if ~isGuest()]] disabled[[/if]]"></div>
         <div class="buttontext-off[[if ~isAlert(id)]] checked[[/if]][[if ~isGuest()]] disabled[[/if]]">off</div>
       </div>
       <div class="profile__alertas--text">Recibir alertas por email sobre autos similares</div>
-    </div>
+    </div-->
     <div class="profile__etiquetas">
       <h5 class="etiquetas--h">etiquetas</h5>
       <div class="etiquetas__etiquetas">
@@ -155,21 +151,20 @@
         <img src="/images/garantia.svg">
       </div>
     [[/if]]
-      <div class="caritem--image" [[if photo]]style="background-image:url([[:~getBucketSize('480x360',photo.photo_url)]])"[[/if]]></div>
+      <div class="caritem--image" [[if file]]style="background-image:url([[:~getBucketSize('480x360',file.photo_url)]])"[[/if]]></div>
       <div class="caritem--profilepicture"><img src="[[if user.picture]][[:~getBucketSize('80x80',user.picture)]][[else]][[:~isDummy()]][[/if]]">
       </div>
       <div class="caritem__data">
-        <h1 class="caritem__data--h">[[:brand.title]] [[:model.title]]</h1>
+        <h1 class="caritem__data--h">[[:~decode(title)]]</h1>
         <div class="caritem__data--description">
           <div class="caritem__data--descr__n">
-            <div>[[:kms]]km</div>
-            <div>[[:mt_year]] | [[:region.title]]</div>
+            <div>[[:created]]</div>
           </div>
         [[if ~isOwned(id) == false]]
           <img class="caritem__data--descr__fav" data-type="fav" data-id="[[:id]]" src="/images/fav[[if ~isFav(id)]]-active[[else]]orite[[/if]].svg">
         [[/if]]
         </div>
-        <div class="caritem__data--price">[[:~isPrice(currency,price)]]</div>
+        <!--div class="caritem__data--price">[[:~isPrice(currency,price)]]</div-->
       </div>
     </a>
   </script>
@@ -196,7 +191,7 @@
   </script>
 
   <script id="slide-nav" type="text/x-jsrender">
-    <div class="bestinfo__slider--nav--img">
+    <div class="bestinfo__slider--nav--img w-hidden">
       <a class="lightbox w-inline-block w-lightbox" href="#"><img sizes="(max-width: 479px) 18vw, (max-width: 767px) 19vw, 11vw" src="[[:photo_url]]" srcset="[[:~getBucketSize('480x360',photo_url)]] 500w, [[:~getBucketSize('800x600',photo_url)]] 800w, [[:~getBucketSize('1080x810',photo_url)]] 1080w, [[:photo_url]] 1200w">
       <script class="w-json" type="application/json">{ "group": "car-thumb", "items": [{
         "type": "image",
@@ -220,12 +215,12 @@
   <div class="datosvendedir modalwrapper" id="register">
 
   </div>
-  <div class="advice">
+  <!--div class="advice">
     <div>¿Cuánto pagas por el seguro de tu auto? Obtené la mejor cobertura hasta un 30% más barato.</div><a class="advice__button w-button" href="/asegura-con-nosotros">Conoce más</a>
-  </div>
+  </div-->
   <div class="bestinfo">
     <div class="bestinfo__slider">
-      <div class="bestinfo__w-slider w-slider" data-animation="slide" data-autoplay="1" data-delay="4000" data-duration="500" data-infinite="1">
+      <div class="bestinfo__w-slider w-slider" data-animation="fade" data-autoplay="1" data-delay="4000" data-duration="500" data-infinite="1">
         <div class="w-slider-mask">
         </div>
         <div class="w-slider-arrow-left">
@@ -244,7 +239,7 @@
   </div>
   <div class="car-info-info">
   </div>
-  <div class="car-info-boxes">
+  <!--div class="car-info-boxes">
     <div class="container-profile">
       <div class="container-profile__title"><img class="container-profile--img" src="/images/volume.svg">
         <h5 class="container-profile--h">Sonido</h5>
@@ -292,22 +287,8 @@
         </div>
       </div>
     </div>
-    <div class="container-profile">
-      <div class="container-profile__title"><img class="container-profile--img" src="/images/money-bag.svg">
-        <h5 class="container-profile--h">FINANCIAMIENTO</h5>
-      </div>
-      <div class="container-profile__detail">
-        <div class="container-profile__detail--financiamiento">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="aseguradora w-clearfix">
-    <h2>Asegurá este vehículo y ahorrá hasta un 30% en la mejor cobertura</h2>
-    <p>Ver Usados te acerca la posibilidad de cotizar el seguro de tu auto con los mayores descuentos y beneficios del mercado. Cotizá, compará y ahorrá hoy mismo.</p>
-    <p>¿Cuanto pagas por el seguro de tu auto?</p>
-    <a class="aseguradora--btn principalbutton w-button" href="http://estoycubierto.com">Cotizar Seguro</a>
-  </div>
+  </div-->
+
   <div class="relacionados">
     <h5 class="relacionados--h">Publicaciones relacionadas</h5>
   </div>
@@ -315,5 +296,5 @@
 {% endblock %}
 
 {% block assets %}
-  <script src="/js/auto.js" type="text/javascript"></script>
+  <script src="/js/transmision.js" type="text/javascript"></script>
 {% endblock %}

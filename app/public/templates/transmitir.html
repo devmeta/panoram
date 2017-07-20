@@ -14,10 +14,69 @@
 {% block body %}
 
 <div class="toolbar">
-  <label>Disparo manual</label>
-  <button id="snap">Snap Photo</button>
-  <label>Una foto cada cuántos segundos?</label>
-  <input type="number" maxlength="5" max="9999" min="5" placeholder="min:5, max:9999">
+  <div class="publish__container">
+    <h5 class="publish__container--h">Publica o privada</h5>
+    <div class="publish__form w-clearfix">
+      <div class="publish__form--newornot">
+        <div class="toggleused" data-ix="used">
+          <div class="active toggle__item"><img src="/images/used-toggle-active.svg">
+            <div class="active toggle--text">Privado</div>
+          </div>
+          <div class="toggle__item"><img src="/images/new-toggle.svg">
+            <div class="toggle--text">Público</div>
+          </div>
+        </div>
+        <div class="togglenew" data-ix="new">
+          <div class="toggle__item"><img src="/images/used-toggle.svg">
+            <div class="toggle--text">Privado</div>
+          </div>
+          <div class="active toggle__item"><img src="/images/new-toggle-active.svg">
+            <div class="active toggle--text">Público</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="publish__form">
+      <h5 class="publish--h">DESCRIBE TU AUTO <span class="publish--span">(*) Campos obligatorios</span></h5>
+      <div class="publish--p">Recuerda ser lo más preciso posible.</div>
+      <div class="w-form2">
+        <form class="w-clearfix">
+          <div class="publish__section">
+            <div class="publish__section__field">
+              <label class="form--label" for="name">¿EN DÓNDE ESTÁ TU VEHÍCULO? <span class="publish--span">(*)</span>
+              </label>
+              <button class="active inactivebutton w-button" id="snap" data-click="snapshot">Snap Photo</button>
+            </div>
+            <div class="publish__section__field">
+              <label class="form--label" for="name">¿En qué localidad? <span class="publish--span">(*)</span>
+              </label>
+              <select class="form__field w-select" data-name="city_id" id="city" name="city">
+              </select>
+            </div>
+          </div>
+          <div class="publish__section">
+            <div class="publish__twoinone">
+              <div class="publish__section__field">
+                <label class="form--label" for="ano">¿De qué año? <span class="publish--span">(*)</span>
+                </label>
+                <input class="form__field w-input" type="number" maxlength="5" max="9999" min="5" placeholder="min:5, max:9999">
+              </div>
+              <div class="publish__section__field">
+                <label class="form--label" for="a-o-2">¿Cuántos kms.? <span class="publish--span">(*)</span>
+                </label>
+                <input class="form__field w-input" data-name="kms" id="kilometros" maxlength="256" name="kilometros" placeholder="Ej: 30.000km" required="required" type="number">
+              </div>
+            </div>
+          </div>
+          <div class="publish__section">
+            <div id='map'></div>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="videoContainer">

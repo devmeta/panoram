@@ -2191,8 +2191,7 @@ a.principalbutton.estoycubierto {text-align: center;
 }
 
 .publish__form--newornot {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   background-color: #f6f7f9;
 }
 

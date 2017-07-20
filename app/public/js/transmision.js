@@ -52,8 +52,8 @@ var vehicle = undefined
 					$('.container-profile__detail--estado').html($.templates("#props").render(vehicle.props.estado))
 				}
 
-				$('.w-slider-mask').html($.templates("#slide").render(vehicle.photos,helpers.listing)).promise().done(function(){
-					$('.bestinfo__slider--nav').html($.templates("#slide-nav").render(vehicle.photos,helpers.listing)).promise().done(function(){
+				$('.w-slider-mask').html($.templates("#slide").render(vehicle.files,helpers.listing)).promise().done(function(){
+					$('.bestinfo__slider--nav').html($.templates("#slide-nav").render(vehicle.files,helpers.listing)).promise().done(function(){
 						webflow_reset()
 					});
 				});

@@ -32,7 +32,7 @@ use App\Status;
 use App\Tag;
 use App\File;
 
-function update_title($mapper){
+function update_title($mapper,$title){
 
     $photo = "";
     $photo_name = "";
@@ -82,9 +82,10 @@ function update_title($mapper){
     if($mapper->extrainfo){
         $description = $mapper->extrainfo;
     }
-    $title = urlencode(str_replace(['---','/'],'-',implode('--',[$photo,implode('-',str_replace(' ','-',$titlechunk)),$description])));
+
+    $title = strlen($title)?$title:date('Y-m-d H:i');
+    $title = urlencode(str_replace(['---','/'],'-',implode('--',[$photo,$title,implode('-',str_replace(' ','-',$titlechunk)),$description])));
     
-    //$body['kms'] = empty($body['kms']) ? 0 : $body['kms'];
     $title = substr($title,0,255);
 
     return $title;
@@ -171,7 +172,7 @@ $app->post("/upload/sort/{code}", function ($request, $response, $arguments) {
     ]);
 
     $body = [];
-    $body['title'] = \update_title($mapper);
+    //$body['title'] = \update_title($mapper);
     $mapper->data($body);
     $this->spot->mapper("App\Panoram")->save($mapper);
 
@@ -212,7 +213,7 @@ $app->post("/upload/{code}", function ($request, $response, $arguments) {
         $data[$i]['error'] = $udata['error'];
     }
 
-    $body['title'] = \update_title($mapper);
+    // $body['title'] = \update_title($mapper);
     $mapper->data($body);
     $this->spot->mapper("App\Panoram")->save($mapper);
 
@@ -291,45 +292,9 @@ $app->post("/update/{code}", function ($request, $response, $arguments) {
         throw new NotFoundException("No se encontró vehículo al actualizar", 404);        
     }
 
-    // check warranty commands
-    if( ! empty($body['warranty'])) {
-
-        if($body['warranty']){
-
-            $admin = (object) [
-                'first_name' => "Administrador",
-                'last_name' => "",
-                'email' => getenv('MAIL_CONTACT')
-            ];
-
-            $user = $this->spot->mapper("App\User")->first([
-                "id" => $this->token->decoded->uid
-            ]);
-
-            $userdata['warranty_requested'] = 1;
-            $mapper->data($userdata);
-            $this->spot->mapper("App\Panoram")->save($mapper);
-
-            $body['vehicle'] = $mapper;
-            $body['user'] = $user;
-
-            \send_email("Nueva Solicitud de Garantía Verusados",$admin,'warranty-admin.html',$body);
-            \send_email("Tu Solicitud de Garantía Verusados para " . $mapper->brand->title . ' ' . $mapper->model->title . ' ' . $mapper->mt_year,$user,'warranty-user.html',$body);
-        }
-
-        $data["status"] = "success";
-        $data["action"] = "aplicagarantia";
-        $data["message"] = "Ya casi! Revisa tu correo para mas instrucciones";
-
-        return $response->withStatus(200)
-            ->withHeader("Content-Type", "application/json")
-            ->write(json_encode($data)); 
-
-    }
-
     // standard update -- build title
 
-    $body['title'] = \update_title($mapper);
+    $body['title'] = \update_title($mapper, $body['title']);
 
     if( ! empty($body['price'])) {
         // humanize price
@@ -397,7 +362,7 @@ $app->post("/transmitir/inicio", function ($request, $response, $arguments) {
 
     $body = [
         'code' => $code,
-        'title' => $code,
+        // 'title' => $code,
         'user_id' => $this->token->decoded->uid,
         'enabled_until' => new \DateTime("now +" . getenv('APP_AD_DUE'))
     ];

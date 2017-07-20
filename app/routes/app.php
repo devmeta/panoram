@@ -78,7 +78,7 @@ $app->get('/{slug}', function ($request, $response, $args) {
         $description = str_replace("-"," ",$chunk[2]);
     }
 
-    return $this->view->render($response, 'auto.html',[
+    return $this->view->render($response, 'transmision.html',[
         'shorturl' => $request->getUri()->getScheme().'://'.$request->getUri()->getHost().'/'.strtok($args['slug'],"---"),
         'url' => $request->getUri()->getScheme().'://'.$request->getUri()->getHost().'/'.$args['slug'],
         'photo' => $photo,

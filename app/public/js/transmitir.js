@@ -1,8 +1,75 @@
 // Elements for taking the snapshot
 var canvas = document.getElementById('canvas')
+, video = document.getElementById('video')
 , context = canvas.getContext('2d')
 , videoWidth
 , videoHeight
+, pos = []
+, snapInterval = 0
+, snapIndex = 0
+, snapPeriodicity = 60
+, transmitir_start = function(){
+    snapshot()
+    $('.publish__container').fadeIn(2000)
+    snapInterval = setInterval(function(){ 
+        snapIndex++
+        snapshot()
+    },snapPeriodicity * 1000)
+    geo.track(function(position) {
+        i++
+        var latitude  = position.coords.latitude
+        , longitude = position.coords.longitude
+
+        marker.setLatLng([latitude, longitude]).update()
+
+        if(i==1) {
+            map.setView([latitude,longitude], 15)
+        }
+
+        vender_updateField('lat',latitude)
+        vender_updateField('lng',longitude)
+
+        pos = [latitude,longitude]
+    })    
+}
+, transmitir_ask = function(){
+    swal({
+      title: "Título de la transmisión",
+      text: "Elige un título para tu transmisión",
+      type: "input",
+      showCancelButton: true,
+      closeOnConfirm: false,
+      inputPlaceholder: "La montaña desde la ventana"
+    },
+    function(inputValue){
+      //if (inputValue === false) return false;
+      vender_updateField('title',inputValue, function(){
+        swal.close()
+        transmitir_start()  
+      })
+    })     
+}
+, vender_updateField = function (name,value,complete){
+    if(!value) return
+    $.server({ 
+        url: '/update/' + code,
+        data: name+'='+value, 
+        success: function(){
+            showTick()  
+            if(typeof complete == "function"){
+                complete.call(this)
+            }
+        }
+    })
+}
+, vender_updateCheck = function (type,id,value){
+    if(!value) return
+    $.server({ 
+        url: '/update-prop/' + code,
+        data: {type:type,id:id,value:value}, 
+        success: showTick
+    })
+}
 , getVideoSize = function() {
     var videoWidth = video.videoWidth
     , videoHeight = video.videoHeight
@@ -13,7 +80,6 @@ var canvas = document.getElementById('canvas')
 , snapshot = function(){
     $('canvas').show()
     context.drawImage(video, 0, 0)
-    //var data = context.getImageData( 0, 0, 640, 480)
     var data = canvas.toDataURL()
     $.ajax({
         type:'post',
@@ -57,9 +123,6 @@ var canvas = document.getElementById('canvas')
     })    
 }
 
-// Grab elements, create settings, etc.
-var video = document.getElementById('video');
-
 // Get access to the camera!
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     // Not adding `{ audio: true }` since we only want video now
@@ -72,7 +135,10 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 video.addEventListener('playing', getVideoSize, false);
 window.addEventListener('resize', getVideoSize, false);
 
-// Trigger photo take
 document.getElementById("snap").addEventListener("click", function() {
     snapshot()      
+})
+
+$(function(){
+    transmitir_ask()
 })

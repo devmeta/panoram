@@ -52,6 +52,8 @@ class Panoram extends \Spot\Entity
             "paused_date"   => ["type" => "datetime", "value" => new \DateTime()],
             "price" => ["type" => "decimal", "precision" => 10, "scale" => 0, "value" => 0, "default" => 0, "notnull" => true],
             "price_ars" => ["type" => "decimal", "precision" => 21, "scale" => 2, "value" => 0, "default" => 0, "notnull" => true],
+            "lat" => ["type" => "decimal", "precision" => 21, "scale" => 2, "value" => 0, "default" => 0, "notnull" => true],
+            "lng" => ["type" => "decimal", "precision" => 21, "scale" => 2, "value" => 0, "default" => 0, "notnull" => true],
             "tel" => ["type" => "string", "length" => 255, "value" => "", "notnull" => true],
             "schedule" => ["type" => "string", "length" => 255, "value" => "", "notnull" => true],
             "currency_id" => ["type" => "integer", "unsigned" => true, "value" => 1, "default" => 1, 'index' => true],
@@ -104,7 +106,10 @@ class Panoram extends \Spot\Entity
         }
 
         $until = $form->enabled_until;
-        $until_date = $until->format('U');
+        if(is_object($until)) $until_date = $until->format('U');
+
+        $created = $form->created;
+        if(is_object($created)) $created_date = $created->format('U');
 
         return [
             "id" => (integer) $form->id ?: null,
@@ -117,6 +122,7 @@ class Panoram extends \Spot\Entity
             "enabled" => !!$form->enabled,
             "requests" => $form->requests->count(),
             "enabled_until" => \human_timespan($until_date),
+            "created" => \human_timespan($created_date),
             "active" => ($until_date > time()),
             "file" => ! empty($files)?$files[0]:null,
             "files" => $files,

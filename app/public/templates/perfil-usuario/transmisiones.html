@@ -153,7 +153,7 @@
         <div class="caritem--img" [[if file]]style="background-image: url([[:~getBucketSize('480x360',file.photo_url)]])"[[/if]]></div>
       </a>
       <div class="caritem__principalinfo w-hidden-small w-hidden-tiny ">
-        <h4 class="caritem__principalinfo--h">[[:brand.title]] [[:model.title]]&nbsp;|&nbsp;[[:~isPrice(currency,price)]]</h4>
+        <h4 class="caritem__principalinfo--h">[[:~decode(title)]]&nbsp;|&nbsp;[[:~isPrice(currency,price)]]</h4>
       [[if warranty]]
         <a class="congarantia w-inline-block" href="/garantia-mecanica"><img src="/images/flame.svg">
           <div class="congarantia--text">Este auto aplica al plan de garantías</div>

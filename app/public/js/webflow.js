@@ -3612,6 +3612,8 @@
 
       // Set config options from data attributes
       config.animation = data.el.attr('data-animation') || 'slide';
+      console.log("-----")
+      console.log(config.animation)
       if (config.animation === 'outin') {
         config.animation = 'cross';
         config.crossOver = 0.5;

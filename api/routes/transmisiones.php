@@ -423,7 +423,6 @@ $app->post("/{slug}", function ($request, $response, $arguments) {
 
     if($vehicle){
 
-
         $fractal = new Manager();
         $fractal->setSerializer(new DataArraySerializer);
         $resource = new Item($vehicle, new Panoram);
@@ -442,41 +441,15 @@ $app->post("/{slug}", function ($request, $response, $arguments) {
             $data["message"] = "Este vehículo figura como vendido. <a href='/perfil-usuario/transmisiones'>Volver a mis publicaciónes</a>";
         }
 
-        if( ! $item->region_id) {
-            $data["status"] = "error";
-            $data["title"] = "Tu publicación no tiene una provincia!";
-            $data["message"] = "Este vehículo se está editando. Si es tu publicación por favor establecé una provincia para tu publicación <a href='/vender/{$code}#paso2'><em>{$item->title}</em></a> o <a href='/perfil-usuario/transmisiones'>Volver a mis publicaciónes</a>";
-        }
-
-        else if(trim($item->mt_year) <= 1950) {
-            $data["status"] = "error";
-            $data["title"] = "Tu publicación no tiene año de matriculación!";
-            $data["message"] = "Este vehículo se está editando. Si es tu publicación por favor establecé un año de matriculación para tu publicación <a href='/vender/{$code}#paso2'><em>{$item->title}</em></a> o <a href='/perfil-usuario/transmisiones'>Volver a mis publicaciónes</a>";
-        }
-
-        else if( ! $item->city_id) {
-            $data["status"] = "error";
-            $data["title"] = "Tu publicación no tiene una ciudad!";
-            $data["message"] = "Este vehículo se está editando. Si es tu publicación por favor establecé una localidad para tu publicación <a href='/vender/{$code}#paso2'><em>{$item->title}</em></a> o <a href='/perfil-usuario/transmisiones'>Volver a mis publicaciónes</a>";
-        }
-
-        else if( ! $item->price) {
-            $data["status"] = "error";
-            $data["title"] = "Tu publicación no tiene un precio!";
-            $data["message"] = "Este vehículo se está editando. Si es tu publicación por favor establecé un precio para tu publicación <a href='/vender/{$code}#paso4'><em>{$item->title}</em></a> o <a href='/perfil-usuario/transmisiones'>Volver a mis publicaciónes</a>";
-
-        }
-        else if(trim($item->tel) == "") {
-            $data["status"] = "error";
-            $data["title"] = "Tu publicación no tiene teléfono de contacto!";
-            $data["message"] = "Este vehículo se está editando. Si es tu publicación por favor establecé un teléfono de contacto para tu publicación <a href='/vender/{$code}#paso4'><em>{$item->title}</em></a> o <a href='/perfil-usuario/transmisiones'>Volver a mis publicaciónes</a>";
-        }
-
-
         $vehicle->data(['hits' => $vehicle->hits + 1]);
         $this->spot->mapper("App\Panoram")->save($vehicle);
 
-        $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE (user_id ={$vehicle->user_id} OR model_id = {$vehicle->model_id}) AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND sold = 0 AND enabled_until > now() AND price > 0 AND mt_year > 1950 AND tel <> '' ORDER BY CASE model_id WHEN {$vehicle->model_id} THEN 0 ELSE 2 END, CASE brand_id WHEN {$vehicle->brand_id} THEN 1 ELSE 2 END ASC, hits desc");
+        if(!empty($vehicle->city_id)){
+            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE (user_id = {$vehicle->user_id} OR city_id = '{$vehicle->city_id})' AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND sold = 0 AND enabled_until > now() ORDER BY CASE city_id WHEN {$vehicle->city_id} THEN 0 ELSE 2 END, CASE region_id WHEN {$vehicle->region_id} THEN 1 ELSE 2 END ASC, hits desc");
+        } else {
+            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE user_id = {$vehicle->user_id} AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND sold = 0 AND enabled_until > now() ORDER BY hits desc");
+        }
+
 
         $fractal = new Manager();
         $fractal->setSerializer(new DataArraySerializer);
