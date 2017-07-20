@@ -5,26 +5,29 @@ var canvas = document.getElementById('canvas')
 , videoWidth
 , videoHeight
 , pos = []
+, marker
+, markers = []
 , snapInterval = 0
 , snapIndex = 0
 , snapPeriodicity = 60
+, posIndex = 0
 , transmitir_start = function(){
+
     snapshot()
+
     $('.publish__container').fadeIn(2000)
     snapInterval = setInterval(function(){ 
         snapIndex++
         snapshot()
     },snapPeriodicity * 1000)
+
     geo.track(function(position) {
-        i++
+        posIndex++
         var latitude  = position.coords.latitude
         , longitude = position.coords.longitude
 
         marker.setLatLng([latitude, longitude]).update()
-
-        if(i==1) {
-            map.setView([latitude,longitude], 15)
-        }
+        map.setView([latitude,longitude], 15)
 
         vender_updateField('lat',latitude)
         vender_updateField('lng',longitude)
@@ -135,10 +138,29 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 video.addEventListener('playing', getVideoSize, false);
 window.addEventListener('resize', getVideoSize, false);
 
-document.getElementById("snap").addEventListener("click", function() {
+// map
+
+L.mapbox.accessToken = geo.mapbox.accessToken
+
+//Load the map and set it to a given lat-lng
+map = L.mapbox.map('map', 'mapbox.streets');
+map.setView([-34.608724, -58.376867], 15);
+
+//Display a default marker
+marker = L.marker([-34.608724, -58.376867], {icon:geo.icon({displayName:"Yo",className:'me',colorId:2})}).addTo(map);
+
+/*document.getElementById("snap").addEventListener("click", function() {
     snapshot()      
-})
+})*/
 
 $(function(){
+
+    $('.publish__form--newornot div').click(function(){
+        var condition = $(this).first().data('ix')
+        if(condition != undefined){
+            vender_updateField('condition',(condition=='new'?2:1))
+        }
+    })
+        
     transmitir_ask()
 })

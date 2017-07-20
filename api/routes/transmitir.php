@@ -32,7 +32,7 @@ use App\Status;
 use App\Tag;
 use App\File;
 
-function update_title($mapper,$title){
+function update_title($mapper,$initial_title=""){
 
     $photo = "";
     $photo_name = "";
@@ -40,9 +40,9 @@ function update_title($mapper,$title){
     $titlechunk = [];
     $ctl = 0;
 
-    foreach($mapper->photos as $mphoto){
-        if(!$ctl AND $mphoto->photo_url){
-            $photo_name = $mphoto->photo_url;
+    foreach($mapper->files as $mphoto){
+        if(!$ctl AND $mphoto->file_url){
+            $photo_name = $mphoto->file_url;
             $ctl = 1;
         }
     }
@@ -53,39 +53,17 @@ function update_title($mapper,$title){
         $photo = $photo_name;
     }
 
-    if($mapper->brand->title){
-        $titlechunk[] = $mapper->brand->title;
-    }
-
-    if($mapper->model->title){
-        $titlechunk[] = $mapper->model->title;
-    }
-
-    if($mapper->version->title){
-        $titlechunk[] = $mapper->version->title;
-    }
-
-    if($mapper->doors){
-        $titlechunk[] = $mapper->doors . ' puertas';
-    }
-
-    if($mapper->kms){
-        $titlechunk[] = $mapper->kms . ' kms';
-    } else {
-        $titlechunk[] = '0 km';
-    }
-
-    if($mapper->region->title){
-        $titlechunk[] = $mapper->region->title;
-    }
-
     if($mapper->extrainfo){
         $description = $mapper->extrainfo;
     }
 
-    $title = strlen($title)?$title:date('Y-m-d H:i');
-    $title = urlencode(str_replace(['---','/'],'-',implode('--',[$photo,$title,implode('-',str_replace(' ','-',$titlechunk)),$description])));
-    
+    if(!empty($initial_title) AND trim($initial_title)!=""){
+        $title = $initial_title;
+    } else {
+        $title = $mapper->title;    
+    }
+
+    $title = urlencode(str_replace(['---','/'],'-',implode('--',[$photo,$title])));
     $title = substr($title,0,255);
 
     return $title;
@@ -172,7 +150,7 @@ $app->post("/upload/sort/{code}", function ($request, $response, $arguments) {
     ]);
 
     $body = [];
-    //$body['title'] = \update_title($mapper);
+    $body['title'] = \update_title($mapper);
     $mapper->data($body);
     $this->spot->mapper("App\Panoram")->save($mapper);
 
@@ -213,7 +191,7 @@ $app->post("/upload/{code}", function ($request, $response, $arguments) {
         $data[$i]['error'] = $udata['error'];
     }
 
-    // $body['title'] = \update_title($mapper);
+    $body['title'] = \update_title($mapper);
     $mapper->data($body);
     $this->spot->mapper("App\Panoram")->save($mapper);
 
@@ -294,7 +272,9 @@ $app->post("/update/{code}", function ($request, $response, $arguments) {
 
     // standard update -- build title
 
-    $body['title'] = \update_title($mapper, $body['title']);
+    if(key($body)=='title'){
+        $body['title'] = \update_title($mapper, $body['title']);
+    }
 
     if( ! empty($body['price'])) {
         // humanize price

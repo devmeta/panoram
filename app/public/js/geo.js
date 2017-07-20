@@ -4,12 +4,12 @@ var geo = {
 	},
 	track : function(success, error) {
 	  if (!navigator.geolocation){
-	  	H.status("💥 Su dispositivo no soporta geolocalización.")
+	  	swal("Localización","💥 Su dispositivo no soporta geolocalización.","warning")
 	    return;
 	  }
 
 	  navigator.geolocation.watchPosition(success, function() {
-	  	H.status("💥 No pude obtener ubicación")
+	  	swal("Localización","💥 No pude obtener ubicación.","error")
 	  });
 	}
 	, icon : function(data){
