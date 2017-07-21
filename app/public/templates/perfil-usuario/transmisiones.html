@@ -103,14 +103,13 @@
           <h1 class="caritem__data--h">[[:brand.title]] [[:model.title]]</h1>
           <div class="caritem__data--description">
             <div class="caritem__data--descr__n">
-              <div>[[:kms]]km</div>
-              <div>[[:mt_year]] | [[:region.title]]</div>
+              <div>[[:duration]]</div>
             </div>
           [[if ~isOwned(id) == false]]
             <img class="caritem__data--descr__fav" data-type="fav" data-id="[[:id]]" src="/images/fav[[if ~isFav(id)]]-active[[else]]orite[[/if]].svg">
           [[/if]]
           </div>
-          <div class="caritem__data--price">[[:~isPrice(currency,price)]]</div>
+          <div class="caritem__data--price">[[:created]]</div>
         </div>
       </a>
       <div class="togglebutton caritem__data--descr__alert" data-type="alert" data-id="[[:id]]" data-ix="toggle">
@@ -135,14 +134,13 @@
         <h1 class="caritem__data--h">[[:brand.title]] [[:model.title]]</h1>
         <div class="caritem__data--description">
           <div class="caritem__data--descr__n">
-            <div>[[:kms]]km</div>
-            <div>[[:mt_year]] | [[:region.title]]</div>
+            <div>[[:duration]]</div>
           </div>
         [[if ~isOwned(id) == false]]
           <img class="caritem__data--descr__fav" data-type="fav" data-id="[[:id]]" src="/images/fav[[if ~isFav(id)]]-active[[else]]orite[[/if]].svg">
         [[/if]]
         </div>
-        <div class="caritem__data--price">[[:~isPrice(currency,price)]]</div>
+        <div class="caritem__data--price">[[:created]]</div>
       </div>
     </a>
   </script>

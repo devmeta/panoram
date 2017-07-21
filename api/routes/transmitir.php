@@ -66,7 +66,7 @@ function update_title($mapper,$initial_title=""){
         $title = implode('--',$parts);
     }
 
-    $title = urldecode(str_replace(['---','/'],'-',implode('--',[$photo,$title])));
+    $title = str_replace(['---','/'],'-',implode('--',[$photo,$title]));
     $title = substr($title,0,255);
 
     return $title;

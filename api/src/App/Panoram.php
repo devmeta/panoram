@@ -83,7 +83,7 @@ class Panoram extends \Spot\Entity
             'gear' => $mapper->belongsTo($entity, 'App\Gear', 'gear_id'),
             'color' => $mapper->belongsTo($entity, 'App\Color', 'color_id'),
             'requests' => $mapper->hasMany($entity, 'App\UserMessage','pan_id')->group(['user_id']),
-            'files' => $mapper->hasMany($entity, 'App\File','pan_id')->order(['position' => 'ASC']),
+            'files' => $mapper->hasMany($entity, 'App\File','pan_id')->order(['created' => 'DESC']),
             'props' => $mapper->hasManyThrough($entity, 'App\Prop', 'App\PanoramProp','prop_id','pan_id')->order(['order' => 'ASC'])
         ];
     }
@@ -94,8 +94,7 @@ class Panoram extends \Spot\Entity
 
         foreach($pan->files as $photo){
             $created = $photo->created;
-        if(is_object($created)) $created_date = $created->format('U');
-
+            if(is_object($created)) $created_date = $created->format('U');
             $files[] = [
                 'id' => $photo->id,
                 'photo_url' => $photo->file_url,
@@ -115,11 +114,10 @@ class Panoram extends \Spot\Entity
         $created = $pan->created;
         if(is_object($created)) $created_date = $created->format('U');
 
-        $duration = 0;
+        $duration = false;
 
         if(count($files)){
-            //$diff = $files[count($files)-1]->created - $files[0]->created;
-            //$duration = \human_timespan($diff);
+            $duration = \human_timespan($files[count($files)-1]['created'],$files[0]['created']);
         }
 
         return [
@@ -136,6 +134,7 @@ class Panoram extends \Spot\Entity
             "requests" => $pan->requests->count(),
             "enabled_until" => \human_timespan($until_date),
             "created" => \human_timespan($created_date),
+            "duration" => $duration?:"n/a",
             "active" => ($until_date > time()),
             "file" => ! empty($files)?$files[0]:null,
             "files" => $files,

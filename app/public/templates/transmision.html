@@ -136,13 +136,13 @@
         <h1 class="caritem__data--h">[[:~decode(title)]]</h1>
         <div class="caritem__data--description">
           <div class="caritem__data--descr__n">
-            <div>[[:created]]</div>
+            <div>[[:duration]]</div>
           </div>
         [[if ~isOwned(id) == false]]
           <img class="caritem__data--descr__fav" data-type="fav" data-id="[[:id]]" src="/images/fav[[if ~isFav(id)]]-active[[else]]orite[[/if]].svg">
         [[/if]]
         </div>
-        <!--div class="caritem__data--price">[[:~isPrice(currency,price)]]</div-->
+        <div class="caritem__data--price">[[:created]]</div>
       </div>
     </a>
   </script>

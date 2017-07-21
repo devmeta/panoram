@@ -413,7 +413,8 @@ function human_timespan_short($time){
     $w = date('w', $time);
     $wdays = ['dom','lun','mar','mié','jue','sáb'];
 
-    if($diff < 86400){
+    //if($diff < 86400){
+    if($diff < (86400 / 4)){
         $str = date('H:i',$time); 
     } elseif($diff < 604800){
         $str = $wdays[$w];
@@ -428,9 +429,9 @@ function human_timespan_short($time){
     return $str;
 }
 
-function human_timespan($time){
+function human_timespan($time, $from = 0){
 
-    $time = time() - $time; // to get the time since that moment
+    $time = ($from?:time()) - $time; // to get the time since that moment
     $time = ($time<1)? $time*-1 : $time;
     $tokens = array (
         31536000 => 'año',
