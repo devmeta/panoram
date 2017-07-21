@@ -60,12 +60,13 @@ function update_title($mapper,$initial_title=""){
     if(!empty($initial_title) AND trim($initial_title)!=""){
         $title = $initial_title;
     } else {
+        $photo_id = strtok($args['slug'],"--");
         $parts = explode('--',$mapper->title);
         unset($parts[0]);
         $title = implode('--',$parts);
     }
 
-    $title = urlencode(str_replace(['---','/'],'-',implode('--',[$photo,$title])));
+    $title = urldecode(str_replace(['---','/'],'-',implode('--',[$photo,$title])));
     $title = substr($title,0,255);
 
     return $title;

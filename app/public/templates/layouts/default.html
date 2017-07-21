@@ -10,8 +10,8 @@
   <link href="/css/normalize.css" rel="stylesheet" type="text/css">
   <link href="/css/webflow.css" rel="stylesheet" type="text/css">
   <link href="/css/gibson.css" rel="stylesheet" type="text/css">
-  <link href="/css/panoram.webflow.css" rel="stylesheet" type="text/css">
-  <link href="/css/animations.css" rel="stylesheet" type="text/css">  
+  <link href="/css/panoram.webflow.css?_={{ rev_parse }}" rel="stylesheet" type="text/css">
+  <link href="/css/animations.css?_={{ rev_parse }}" rel="stylesheet" type="text/css">  
   <link href="/css/sweetalert.css" rel="stylesheet" type="text/css">  
   <link href="/images/iso-panoram.png" rel="shortcut icon" type="image/x-icon">
   <link href="/images/iso-panoram-big.png" rel="apple-touch-icon">
@@ -44,10 +44,10 @@
   <script src="/js/binaryajax.js" type="text/javascript"></script>  
   <script src="/js/jsrender.min.js" type="text/javascript"></script>
   <script src="/js/sweetalert.min.js" type="text/javascript"></script>
-  <script src="/js/config.js" type="text/javascript"></script>
-  <script src="/js/app.js" type="text/javascript"></script>  
+  <script src="/js/config.js?_={{ rev_parse }}" type="text/javascript"></script>
+  <script src="/js/app.js?_={{ rev_parse }}" type="text/javascript"></script>  
 
-  <!-- [if lte IE 9]><script src="/js/placeholders.min.js"></script><![endif] -->  
+  <!-- [if lte IE 9]><script src="/js/placeholders.min.js?_={{ rev_parse }}"></script><![endif] -->  
 
   {% block assets %}{% endblock %}
   
