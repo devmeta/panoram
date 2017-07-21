@@ -5,7 +5,6 @@ var canvas = document.getElementById('canvas')
 , video = document.getElementById('video')
 , context = canvas.getContext('2d')
 , videoElement = document.querySelector('video')
-, audioSelect = document.querySelector('select#audioSource')
 , videoSelect = document.querySelector('select#videoSource')
 , videoWidth
 , videoHeight
@@ -204,11 +203,6 @@ function getStream() {
   }
 
   var constraints = {
-    audio: {
-      optional: [{
-        sourceId: audioSelect.value
-      }]
-    },
     video: {
       optional: [{
         sourceId: videoSelect.value
