@@ -194,21 +194,20 @@
         <img src="/images/garantia.svg">
       </div>
     [[/if]]
-      <div class="caritem--image" [[if photo]]style="background-image:url([[:~getBucketSize('480x360',photo.photo_url)]])"[[/if]]></div>
+      <div class="caritem--image" [[if file]]style="background-image:url([[:~getBucketSize('480x360',file.photo_url)]])"[[/if]]></div>
       <div class="caritem--profilepicture"><img src="[[if user.picture]][[:~getBucketSize('80x80',user.picture)]][[else]][[:~isDummy()]][[/if]]" width="50" height="50">
       </div>
       <div class="caritem__data">
-        <h1 class="caritem__data--h">[[:brand.title]] [[:model.title]]</h1>
+        <h1 class="caritem__data--h">[[:~decode(title)]]</h1>
         <div class="caritem__data--description">
           <div class="caritem__data--descr__n">
-            <div>[[:~format(kms)]]km</div>
-            <div>[[:mt_year]] | [[:region.title]]</div>
+            <div>[[:created]]</div>
           </div>
         [[if ~isOwned(id) == false]]
           <img class="caritem__data--descr__fav" data-type="fav" data-id="[[:id]]" src="/images/fav[[if ~isFav(id)]]-active[[else]]orite[[/if]].svg">
         [[/if]]
         </div>
-        <div class="caritem__data--price">[[:~isPrice(currency,price)]]</div>
+        <!--div class="caritem__data--price">[[:~isPrice(currency,price)]]</div-->
       </div>
     </a>    
   </script>

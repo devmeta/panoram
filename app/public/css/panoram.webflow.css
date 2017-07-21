@@ -480,6 +480,7 @@ a.principalbutton.estoycubierto {text-align: center;
 }
 
 .carlisting__cont__filter {
+  display: none;
   margin-top: 10px;
   margin-left: 1%;
 }

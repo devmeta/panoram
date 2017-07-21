@@ -58,32 +58,26 @@ $app->get('/{slug}', function ($request, $response, $args) {
         ]);
     }
 
-    // user
-    if(strpos($args['slug'],"@") === 0){
-        return $this->view->render($response, 'perfil.html',[
-            'slug' => substr($args['slug'],1)
-        ]);
-    }
-
     // vehicle
     $og = substr($args['slug'], strrpos($args['slug'], '---') + 1);
     $chunk = array_values(array_filter(explode("--",$og)));
     $photo = "";
     $title = "";
     $description = "";
+    $host = $request->getUri()->getScheme().'://'.$request->getUri()->getHost();
 
     if(count($chunk) > 1){
         $photo = getenv('BUCKET_URL') . '/' . $chunk[0] . ".jpg";
         $title = str_replace("-"," ",$chunk[1]);
-        $description = str_replace("-"," ",$chunk[2]);
+        //$description = str_replace("-"," ",$chunk[2]);
     }
 
     return $this->view->render($response, 'transmision.html',[
-        'shorturl' => $request->getUri()->getScheme().'://'.$request->getUri()->getHost().'/'.strtok($args['slug'],"---"),
-        'url' => $request->getUri()->getScheme().'://'.$request->getUri()->getHost().'/'.$args['slug'],
+        'shorturl' => $host.'/'.strtok($args['slug'],"---"),
+        'url' => $host.'/'.$args['slug'],
         'photo' => $photo,
         'title' => $title,
-        'description' => $description
+        //'description' => $description
     ]);
 
     return $this->view->render($response, '404.html');

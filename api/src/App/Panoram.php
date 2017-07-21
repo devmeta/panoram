@@ -88,11 +88,11 @@ class Panoram extends \Spot\Entity
         ];
     }
 
-    public function transform(Panoram $form)
+    public function transform(Panoram $pan)
     {
         $files = $props = [];
 
-        foreach($form->files as $photo){
+        foreach($pan->files as $photo){
             $files[] = [
                 'id' => $photo->id,
                 'photo_url' => $photo->file_url,
@@ -101,26 +101,26 @@ class Panoram extends \Spot\Entity
             ];
         }
 
-        foreach($form->props as $prop){
+        foreach($pan->props as $prop){
             $props[$prop->group->slug][] = $prop->title;
         }
 
-        $until = $form->enabled_until;
+        $until = $pan->enabled_until;
         if(is_object($until)) $until_date = $until->format('U');
 
-        $created = $form->created;
+        $created = $pan->created;
         if(is_object($created)) $created_date = $created->format('U');
 
         return [
-            "id" => (integer) $form->id ?: null,
-            "public_id" => sprintf("%'.09d\n", $form->id),
-            "encoded" => Base62::encode(sprintf("%'.09d\n", $form->id)),
-            "code" => (string) $form->code ?: null,
-            "title" => (string) $form->title ?: null,
-            "extrainfo" => (string) $form->extrainfo ?: null,
-            "hits" => (integer) $form->hits ?: 0,
-            "enabled" => !!$form->enabled,
-            "requests" => $form->requests->count(),
+            "id" => (integer) $pan->id ?: null,
+            "public_id" => sprintf("%'.09d\n", $pan->id),
+            "encoded" => Base62::encode(sprintf("%'.09d\n", $pan->id)),
+            "code" => (string) $pan->code ?: null,
+            "title" => (string) $pan->title ? substr($pan->title, strpos($pan->title, "--") + 2) : null,
+            "extrainfo" => (string) $pan->extrainfo ?: null,
+            "hits" => (integer) $pan->hits ?: 0,
+            "enabled" => !!$pan->enabled,
+            "requests" => $pan->requests->count(),
             "enabled_until" => \human_timespan($until_date),
             "created" => \human_timespan($created_date),
             "active" => ($until_date > time()),
@@ -128,45 +128,45 @@ class Panoram extends \Spot\Entity
             "files" => $files,
             "props" => $props,
             "user" => [
-                "id" => (integer) $form->user_id ? : null,
-                "title" => ((string) $form->user->first_name ? : "") . ' ' . ((string) $form->user->last_name ? : ""),
-                "email" => (string) $form->user->email ? : null,
-                "picture" => (string) $form->user->picture ? : null
+                "id" => (integer) $pan->user_id ? : null,
+                "title" => ((string) $pan->user->first_name ? : "") . ' ' . ((string) $pan->user->last_name ? : ""),
+                "email" => (string) $pan->user->email ? : null,
+                "picture" => (string) $pan->user->picture ? : null
             ],
             "brand" => [
-                "id" => (integer) $vehicle->brand_id ? : null,
-                "title" => (string) $vehicle->brand->title ? : null
+                "id" => (integer) $pan->brand_id ? : null,
+                "title" => (string) $pan->brand->title ? : null
             ],
             "model" => [
-                "id" => (integer) $vehicle->model_id ?: null,
-                "title" => (string) $vehicle->model->title ?: null
+                "id" => (integer) $pan->model_id ?: null,
+                "title" => (string) $pan->model->title ?: null
             ],
             "version" => [
-                "id" => (integer) $vehicle->version_id ?: null,
-                "title" => (string) $vehicle->version->title ?: null
+                "id" => (integer) $pan->version_id ?: null,
+                "title" => (string) $pan->version->title ?: null
             ],
             "region" => [
-                "id" => (integer) $vehicle->region_id ?: null,
-                "title" => (string) $vehicle->region->title ?: null
+                "id" => (integer) $pan->region_id ?: null,
+                "title" => (string) $pan->region->title ?: null
             ],
             "city" => [
-                "id" => (integer) $vehicle->city_id ?: null,
-                "title" => (string) $vehicle->city->title ?: null
+                "id" => (integer) $pan->city_id ?: null,
+                "title" => (string) $pan->city->title ?: null
             ],
             "gear" => [
-                "id" => (integer) $vehicle->gear_id ?: null,
-                "title" => (string) $vehicle->gear->title ?: null
+                "id" => (integer) $pan->gear_id ?: null,
+                "title" => (string) $pan->gear->title ?: null
             ],
             "fuel" => [
-                "id" => (integer) $vehicle->fuel_id ?: null,
-                "title" => (string) $vehicle->fuel->title ?: null
+                "id" => (integer) $pan->fuel_id ?: null,
+                "title" => (string) $pan->fuel->title ?: null
             ],
             "color" => [
-                "id" => (integer) $vehicle->color_id ?: null,
-                "title" => (string) $vehicle->color->title ?: null
+                "id" => (integer) $pan->color_id ?: null,
+                "title" => (string) $pan->color->title ?: null
             ],
             "links"        => [
-                "self" => "/" . $form->code . '---' . $form->title
+                "self" => "/" . $pan->code . '---' . $pan->title
             ]
         ];
     }

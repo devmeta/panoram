@@ -41,11 +41,8 @@ $app->post("/transmisiones/buscar", function ($request, $response, $arguments) {
         'panorams.enabled = 1',
         'panorams.deleted = 0',
         'panorams.paused = 0',
-        'panorams.sold = 0',
-        'panorams.enabled_until > now()',
-        'panorams.price_ars > 0',
-        "panorams.tel <> ''",
-        "panorams.mt_year > 1950",
+        'panorams.condition = 1',
+        'panorams.enabled_until > now()'
     ];
 
     $orderarr = [
@@ -428,7 +425,6 @@ $app->post("/{slug}", function ($request, $response, $arguments) {
         $resource = new Item($vehicle, new Panoram);
         $item = $fractal->createData($resource)->toArray();
         
-
         if( ! $item->active) {
             $data["status"] = "error";
             $data["title"] = "Tu publicación está caducada!";
