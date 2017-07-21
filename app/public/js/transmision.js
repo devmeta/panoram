@@ -11,7 +11,8 @@ var vehicle = undefined
 				$('#map').hide()
 				$('.auto-container').fadeIn(500, function(){
 					$('#map').show()
-					map.invalidateSize()					
+					map.invalidateSize()		
+					webflow_reset()			
 				})
 			})
 
