@@ -145,10 +145,10 @@ L.mapbox.accessToken = geo.mapbox.accessToken
 
 //Load the map and set it to a given lat-lng
 map = L.mapbox.map('map', 'mapbox.streets');
-map.setView([-34.608724, -58.376867], 15);
+map.setView([0,0], 15);
 
 //Display a default marker
-marker = L.marker([-34.608724, -58.376867], {icon:geo.icon({displayName:"Yo",className:'me',colorId:2})}).addTo(map);
+marker = L.marker([0,0], {icon:geo.icon({displayName:"",className:'me',colorId:1})}).addTo(map);
 
 /*document.getElementById("snap").addEventListener("click", function() {
     snapshot()      

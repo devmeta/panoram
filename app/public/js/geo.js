@@ -34,7 +34,7 @@ var geo = {
 	    	display: block;
 			text-align: center;
     		font-weight: 600;
-    		line-height: 2rem;
+    		line-height: 1rem;
 	    	transform: rotate(-50deg);`
 	    const icon = L.divIcon({
 	      className: data.className ? data.className + ' icon' : 'icon',

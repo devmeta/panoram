@@ -7,8 +7,12 @@ var vehicle = undefined
 		url: location.pathname,
 		success: function(response){
 
-			$('.auto-loader').delay(1000).fadeOut(500,function(){
-				$('.auto-container').fadeIn(500)
+			$('.auto-loader').delay(500).fadeOut(500,function(){
+				$('#map').hide()
+				$('.auto-container').fadeIn(500, function(){
+					$('#map').show()
+					map.invalidateSize()					
+				})
 			})
 
 			if(response.status == 'error'){
@@ -21,7 +25,7 @@ var vehicle = undefined
 
 			vehicle = response.vehicle.data
 			, token = get_token()
-			hideLoader()
+			//hideLoader()
 
 			if(!$.isEmptyObject(vehicle)){
 
@@ -32,7 +36,7 @@ var vehicle = undefined
 					if(vehicle.lat && vehicle.lng){
 						L.mapbox.accessToken = geo.mapbox.accessToken
 						map = L.mapbox.map('map', 'mapbox.streets');
-						marker = L.marker([vehicle.lat,vehicle.lng], {icon:geo.icon({displayName:"Yo",className:'me',colorId:1})}).addTo(map);
+						marker = L.marker([vehicle.lat,vehicle.lng], {icon:geo.icon({displayName:"",className:'me',colorId:1})}).addTo(map);
 			        	map.setView([vehicle.lat,vehicle.lng], 15)
 
 			        } else {
