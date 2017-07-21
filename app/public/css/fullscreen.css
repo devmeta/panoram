@@ -9,7 +9,7 @@ html, body {
 	position: fixed;
 	top: 0;
 	left: 0px;
-	z-index: 110;
+	z-index: 13;
 }
 
 .header-top a {
@@ -36,7 +36,7 @@ html, body {
 }
 
 canvas {
-	z-index: 99;
+	z-index: 11;
 }
 
 #map {
@@ -44,12 +44,21 @@ canvas {
 	height: 200px;
 }
 
-.toolbar {
-	display: none;
+.toolbar-container {
+	display: none;	
 	position: absolute;
-	z-index: 10;
-	top: 10px;
-	right:10px;
+	z-index: 12;
+	top: 0;
+	right:0;
+	left:0;
+	bottom:0;
+	padding-right: 20px;
+}
+
+.toolbar {
+	max-width: 460px;
+	margin: 10px auto;
+	margin-top: 80px;
 }
 
 .bottom {

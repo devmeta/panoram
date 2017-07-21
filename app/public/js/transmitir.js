@@ -244,12 +244,18 @@ $(function(){
     })
 
     $('.toogle-toolbox').click(function(){
-        if($('.toolbar').is(':visible')){
-            $('.toolbar').fadeOut()
+        if($('.toolbar-container').is(':visible')){
+            $('.toolbar-container').fadeOut()
         } else {
-            $('.toolbar').fadeIn('slow', function(){
+            $('.toolbar-container').fadeIn('slow', function(){
                 map.invalidateSize()
             })
+        }
+    })
+
+    $('.toolbar-container').click(function(e){
+        if($(e.target).hasClass('toolbar-container')||$(e.target).hasClass('toolbar')){
+            $('.toolbar-container').fadeOut()
         }
     })
 

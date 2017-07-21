@@ -21,58 +21,60 @@
     <a class="w-inline-block toogle-toolbox" href="#"><img height="60" class="" src="/images/hamburger-512-w.png">
     </a>
 </div>
-<div class="toolbar">
-  <div class="publish__container">
-    <h5 class="publish__container--h">Publica o privada</h5>
-    <div class="publish__form w-clearfix">
-      <div class="publish__form--newornot">
-        <div class="toggleused" data-ix="used">
-          <div class="active toggle__item"><img src="/images/used-toggle-active.svg">
-            <div class="active toggle--text">Privado</div>
+<div class="toolbar-container">
+  <div class="toolbar">
+    <div class="publish__container">
+      <h5 class="publish__container--h">Publica o privada</h5>
+      <div class="publish__form w-clearfix">
+        <div class="publish__form--newornot">
+          <div class="toggleused" data-ix="used">
+            <div class="active toggle__item"><img src="/images/used-toggle-active.svg">
+              <div class="active toggle--text">Privado</div>
+            </div>
+            <div class="toggle__item"><img src="/images/new-toggle.svg">
+              <div class="toggle--text">Público</div>
+            </div>
           </div>
-          <div class="toggle__item"><img src="/images/new-toggle.svg">
-            <div class="toggle--text">Público</div>
-          </div>
-        </div>
-        <div class="togglenew" data-ix="new">
-          <div class="toggle__item"><img src="/images/used-toggle.svg">
-            <div class="toggle--text">Privado</div>
-          </div>
-          <div class="active toggle__item"><img src="/images/new-toggle-active.svg">
-            <div class="active toggle--text">Público</div>
+          <div class="togglenew" data-ix="new">
+            <div class="toggle__item"><img src="/images/used-toggle.svg">
+              <div class="toggle--text">Privado</div>
+            </div>
+            <div class="active toggle__item"><img src="/images/new-toggle-active.svg">
+              <div class="active toggle--text">Público</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="publish__form">
-      <h5 class="publish--h">CONFIGURÁ TU TRANSMISIÓN <!--span class="publish--span">(*) Campos obligatorios</span--></h5>
-      <div class="publish--p">Cada cuanto debe tomar una captura y con qué cámara?</div>
-      <div class="w-form2">
-        <form class="w-clearfix">
-          <div class="publish__section">
-            <div class="publish__twoinone">
-              <div class="publish__section__field">
-                <label class="form--label" for="ano">¿Cada cuántos segundos? <!--span class="publish--span">(*)</span-->
-                </label>
-                <input class="form__field w-input" type="number" data-name="periodicity" maxlength="5" name="periodicity" id="periodicity" max="9999" min="15" placeholder="min:15, max:9999" value="15">
+      <div class="publish__form">
+        <h5 class="publish--h">CONFIGURÁ TU TRANSMISIÓN <!--span class="publish--span">(*) Campos obligatorios</span--></h5>
+        <div class="publish--p">Cada cuanto debe tomar una captura y con qué cámara?</div>
+        <div class="w-form2">
+          <form class="w-clearfix">
+            <div class="publish__section">
+              <div class="publish__twoinone">
+                <div class="publish__section__field">
+                  <label class="form--label" for="ano">¿Cada cuántos segundos? <!--span class="publish--span">(*)</span-->
+                  </label>
+                  <input class="form__field w-input" type="number" data-name="periodicity" maxlength="5" name="periodicity" id="periodicity" max="9999" min="15" placeholder="min:15, max:9999" value="15">
+                </div>
+                <div class="publish__section__field">
+                  <label class="form--label" for="name">SELECCIONA CÁMARA <!--span class="publish--span">(*)</span-->
+                  </label>
+                  <select class="form__field w-select" data-name="videoSource" id="videoSource" name="videoSource">
+                  </select>
+                </div>              
+                <!--div class="publish__section__field">
+                  <label class="form--label" for="a-o-2">Etiquetas
+                  </label>
+                  <input class="form__field w-input" data-name="tags" id="kilometros" maxlength="256" name="tags" placeholder="Paisajes, montaña" required="required" type="number">
+                </div-->
               </div>
-              <div class="publish__section__field">
-                <label class="form--label" for="name">SELECCIONA CÁMARA <!--span class="publish--span">(*)</span-->
-                </label>
-                <select class="form__field w-select" data-name="videoSource" id="videoSource" name="videoSource">
-                </select>
-              </div>              
-              <!--div class="publish__section__field">
-                <label class="form--label" for="a-o-2">Etiquetas
-                </label>
-                <input class="form__field w-input" data-name="tags" id="kilometros" maxlength="256" name="tags" placeholder="Paisajes, montaña" required="required" type="number">
-              </div-->
             </div>
+            <div id='map'></div>
           </div>
-          <div id='map'></div>
+          </form>
         </div>
-        </form>
       </div>
     </div>
   </div>
