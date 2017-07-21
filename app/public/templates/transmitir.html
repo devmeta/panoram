@@ -15,6 +15,12 @@
 
 {% block body %}
 
+<div class="header-top">
+    <a class="w-inline-block" href="/"><img height="60" class="" src="/images/34865-200-white.png">
+    </a>
+    <a class="w-inline-block toogle-toolbox" href="#"><img height="30" class="" src="/images/togglebutton.png">
+    </a>
+</div>
 <div class="toolbar">
   <div class="publish__container">
     <h5 class="publish__container--h">Publica o privada</h5>
@@ -41,7 +47,7 @@
 
     <div class="publish__form">
       <h5 class="publish--h">CONFIGURÁ TU TRANSMISIÓN <!--span class="publish--span">(*) Campos obligatorios</span--></h5>
-      <div class="publish--p">Recuerda ser lo más preciso posible.</div>
+      <div class="publish--p">Cada cuanto debe tomar una captura y con qué cámara?</div>
       <div class="w-form2">
         <form class="w-clearfix">
           <div class="publish__section">
@@ -49,13 +55,19 @@
               <div class="publish__section__field">
                 <label class="form--label" for="ano">¿Cada cuántos segundos? <!--span class="publish--span">(*)</span-->
                 </label>
-                <input class="form__field w-input" type="number" maxlength="5" max="9999" min="60" placeholder="min:60, max:9999" value="60">
+                <input class="form__field w-input" type="number" data-name="periodicity" maxlength="5" name="periodicity" id="periodicity" max="9999" min="15" placeholder="min:15, max:9999" value="15">
               </div>
               <div class="publish__section__field">
+                <label class="form--label" for="name">SELECCIONA CÁMARA <!--span class="publish--span">(*)</span-->
+                </label>
+                <select class="form__field w-select" data-name="videoSource" id="videoSource" name="videoSource">
+                </select>
+              </div>              
+              <!--div class="publish__section__field">
                 <label class="form--label" for="a-o-2">Etiquetas
                 </label>
-                <input class="form__field w-input" data-name="kms" id="kilometros" maxlength="256" name="tags" placeholder="Paisajes, montaña" required="required" type="number">
-              </div>
+                <input class="form__field w-input" data-name="tags" id="kilometros" maxlength="256" name="tags" placeholder="Paisajes, montaña" required="required" type="number">
+              </div-->
             </div>
           </div>
           <div id='map'></div>

@@ -25,8 +25,8 @@ use Tuupola\Base62;
 use App\Panoram;
 use App\PropGroup;
 use App\Prop;
-use App\Gear;
-use App\Currency;
+use App\Region;
+use App\City;
 use App\PanoramProp;
 use App\Status;
 use App\Tag;
@@ -448,26 +448,6 @@ $app->post("/transmitir/{code}", function ($request, $response, $arguments) {
     $resource = new Item($mapper, new Panoram);
     $data['vehicle'] = $fractal->createData($resource)->toArray();
     
-    // brands
-    $mapper = $this->spot->mapper("App\Brand")
-        ->all()
-        ->order(["title" => "ASC"]);
-
-    $fractal = new Manager();
-    $fractal->setSerializer(new DataArraySerializer);
-    $resource = new Collection($mapper, new Brand);
-    $data['brands'] = $fractal->createData($resource)->toArray();
-
-    // currencies
-    $mapper = $this->spot->mapper("App\Currency")
-        ->all()
-        ->order(["order" => "ASC"]);
-        
-    $fractal = new Manager();
-    $fractal->setSerializer(new DataArraySerializer);
-    $resource = new Collection($mapper, new Currency);
-    $data['currencies'] = $fractal->createData($resource)->toArray();
-
     if( ! empty($data['vehicle']['data']['region']['id'])){
 
         // citites
@@ -482,53 +462,6 @@ $app->post("/transmitir/{code}", function ($request, $response, $arguments) {
         $data['cities'] = $fractal->createData($resource)->toArray();        
     }
 
-    if( ! empty($data['vehicle']['data']['brand']['id'])){
-        // models
-        $mapper = $this->spot->mapper("App\Model")
-            ->where(['brand_id' => $data['vehicle']['data']['brand']['id']])
-            ->order(["title" => "ASC"]);
-
-        /* Serialize the response data. */
-        $fractal = new Manager();
-        $fractal->setSerializer(new DataArraySerializer);
-        $resource = new Collection($mapper, new Model);
-        $data['models'] = $fractal->createData($resource)->toArray();
-
-        if(!empty($data['vehicle']['data']['model']['id'])){
-            // versions
-            $mapper = $this->spot->mapper("App\Version")
-                ->where(['model_id' => $data['vehicle']['data']['model']['id']])
-                ->order(["title" => "ASC"]);
-
-            /* Serialize the response data. */
-            $fractal = new Manager();
-            $fractal->setSerializer(new DataArraySerializer);
-            $resource = new Collection($mapper, new Version);
-            $data['versions'] = $fractal->createData($resource)->toArray();
-        }
-    }
-
-    // gears
-    $mapper = $this->spot->mapper("App\Gear")
-        ->all()
-        ->order(["order" => "ASC"]);
-
-    /* Serialize the response data. */
-    $fractal = new Manager();
-    $fractal->setSerializer(new DataArraySerializer);
-    $resource = new Collection($mapper, new Gear);
-    $data['gears'] = $fractal->createData($resource)->toArray();
-
-    // colors
-    $mapper = $this->spot->mapper("App\Color")
-        ->all()
-        ->order(["order" => "ASC"]);
-
-    /* Serialize the response data. */
-    $fractal = new Manager();
-    $fractal->setSerializer(new DataArraySerializer);
-    $resource = new Collection($mapper, new Color);
-    $data['colors'] = $fractal->createData($resource)->toArray();
 
     // regions
     $mapper = $this->spot->mapper("App\Region")
@@ -541,16 +474,6 @@ $app->post("/transmitir/{code}", function ($request, $response, $arguments) {
     $resource = new Collection($mapper, new Region);
     $data['regions'] = $fractal->createData($resource)->toArray();
 
-    // fuels
-    $mapper = $this->spot->mapper("App\Fuel")
-        ->all()
-        ->order(["title" => "ASC"]);
-
-    /* Serialize the response data. */
-    $fractal = new Manager();
-    $fractal->setSerializer(new DataArraySerializer);
-    $resource = new Collection($mapper, new Fuel);
-    $data['fuels'] = $fractal->createData($resource)->toArray();
 
     // props
     $propgroups = $this->spot->mapper("App\PropGroup")
@@ -579,11 +502,7 @@ $app->post("/transmitir/{code}", function ($request, $response, $arguments) {
     $mapper = $this->spot->mapper("App\Panoram")
         ->where([
             'user_id' => $this->token->decoded->uid,
-            'code <>' => $request->getAttribute('code'),
-            'region_id <>' => 'NULL',
-            'city_id <>' => 'NULL',
-            'tel <>' => '',
-            'schedule <>' => ''
+            'code <>' => $request->getAttribute('code')
         ])
         ->order(['created' => 'DESC'])
         ->limit(1);

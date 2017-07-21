@@ -5,6 +5,17 @@ html, body {
 	background-color: #000;
 }
 
+.header-top {
+	position: fixed;
+	top: 0;
+	left: 0px;
+	z-index: 110;
+}
+
+.header-top a {
+	padding: 0 10px;
+}
+
 .videoContainer 
 {
     position:absolute;
@@ -34,6 +45,7 @@ canvas {
 }
 
 .toolbar {
+	display: none;
 	position: absolute;
 	z-index: 10;
 	top: 10px;

@@ -1,26 +1,36 @@
+'use strict';
+
 // Elements for taking the snapshot
 var canvas = document.getElementById('canvas')
 , video = document.getElementById('video')
 , context = canvas.getContext('2d')
+, videoElement = document.querySelector('video')
+, audioSelect = document.querySelector('select#audioSource')
+, videoSelect = document.querySelector('select#videoSource')
 , videoWidth
 , videoHeight
+, upload_in_progress = 1 
 , pos = []
 , map
 , marker
 , markers = []
 , snapInterval = 0
 , snapIndex = 0
-, snapPeriodicity = 60
+, snapPeriodicity = 15
 , posIndex = 0
-, transmitir_start = function(){
-
-    snapshot()
-
-    $('.publish__container').fadeIn(2000)
+, transmitir_clock = function(){
+    if(snapInterval) clearInterval(snapInterval)
     snapInterval = setInterval(function(){ 
         snapIndex++
         snapshot()
     },snapPeriodicity * 1000)
+}
+, transmitir_start = function(){
+
+    transmitir_clock()
+    snapshot()
+
+    $('.publish__container').fadeIn(2000)
 
     geo.track(function(position) {
         posIndex++
@@ -35,23 +45,34 @@ var canvas = document.getElementById('canvas')
 
         pos = [latitude,longitude]
     })    
+
+    map.invalidateSize()    
 }
 , transmitir_ask = function(){
-    swal({
-      title: "Título de la transmisión",
-      text: "Elige un título para tu transmisión",
-      type: "input",
-      showCancelButton: true,
-      closeOnConfirm: false,
-      inputPlaceholder: "La montaña desde la ventana"
-    },
-    function(inputValue){
-      //if (inputValue === false) return false;
-      transmitir_updateField('title',inputValue, function(){
-        swal.close()
-        transmitir_start()  
-      })
-    })     
+
+    $.server({
+        url: location.pathname, 
+        success: function(response){
+            var pan = response.vehicle.data
+
+            swal({
+              title: "Título de la transmisión",
+              text: "Elige un título para tu transmisión",
+              inputValue: pan.title,
+              type: "input",
+              showCancelButton: true,
+              closeOnConfirm: false,
+              inputPlaceholder: "La montaña desde la ventana"
+            },
+            function(inputValue){
+              //if (inputValue === false) return false;
+              transmitir_updateField('title',inputValue, function(){
+                swal.close()
+                transmitir_start()  
+              })
+            })
+        }
+    })    
 }
 , transmitir_updateField = function (name,value,complete){
     if(!value) return
@@ -75,11 +96,11 @@ var canvas = document.getElementById('canvas')
     })
 }
 , getVideoSize = function() {
-    var videoWidth = video.videoWidth
-    , videoHeight = video.videoHeight
+    var videoWidth = videoElement.videoWidth
+    , videoHeight = videoElement.videoHeight
     $('#canvas').attr("width",videoWidth)
     $('#canvas').attr("height",videoHeight)
-    video.removeEventListener('playing', getVideoSize, false);
+    videoElement.removeEventListener('playing', getVideoSize, false);
 }
 , snapshot = function(){
     $('canvas').show()
@@ -131,12 +152,12 @@ var canvas = document.getElementById('canvas')
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     // Not adding `{ audio: true }` since we only want video now
     navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-        video.src = window.URL.createObjectURL(stream);
-        video.play();
+        videoElement.src = window.URL.createObjectURL(stream);
+        videoElement.play();
     });
 }
 
-video.addEventListener('playing', getVideoSize, false);
+videoElement.addEventListener('playing', getVideoSize, false);
 window.addEventListener('resize', getVideoSize, false);
 
 // map
@@ -154,7 +175,77 @@ marker = L.marker([0,0], {icon:geo.icon({displayName:"",className:'me',colorId:1
     snapshot()      
 })*/
 
+
+navigator.mediaDevices.enumerateDevices()
+    .then(gotDevices).then(getStream).catch(handleError);
+
+videoSelect.onchange = getStream;
+
+function gotDevices(deviceInfos) {
+  for (var i = 0; i !== deviceInfos.length; ++i) {
+    var deviceInfo = deviceInfos[i];
+    var option = document.createElement('option');
+    option.value = deviceInfo.deviceId;
+    if (deviceInfo.kind === 'videoinput') {
+      option.text = deviceInfo.label || 'camera ' +
+        (videoSelect.length + 1);
+      videoSelect.appendChild(option);
+    } else {
+      console.log('Found ome other kind of source/device: ', deviceInfo);
+    }
+  }
+}
+
+function getStream() {
+  if (window.stream) {
+    window.stream.getTracks().forEach(function(track) {
+      track.stop();
+    });
+  }
+
+  var constraints = {
+    audio: {
+      optional: [{
+        sourceId: audioSelect.value
+      }]
+    },
+    video: {
+      optional: [{
+        sourceId: videoSelect.value
+      }]
+    }
+  };
+
+  navigator.mediaDevices.getUserMedia(constraints).
+      then(gotStream).catch(handleError);
+}
+
+function gotStream(stream) {
+  window.stream = stream; // make stream available to console
+  videoElement.srcObject = stream;
+}
+
+function handleError(error) {
+  console.log('Error: ', error);
+}
+
 $(function(){
+
+    $('#periodicity').change(function(){
+        if(name=="periodicity"){
+            var int = parseInt($(this).val())
+            snapPeriodicity = int
+            transmitir_clock()
+        }         
+    })
+
+    $('.toogle-toolbox').click(function(){
+        if($('.toolbar').is(':visible')){
+            $('.toolbar').fadeOut()
+        } else {
+            $('.toolbar').fadeIn()
+        }
+    })
 
     $('.publish__form--newornot div').click(function(){
         var condition = $(this).first().data('ix')
