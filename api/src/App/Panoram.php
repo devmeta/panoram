@@ -83,7 +83,7 @@ class Panoram extends \Spot\Entity
             'gear' => $mapper->belongsTo($entity, 'App\Gear', 'gear_id'),
             'color' => $mapper->belongsTo($entity, 'App\Color', 'color_id'),
             'requests' => $mapper->hasMany($entity, 'App\UserMessage','pan_id')->group(['user_id']),
-            'files' => $mapper->hasMany($entity, 'App\File','pan_id')->order(['created' => 'DESC']),
+            'files' => $mapper->hasMany($entity, 'App\File','pan_id')->order(['created' => 'ASC']),
             'props' => $mapper->hasManyThrough($entity, 'App\Prop', 'App\PanoramProp','prop_id','pan_id')->order(['order' => 'ASC'])
         ];
     }
@@ -117,7 +117,7 @@ class Panoram extends \Spot\Entity
         $duration = false;
 
         if(count($files)){
-            $duration = \human_timespan($files[count($files)-1]['created'],$files[0]['created']);
+            $duration = \human_timespan($files[0]['created'],$files[count($files)-1]['created']);
         }
 
         return [
