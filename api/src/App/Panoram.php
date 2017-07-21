@@ -133,7 +133,7 @@ class Panoram extends \Spot\Entity
             "enabled" => !!$pan->enabled,
             "requests" => $pan->requests->count(),
             "enabled_until" => \human_timespan($until_date),
-            "created" => \human_timespan($created_date),
+            "created" => \human_timespan_short($created_date),
             "duration" => $duration?:"n/a",
             "active" => ($until_date > time()),
             "file" => ! empty($files)?$files[0]:null,

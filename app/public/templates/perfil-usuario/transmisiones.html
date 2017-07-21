@@ -100,7 +100,7 @@
         <div class="caritem--profilepicture"><img src="[[if user.picture]][[:~getBucketSize('80x80',user.picture)]][[else]][[:~isDummy()]][[/if]]">
         </div>
         <div class="caritem__data">
-          <h1 class="caritem__data--h">[[:brand.title]] [[:model.title]]</h1>
+          <h1 class="caritem__data--h">[[:title]]</h1>
           <div class="caritem__data--description">
             <div class="caritem__data--descr__n">
               <div>[[:duration]]</div>
@@ -131,7 +131,7 @@
       <div class="caritem--profilepicture"><img src="[[if user.picture]][[:~getBucketSize('80x80',user.picture)]][[else]][[:~isDummy()]][[/if]]">
       </div>
       <div class="caritem__data">
-        <h1 class="caritem__data--h">[[:brand.title]] [[:model.title]]</h1>
+        <h1 class="caritem__data--h">[[:title]]</h1>
         <div class="caritem__data--description">
           <div class="caritem__data--descr__n">
             <div>[[:duration]]</div>
@@ -151,7 +151,7 @@
         <div class="caritem--img" [[if file]]style="background-image: url([[:~getBucketSize('480x360',file.photo_url)]])"[[/if]]></div>
       </a>
       <div class="caritem__principalinfo w-hidden-small w-hidden-tiny ">
-        <h4 class="caritem__principalinfo--h">[[:~decode(title)]]&nbsp;|&nbsp;[[:~isPrice(currency,price)]]</h4>
+        <h4 class="caritem__principalinfo--h">[[:title]]&nbsp;|&nbsp; [[:duration]]</h4>
       [[if warranty]]
         <a class="congarantia w-inline-block" href="/garantia-mecanica"><img src="/images/flame.svg">
           <div class="congarantia--text">Este auto aplica al plan de garantías</div>
@@ -174,7 +174,7 @@
         [[if !sold]]
           <div>[[:hits]] vistas</div>
           <div class="black caritem--division"></div>
-          <div>Solicitaron tus datos [[:requests]] veces</div>
+          <div>[[:created]]</div>
         [[/if]]
         [[if (!enabled)]]
           <div class="black caritem--division"></div>
@@ -184,11 +184,11 @@
       </div>
       <div class="caritem__buttons">
         <div class="w-hidden-main w-hidden-medium  w-col">
-          <h6>[[:brand.title]] [[:model.title]]&nbsp; |&nbsp; [[:~isPrice(currency,price)]]</h6>
+          <h6>[[:title]]&nbsp; |&nbsp; [[:created]]</h6>
         </div>
         [[if !sold]]
         <div class="w-col">
-          <a class="principalbutton w-button" href="/transmitir/[[:code]][[if (!kms||kms==''||!mt_year||mt_year<=1950||!region.id||!city.id)]]#paso2[[else]]#paso4[[/if]]">Editar</a>
+          <a class="principalbutton w-button" href="/transmitir/[[:code]]">Editar</a>
           <a href="#" class="caritem--textlink caritem--eliminar" data-code="[[:code]]">Eliminar</a>
         </div>
         [[/if]]
@@ -199,5 +199,5 @@
 {% endblock %}
 
 {% block assets %}
-  <script src="/js/perfil-autos.js" type="text/javascript"></script>
+  <script src="/js/perfil-transmisiones.js?_={{ rev_parse }}" type="text/javascript"></script>
 {% endblock %}

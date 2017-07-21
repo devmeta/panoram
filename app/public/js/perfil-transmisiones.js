@@ -3,7 +3,6 @@ function perfil_autos_fetch(){
 	$.server({
 		url : '/perfil/transmisiones', 
 		success: function(response){
-
 			if( ! $.isEmptyObject(response.listing) && response.listing.data.length){
 				$('.content_publicaciones').html($.templates("#publicaciones").render(response.listing.data,helpers.listing))
 				if(response.listing.data.length > 5){

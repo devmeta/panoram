@@ -117,11 +117,11 @@ img {
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
   align-self: stretch;
-  border: 1px solid #ef4039;
+  border: 2px solid #296728;
   border-radius: 6px;
-  background-color: #fff;
+  background-color: #258223;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, .1);
-  color: #ef4039;
+  color: #ffffff;
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
@@ -603,8 +603,8 @@ a.principalbutton.estoycubierto {text-align: center;
 }
 
 .caritem__data--price {
-  font-size: 21px;
-  line-height: 26px;
+  font-size: 15px;
+  /*line-height: 26px;*/
   font-weight: 700;
   text-align: right;
 }
