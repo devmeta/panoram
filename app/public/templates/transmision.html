@@ -8,7 +8,6 @@
   <meta property="og:description" content="{{description}}" />
   <meta property="og:image" itemprop="image primaryImageOfPage" content="{{photo}}" />
   <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
-
   <script id="carinfo" type="text/x-jsrender">
   [[if extrainfo]]
     <div class="container-profile justone">
@@ -26,36 +25,11 @@
       </div>
       <div class="container-profile__detail">
         <div class="container__detail">
-          <h6 class="container-profile__detail--h">Marca</h6>
+          <h6 class="container-profile__detail--h">Ubicación</h6>
+        </div>
+        <div class="container__detail">
+          <h6 class="container-profile__detail--h">Título</h6>
           <div>[[:title]]</div>
-        </div>
-        <div class="container__detail">
-          <h6 class="container-profile__detail--h">Año</h6>
-          <div>[[:created]]</div>
-        </div>
-        <div class="container__detail">
-          <h6 class="container-profile__detail--h">Kilometro</h6>
-          <div>[[:kms]]</div>
-        </div>
-        <div class="container__detail">
-          <h6 class="container-profile__detail--h">Combustible</h6>
-          <div>[[:fuel.title]]</div>
-        </div>
-        <div class="container__detail">
-          <h6 class="container-profile__detail--h">Transmisión</h6>
-          <div>[[:gear.title]]</div>
-        </div>
-        <div class="container__detail">
-          <h6 class="container-profile__detail--h">Color</h6>
-          <div>[[:color.title]]</div>
-        </div>
-        <div class="container__detail">
-          <h6 class="container-profile__detail--h">Puertas</h6>
-          <div>[[:doors]]</div>
-        </div>
-        <div class="container__detail">
-          <h6 class="container-profile__detail--h">Versión</h6>
-          <div>[[:version.title]]</div>
         </div>
       </div>
     </div-->
@@ -99,6 +73,9 @@
       </div>
       <h1 class="profile--name" data-code="[[:code]]">[[:~decode(title)]]</h1>
       <h3 class="profile--km-year">[[:created]]</span></h3>
+      <div class="profile--place">
+        <div id="map" class="panomap"></div>
+      </div>      
       <!--div class="profile--place">[[:region.title]], [[:city.title]]</div>
       <h1 class="profile--price">[[:~isPrice(currency,price)]]</h1>
       <a onclick="_gaq.push(['_trackEvent', 'contacto', 'clic', 'contacto vendedor'])" class="principalbutton profile--button w-button" data-ix="gotodatos" href="#">Contactar al vendedor</a-->
@@ -298,5 +275,6 @@
 
 {% block assets %}
   <script type="text/javascript" src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+  <script src="/js/geo.js?_={{ rev_parse }}" type="text/javascript"></script>
   <script src="/js/transmision.js" type="text/javascript"></script>
 {% endblock %}

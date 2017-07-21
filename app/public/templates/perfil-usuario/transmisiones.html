@@ -148,7 +148,7 @@
   </script>
 
   <script id="publicaciones" type="text/x-jsrender">
-    <div class="publicaciones__caritem [[:code]][[if sold]] vendido[[/if]][[if paused]] pausado[[/if]][[if ~isDraft(price,kms,tel,mt_year,region.id,city.id)]] faltandatos[[/if]]" id="[[:code]]" data-active="[[:active]]" data-paused="[[:paused]]" data-sold="[[:sold]]">
+    <div class="publicaciones__caritem [[:code]][[if paused]] pausado[[/if]][[if condition==2]] faltandatos[[/if]]" id="[[:code]]" data-active="[[:active]]" data-paused="[[:paused]]" data-sold="[[:sold]]">
       <a href="[[:links.self]]" target="_blank">
         <div class="caritem--img" [[if file]]style="background-image: url([[:~getBucketSize('480x360',file.photo_url)]])"[[/if]]></div>
       </a>
@@ -162,10 +162,10 @@
       </div>
       <div class="caritem__details">
         <div class="caritem__detail__top">
-        [[if ~isDraft(price,kms,tel,mt_year,region.id,city.id)]]
-          <div class="destaque--h">Faltan datos</div>
+        [[if condition==2]]
+          <div class="destaque--h">Privado</div>
         [[else]]
-          <div>Publicación clásica</div>
+          <div>Público</div>
         [[/if]]
           <div class="caritem--division"></div>
           <div>#[[:public_id]]</div>
@@ -190,7 +190,7 @@
         </div>
         [[if !sold]]
         <div class="w-col">
-          <a class="principalbutton w-button" href="/vender/[[:code]][[if (!kms||kms==''||!mt_year||mt_year<=1950||!region.id||!city.id)]]#paso2[[else]]#paso4[[/if]]">Editar</a>
+          <a class="principalbutton w-button" href="/transmitir/[[:code]][[if (!kms||kms==''||!mt_year||mt_year<=1950||!region.id||!city.id)]]#paso2[[else]]#paso4[[/if]]">Editar</a>
           <a href="#" class="caritem--textlink caritem--eliminar" data-code="[[:code]]">Eliminar</a>
         </div>
         [[/if]]

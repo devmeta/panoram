@@ -5,6 +5,7 @@ var canvas = document.getElementById('canvas')
 , videoWidth
 , videoHeight
 , pos = []
+, map
 , marker
 , markers = []
 , snapInterval = 0
@@ -29,8 +30,8 @@ var canvas = document.getElementById('canvas')
         marker.setLatLng([latitude, longitude]).update()
         map.setView([latitude,longitude], 15)
 
-        vender_updateField('lat',latitude)
-        vender_updateField('lng',longitude)
+        transmitir_updateField('lat',latitude)
+        transmitir_updateField('lng',longitude)
 
         pos = [latitude,longitude]
     })    
@@ -46,13 +47,13 @@ var canvas = document.getElementById('canvas')
     },
     function(inputValue){
       //if (inputValue === false) return false;
-      vender_updateField('title',inputValue, function(){
+      transmitir_updateField('title',inputValue, function(){
         swal.close()
         transmitir_start()  
       })
     })     
 }
-, vender_updateField = function (name,value,complete){
+, transmitir_updateField = function (name,value,complete){
     if(!value) return
     $.server({ 
         url: '/update/' + code,
@@ -65,7 +66,7 @@ var canvas = document.getElementById('canvas')
         }
     })
 }
-, vender_updateCheck = function (type,id,value){
+, transmitir_updateCheck = function (type,id,value){
     if(!value) return
     $.server({ 
         url: '/update-prop/' + code,
@@ -158,7 +159,7 @@ $(function(){
     $('.publish__form--newornot div').click(function(){
         var condition = $(this).first().data('ix')
         if(condition != undefined){
-            vender_updateField('condition',(condition=='new'?2:1))
+            transmitir_updateField('condition',(condition=='new'?2:1))
         }
     })
         

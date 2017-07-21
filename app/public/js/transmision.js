@@ -1,4 +1,7 @@
 var vehicle = undefined
+, map
+, marker 
+, markers = []
 , auto = function (){
 	showLoader()
 	, $.server({
@@ -21,8 +24,23 @@ var vehicle = undefined
 
 				$('.car-info-info').html($.templates("#carinfo").render(vehicle))
 				$('.container-profile__detail--financiamiento').html((vehicle.financing?"Sí":"No"))
-				$('.bestinfo__profile').html($.templates("#profile").render(vehicle,helpers.listing))
 				$('.datosvendedir').html($.templates("#datosvendedor").render(vehicle,helpers.users))
+				$('.bestinfo__profile').html($.templates("#profile").render(vehicle,helpers.listing)).promise().done(function(){
+					if(vehicle.lat && vehicle.lng){
+						L.mapbox.accessToken = geo.mapbox.accessToken
+						map = L.mapbox.map('map', 'mapbox.streets');
+						marker = L.marker([vehicle.lat,vehicle.lng], {icon:geo.icon({displayName:"Yo",className:'me',colorId:1})}).addTo(map);
+			        	map.setView([vehicle.lat,vehicle.lng], 15)
+
+			        } else {
+						L.mapbox.accessToken = geo.mapbox.accessToken
+						map = L.mapbox.map('map', 'mapbox.streets');
+						//marker = L.marker([0,0]).addTo(map);
+			        	map.setView([0,0], 1)
+
+			        	$('#map').css({opacity:0.5})
+			        }
+				})
 
 				if($.isEmptyObject(token)){
 					$('.profile--button').attr('data-ix','register')

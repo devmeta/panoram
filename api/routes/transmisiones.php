@@ -446,7 +446,6 @@ $app->post("/{slug}", function ($request, $response, $arguments) {
             $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE user_id = {$vehicle->user_id} AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND sold = 0 AND enabled_until > now() ORDER BY hits desc");
         }
 
-
         $fractal = new Manager();
         $fractal->setSerializer(new DataArraySerializer);
         $resource = new Collection($related, new Panoram);

@@ -2956,6 +2956,11 @@ a.principalbutton.estoycubierto {text-align: center;
   margin-right: 10px;
 }
 
+.panomap {
+  width: 100%;
+  height: 200px;
+}
+
 @media (max-width: 991px) {
   .profile__share img {
     display: none;

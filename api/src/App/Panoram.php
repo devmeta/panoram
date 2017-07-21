@@ -93,10 +93,14 @@ class Panoram extends \Spot\Entity
         $files = $props = [];
 
         foreach($pan->files as $photo){
+            $created = $photo->created;
+        if(is_object($created)) $created_date = $created->format('U');
+
             $files[] = [
                 'id' => $photo->id,
                 'photo_url' => $photo->file_url,
                 'position' => $photo->position,
+                'created' => $created_date,
                 'filesize'  => $photo->filesize
             ];
         }
@@ -111,11 +115,20 @@ class Panoram extends \Spot\Entity
         $created = $pan->created;
         if(is_object($created)) $created_date = $created->format('U');
 
+        $duration = 0;
+
+        if(count($files)){
+            //$diff = $files[count($files)-1]->created - $files[0]->created;
+            //$duration = \human_timespan($diff);
+        }
+
         return [
             "id" => (integer) $pan->id ?: null,
             "public_id" => sprintf("%'.09d\n", $pan->id),
             "encoded" => Base62::encode(sprintf("%'.09d\n", $pan->id)),
             "code" => (string) $pan->code ?: null,
+            "lat" => (string) $pan->lat ?: null,
+            "lng" => (string) $pan->lng ?: null,
             "title" => (string) $pan->title ? substr($pan->title, strpos($pan->title, "--") + 2) : null,
             "extrainfo" => (string) $pan->extrainfo ?: null,
             "hits" => (integer) $pan->hits ?: 0,
@@ -133,18 +146,6 @@ class Panoram extends \Spot\Entity
                 "email" => (string) $pan->user->email ? : null,
                 "picture" => (string) $pan->user->picture ? : null
             ],
-            "brand" => [
-                "id" => (integer) $pan->brand_id ? : null,
-                "title" => (string) $pan->brand->title ? : null
-            ],
-            "model" => [
-                "id" => (integer) $pan->model_id ?: null,
-                "title" => (string) $pan->model->title ?: null
-            ],
-            "version" => [
-                "id" => (integer) $pan->version_id ?: null,
-                "title" => (string) $pan->version->title ?: null
-            ],
             "region" => [
                 "id" => (integer) $pan->region_id ?: null,
                 "title" => (string) $pan->region->title ?: null
@@ -152,18 +153,6 @@ class Panoram extends \Spot\Entity
             "city" => [
                 "id" => (integer) $pan->city_id ?: null,
                 "title" => (string) $pan->city->title ?: null
-            ],
-            "gear" => [
-                "id" => (integer) $pan->gear_id ?: null,
-                "title" => (string) $pan->gear->title ?: null
-            ],
-            "fuel" => [
-                "id" => (integer) $pan->fuel_id ?: null,
-                "title" => (string) $pan->fuel->title ?: null
-            ],
-            "color" => [
-                "id" => (integer) $pan->color_id ?: null,
-                "title" => (string) $pan->color->title ?: null
             ],
             "links"        => [
                 "self" => "/" . $pan->code . '---' . $pan->title

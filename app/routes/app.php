@@ -59,19 +59,15 @@ $app->get('/{slug}', function ($request, $response, $args) {
     }
 
     // vehicle
-    $og = substr($args['slug'], strrpos($args['slug'], '---') + 1);
-    $chunk = array_values(array_filter(explode("--",$og)));
-    $id = strtok($args['slug'],"--");
-    $photo = "";
-    $title = "";
+    $slugish = substr($args['slug'], strrpos($args['slug'], '---') + 3);
+    $id = strtok($args['slug'],"---");
+    $file_name = strtok($slugish,"--");
+    $title = substr($slugish, strrpos($slugish, '--') + 2);
     $description = "";
     $host = $request->getUri()->getScheme().'://'.$request->getUri()->getHost();
+    $photo = "";
 
-    if(count($chunk) > 1){
-        $photo = getenv('BUCKET_URL') . '/cams/' . $id . '/' .$chunk[0] . ".jpg";
-        $title = str_replace("-"," ",$chunk[1]);
-        //$description = str_replace("-"," ",$chunk[2]);
-    }
+    if($file_name) $photo = getenv('BUCKET_URL') . '/cams/' . $id . '/' . $file_name . ".jpg";
 
     return $this->view->render($response, 'transmision.html',[
         'shorturl' => $host.'/'.strtok($args['slug'],"---"),
