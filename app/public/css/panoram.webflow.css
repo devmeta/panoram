@@ -2253,6 +2253,10 @@ a.principalbutton.estoycubierto {text-align: center;
   background-color: #ef4039;
 }
 
+.togglenew .toggle__item.active {
+  background-color: #08b307;
+}
+
 .toggle--text {
   margin-top: 4px;
   margin-left: 6px;

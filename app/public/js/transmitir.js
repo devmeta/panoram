@@ -54,6 +54,15 @@ var canvas = document.getElementById('canvas')
         success: function(response){
             var pan = response.vehicle.data
 
+            // condition
+            console.log(pan.condition)
+            if(pan.condition == 1){
+                $('.toggleused').hide()
+                $('.togglenew').css({display:'flex'})
+                $('.togglenew div:first, .togglenew div:first div').removeClass('active')
+                $('.togglenew div:eq(2), .togglenew div:eq(2) div').addClass('active')
+            }
+
             swal({
               title: "Título de la transmisión",
               text: "Elige un título para tu transmisión",

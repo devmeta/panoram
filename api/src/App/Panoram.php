@@ -131,6 +131,7 @@ class Panoram extends \Spot\Entity
             "extrainfo" => (string) $pan->extrainfo ?: null,
             "hits" => (integer) $pan->hits ?: 0,
             "enabled" => !!$pan->enabled,
+            "condition" => (integer) $pan->condition ?: 2,
             "requests" => $pan->requests->count(),
             "enabled_until" => \human_timespan($until_date),
             "created" => \human_timespan_short($created_date),
