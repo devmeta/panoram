@@ -61,13 +61,14 @@ $app->get('/{slug}', function ($request, $response, $args) {
     // vehicle
     $og = substr($args['slug'], strrpos($args['slug'], '---') + 1);
     $chunk = array_values(array_filter(explode("--",$og)));
+    $id = strtok($args['slug'],"--");
     $photo = "";
     $title = "";
     $description = "";
     $host = $request->getUri()->getScheme().'://'.$request->getUri()->getHost();
 
     if(count($chunk) > 1){
-        $photo = getenv('BUCKET_URL') . '/' . $chunk[0] . ".jpg";
+        $photo = getenv('BUCKET_URL') . '/cams/' . $id . '/' .$chunk[0] . ".jpg";
         $title = str_replace("-"," ",$chunk[1]);
         //$description = str_replace("-"," ",$chunk[2]);
     }
