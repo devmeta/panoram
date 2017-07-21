@@ -145,7 +145,7 @@ L.mapbox.accessToken = geo.mapbox.accessToken
 
 //Load the map and set it to a given lat-lng
 map = L.mapbox.map('map', 'mapbox.streets');
-map.setView([0,0], 15);
+map.setView([0,0], 8);
 
 //Display a default marker
 marker = L.marker([0,0], {icon:geo.icon({displayName:"",className:'me',colorId:1})}).addTo(map);

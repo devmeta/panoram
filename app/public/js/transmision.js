@@ -37,7 +37,7 @@ var vehicle = undefined
 						L.mapbox.accessToken = geo.mapbox.accessToken
 						map = L.mapbox.map('map', 'mapbox.streets');
 						marker = L.marker([vehicle.lat,vehicle.lng], {icon:geo.icon({displayName:"",className:'me',colorId:1})}).addTo(map);
-			        	map.setView([vehicle.lat,vehicle.lng], 15)
+			        	map.setView([vehicle.lat,vehicle.lng], 8)
 
 			        } else {
 						L.mapbox.accessToken = geo.mapbox.accessToken
