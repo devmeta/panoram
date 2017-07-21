@@ -146,7 +146,7 @@ var canvas = document.getElementById('canvas')
         upload_in_progress = 0
     })    
 }
-
+/*
 // Get access to the camera!
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     // Not adding `{ audio: true }` since we only want video now
@@ -155,6 +155,7 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         videoElement.play();
     });
 }
+*/
 
 videoElement.addEventListener('playing', getVideoSize, false);
 window.addEventListener('resize', getVideoSize, false);
@@ -216,9 +217,7 @@ function getStream() {
 
 function gotStream(stream) {
   window.stream = stream; // make stream available to console
-  //videoElement.srcObject = stream;
-    videoElement.src = window.URL.createObjectURL(stream);
-    videoElement.play();  
+  videoElement.srcObject = stream;
 }
 
 function handleError(error) {
@@ -239,7 +238,9 @@ $(function(){
         if($('.toolbar').is(':visible')){
             $('.toolbar').fadeOut()
         } else {
-            $('.toolbar').fadeIn()
+            $('.toolbar').fadeIn('slow', function(){
+                map.invalidateSize()
+            })
         }
     })
 
