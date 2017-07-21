@@ -1525,6 +1525,23 @@ a.principalbutton.estoycubierto {text-align: center;
   align-items: stretch;
 }
 
+.auto-loader {
+  padding: 19.23333% 0;
+}
+
+.auto-loader-wheel {
+  margin: auto;
+  width: 205px;
+  height: 205px;
+  background-image: url('../images/34865-200-white.png');
+  background-repeat: no-repeat; 
+  animation: wheel-driving 1s infinite;
+}
+
+.auto-container {
+  display: none;
+}
+
 .paravos {
   display: -webkit-box;
   display: -webkit-flex;

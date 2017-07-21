@@ -189,86 +189,87 @@
 {% endblock %}
 
 {% block body %}
+  
+  <div class="auto-loader"><div class="auto-loader-wheel"></div></div>
 
-  <div class="datosvendedir modalwrapper" id="register">
+  <div class="auto-container">
+    <!--div class="advice">
+      <div>¿Cuánto pagas por el seguro de tu auto? Obtené la mejor cobertura hasta un 30% más barato.</div><a class="advice__button w-button" href="/asegura-con-nosotros">Conoce más</a>
+    </div-->
+    <div class="bestinfo">
+      <div class="bestinfo__slider">
+        <div class="bestinfo__w-slider w-slider" data-animation="fade" data-autoplay="1" data-delay="4000" data-duration="500" data-infinite="1">
+          <div class="w-slider-mask">
+          </div>
+          <div class="w-slider-arrow-left">
+            <div class="arrow--icon w-icon-slider-left"></div>
+          </div>
+          <div class="w-slider-arrow-right">
+            <div class="arrow--icon w-icon-slider-right"></div>
+          </div>
+          <div class="w-slider-nav"></div>
+        </div>
+        <div class="bestinfo__slider--nav">
+        </div>
+      </div>
+      <div class="bestinfo__profile">
+      </div>
+    </div>
+    <div class="car-info-info">
+    </div>
+    <!--div class="car-info-boxes">
+      <div class="container-profile">
+        <div class="container-profile__title"><img class="container-profile--img" src="/images/volume.svg">
+          <h5 class="container-profile--h">Sonido</h5>
+        </div>
+        <div class="container-profile__detail">
+          <div class="container-profile__detail--sonido">
+          </div>
+        </div>
+      </div>
+      <div class="container-profile">
+        <div class="container-profile__title"><img class="container-profile--img" src="/images/sun.svg">
+          <h5 class="container-profile--h">exterior</h5>
+        </div>
+        <div class="container-profile__detail">
+          <div class="container-profile__detail--exterior">
+          </div>
+        </div>
+      </div>
+      <div class="container-profile">
+        <div class="container-profile__title"><img class="container-profile--img" src="/images/favorite-1.svg">
+          <h5 class="container-profile--h">confort</h5>
+        </div>
+        <div class="container-profile__detail">
+          <div class="container-profile__detail--confort">
+          </div>
+        </div>
+      </div>
+      <div class="container-profile">
+        <div class="container-profile__title"><img class="container-profile--img" src="/images/handshake.svg">
+          <h5 class="container-profile--h">seguridad</h5>
+        </div>
+        <div class="container-profile__detail">
+          <div class="container-profile__detail--seguridad">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="car-info-boxes">
+      <div class="container-profile">
+        <div class="container-profile__title"><img class="container-profile--img" src="/images/estado.svg">
+          <h5 class="container-profile--h">ESTADO DEL AUTO</h5>
+        </div>
+        <div class="container-profile__detail">
+          <div class="container-profile__detail--estado">
+          </div>
+        </div>
+      </div>
+    </div-->
 
-  </div>
-  <!--div class="advice">
-    <div>¿Cuánto pagas por el seguro de tu auto? Obtené la mejor cobertura hasta un 30% más barato.</div><a class="advice__button w-button" href="/asegura-con-nosotros">Conoce más</a>
-  </div-->
-  <div class="bestinfo">
-    <div class="bestinfo__slider">
-      <div class="bestinfo__w-slider w-slider" data-animation="fade" data-autoplay="1" data-delay="4000" data-duration="500" data-infinite="1">
-        <div class="w-slider-mask">
-        </div>
-        <div class="w-slider-arrow-left">
-          <div class="arrow--icon w-icon-slider-left"></div>
-        </div>
-        <div class="w-slider-arrow-right">
-          <div class="arrow--icon w-icon-slider-right"></div>
-        </div>
-        <div class="w-slider-nav"></div>
-      </div>
-      <div class="bestinfo__slider--nav">
-      </div>
+    <div class="relacionados">
+      <h5 class="relacionados--h">Publicaciones relacionadas</h5>
     </div>
-    <div class="bestinfo__profile">
-    </div>
-  </div>
-  <div class="car-info-info">
-  </div>
-  <!--div class="car-info-boxes">
-    <div class="container-profile">
-      <div class="container-profile__title"><img class="container-profile--img" src="/images/volume.svg">
-        <h5 class="container-profile--h">Sonido</h5>
-      </div>
-      <div class="container-profile__detail">
-        <div class="container-profile__detail--sonido">
-        </div>
-      </div>
-    </div>
-    <div class="container-profile">
-      <div class="container-profile__title"><img class="container-profile--img" src="/images/sun.svg">
-        <h5 class="container-profile--h">exterior</h5>
-      </div>
-      <div class="container-profile__detail">
-        <div class="container-profile__detail--exterior">
-        </div>
-      </div>
-    </div>
-    <div class="container-profile">
-      <div class="container-profile__title"><img class="container-profile--img" src="/images/favorite-1.svg">
-        <h5 class="container-profile--h">confort</h5>
-      </div>
-      <div class="container-profile__detail">
-        <div class="container-profile__detail--confort">
-        </div>
-      </div>
-    </div>
-    <div class="container-profile">
-      <div class="container-profile__title"><img class="container-profile--img" src="/images/handshake.svg">
-        <h5 class="container-profile--h">seguridad</h5>
-      </div>
-      <div class="container-profile__detail">
-        <div class="container-profile__detail--seguridad">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="car-info-boxes">
-    <div class="container-profile">
-      <div class="container-profile__title"><img class="container-profile--img" src="/images/estado.svg">
-        <h5 class="container-profile--h">ESTADO DEL AUTO</h5>
-      </div>
-      <div class="container-profile__detail">
-        <div class="container-profile__detail--estado">
-        </div>
-      </div>
-    </div>
-  </div-->
-
-  <div class="relacionados">
-    <h5 class="relacionados--h">Publicaciones relacionadas</h5>
   </div>
 
 {% endblock %}

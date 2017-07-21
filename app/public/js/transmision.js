@@ -3,10 +3,13 @@ var vehicle = undefined
 , marker 
 , markers = []
 , auto = function (){
-	showLoader()
-	, $.server({
+	$.server({
 		url: location.pathname,
 		success: function(response){
+
+			$('.auto-loader').delay(1000).fadeOut(500,function(){
+				$('.auto-container').fadeIn(500)
+			})
 
 			if(response.status == 'error'){
 				$("body").addClass('momargin').load("/message", function(){
