@@ -60,20 +60,12 @@ $app->post("/transmisiones/buscar", function ($request, $response, $arguments) {
 
         switch($what){
 
-            case 'menor-precio':
-            $orderarr[]= 'panorams.price_ars ASC';
-            break;
-
-            case 'mayor-precio':
-            $orderarr[]= 'panorams.price_ars DESC';
+            case 'mas-recientes':
+            $orderarr[]= 'panorams.created DESC';
             break;
 
             case 'mas-vistos':
             $orderarr[]= 'panorams.hits DESC';
-            break;
-
-            case 'con-garantia':
-            $orderarr[]= 'panorams.warranty DESC';
             break;
 
             default:
