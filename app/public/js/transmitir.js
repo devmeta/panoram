@@ -27,7 +27,6 @@ var canvas = document.getElementById('canvas')
 , transmitir_start = function(){
 
     transmitir_clock()
-    snapshot()
 
     $('.publish__container').fadeIn(2000)
 
@@ -136,6 +135,7 @@ var canvas = document.getElementById('canvas')
                         if(percentage >= 99){
                             console.log("Subido!")
                             $('canvas').fadeOut(1000)
+                            showTick()  
                         }
                     }
                 }, false)
@@ -180,10 +180,9 @@ map.setView([0,0], 8);
 //Display a default marker
 marker = L.marker([0,0], {icon:geo.icon({displayName:"",className:'me',colorId:1})}).addTo(map);
 
-/*document.getElementById("snap").addEventListener("click", function() {
+document.getElementById("snap").addEventListener("click", function() {
     snapshot()      
-})*/
-
+})
 
 navigator.mediaDevices.enumerateDevices()
     .then(gotDevices).then(getStream).catch(handleError);

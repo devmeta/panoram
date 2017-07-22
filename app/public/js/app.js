@@ -355,7 +355,7 @@ var scroll_count = 0
 	$(".trigger").addClass("drawn")
 	setTimeout(function (){
 		$(".trigger").removeClass("drawn")
-	},1000)
+	},100000000)
 }
 , parseMessage = function (res){
 	$("body").addClass('momargin').load("/message", function (){

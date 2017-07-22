@@ -1,1 +1,0 @@
-var endpoint = 'http://local.api.verusados.com'

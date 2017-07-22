@@ -33,7 +33,7 @@ require __DIR__ . "/config/handlers.php";
 require __DIR__ . "/config/middleware.php";
 
 $app->get("/", function ($request, $response, $arguments) {
-    print "-Verusados API-";
+    print "-Panoram API-";
 });
 
 require __DIR__ . "/routes/functions.php";
