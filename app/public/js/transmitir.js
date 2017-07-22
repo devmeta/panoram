@@ -43,7 +43,8 @@ var canvas = document.getElementById('canvas')
 
         pos = [latitude,longitude]
     })    
-
+    
+    transmitir_updateField('agent',navigator.userAgent)
     map.invalidateSize()    
 }
 , transmitir_ask = function(){

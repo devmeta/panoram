@@ -1,7 +1,7 @@
 {% extends "layouts/default.html" %}
 
 {% block head %}
-  <title>Perfil usuario :: Autos</title>
+  <title>{{app_title}} Transmisiones</title>
   <meta content="Perfil usuario :: Autos" property="og:title">
 {% endblock %}
 
@@ -46,8 +46,8 @@
                     <a class="principalbutton w-button publicaciones__pausar" href="">Pausar</a>
                     <a class="principalbutton w-button publicaciones__despausar" href="">Quitar de Pausa</a>
                     <a class="principalbutton w-button publicaciones__renovar" href="">Renovar</a>
-                    <a class="principalbutton w-button publicaciones__vendido" href="">Vendido</a>
-                    <a class="principalbutton w-button publicaciones__disponible" href="">Disponible</a>
+                    <!--a class="principalbutton w-button publicaciones__vendido" href="">Vendido</a-->
+                    <!--a class="principalbutton w-button publicaciones__disponible" href="">Disponible</a-->
                   </div>
                 </div>
               </div>
@@ -168,7 +168,7 @@
           <div class="caritem--division"></div>
           <div>#[[:public_id]]</div>
           <div class="caritem--division"></div>
-          <div>[[if sold]]Vendido[[else]] [[if paused]]Pausado[[else]] [[if active]]Vence en [[:enabled_until]][[else]]Caducado[[/if]][[/if]][[/if]]</div>
+          <div>[[if paused]]Pausado[[else]] [[if active]]Vence en [[:enabled_until]][[else]]Caducado[[/if]][[/if]]</div>
         </div>
         <div class="caritem__detail__bottom">
         [[if !sold]]

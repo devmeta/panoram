@@ -21,7 +21,7 @@ $app->get('/opener', function ($request, $response, $args) {
 $app->group('/perfil-usuario', function () use ($app) {
     $app->get('/transmisiones', function ($request, $response, $args) {
         return $this->view->render($response, 'perfil-usuario/transmisiones.html');
-    })->setName('perfil-usuario-autos');
+    })->setName('perfil-usuario-transmisiones');
 
     $app->get('/datos', function ($request, $response, $args) {
         return $this->view->render($response, 'perfil-usuario/datos.html');
