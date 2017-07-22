@@ -72,20 +72,6 @@ function update_title($mapper,$initial_title=""){
     return $title;
 }
 
-function upload_database($files, $index, $url, $pan) {
-
-    global $container;
-
-    $body = [
-        'pan_id' => $pan->id,
-        'file_url' => getenv('BUCKET_URL') . '/' . $url,
-        'filesize' => $files['size'][$index]
-    ];
-
-    $photo = new File($body);
-    return $container["spot"]->mapper("App\File")->save($photo);
-}
-
 $app->post("/upload/remove/{id}", function ($request, $response, $arguments) {
     if (false === $this->token->decoded->uid) {
         throw new ForbiddenException("Token not allowed to list panorams.", 403);

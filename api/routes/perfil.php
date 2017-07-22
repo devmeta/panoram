@@ -450,7 +450,7 @@ $app->post("/perfil/datos/upload", function ($request, $response, $arguments) {
                         }
                     }
 
-                    $data['url'] = $store['url'];
+                    $data['url'] = getenv('BUCKET_URL') . '/users/' . $store['key'];
                     $user->data(['picture' => $data['url']]);
                     $this->spot->mapper("App\User")->save($user);                
                 } else {
@@ -508,7 +508,7 @@ $app->post("/perfil/datos/completar", function ($request, $response, $arguments)
         if (in_array($ext, $valid_exts)){
             if($_FILES['image']['size'] < $max_size){
 
-                $store = bucket_store($_FILES['image']['tmp_name'],getenv('S3_PROFILE_RESOLUTIONS'));
+                $store = bucket_store($_FILES['image']['tmp_name'],getenv('S3_PROFILE_RESOLUTIONS'),'users');
 
                 if(empty($store['error'])) {
                     if(!empty($user->picture)){
@@ -521,7 +521,7 @@ $app->post("/perfil/datos/completar", function ($request, $response, $arguments)
                         }
                     }
 
-                    $data['picture'] = $store['url'];
+                    $data['picture'] = $store['key'];
                 } else {
                     $data[$i]['error'] = $store['error'];
                 }

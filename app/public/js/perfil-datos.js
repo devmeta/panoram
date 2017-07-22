@@ -26,7 +26,7 @@ function perfil_datos_fetch(){
 
 				if(response.data.picture){
 					perc+= 20;
-					$('.profilepicture--img img').attr('src',datos_helper.getBucketSize('80x80',response.data.picture));
+					$('.profilepicture--img img').attr('src',getBucketSize('80x80',response.data.picture));
 					$('.dashboard__list-item:eq(0)').hide();
 				}
 
@@ -145,7 +145,7 @@ $(function(){
 	        		token.picture = response.url;
 					localStorage.setItem("token_data",JSON.stringify(token));
 
-	        		$('.profilepicture--img img').attr('src',datos_helper.getBucketSize('80x80',response.url));
+	        		$('.profilepicture--img img').attr('src',getBucketSize('80x80',response.url));
 	        		$('.profilepicture--link').text("Cambiar foto");
 	            	showTick();
 	        	}

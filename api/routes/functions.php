@@ -161,6 +161,20 @@ function log2file($path, $data, $mode="a"){
    chmod($path, 0777);
 }
 
+function upload_database($files, $index, $url, $pan) {
+
+    global $container;
+
+    $body = [
+        'pan_id' => $pan->id,
+        'file_url' => getenv('BUCKET_URL') . '/' . $url,
+        'filesize' => $files['size'][$index]
+    ];
+
+    $photo = new File($body);
+    return $container["spot"]->mapper("App\File")->save($photo);
+}
+
 function bucket_store($tmp_name,$res,$tag = ''){
 
     global $container, $manager;
@@ -169,12 +183,12 @@ function bucket_store($tmp_name,$res,$tag = ''){
         $manager = new ImageManager();
     }
 
-    if(!is_dir($tag)){
-        mkdir($tag);
-        chmod($tag,777);
+    $jti = Base62::encode(random_bytes(8));
+
+    while(is_file(getenv('BUCKET_PATH') . '/users/' . $jti . '.' . getenv('S3_EXTENSION')) ){
+        $jti = Base62::encode(random_bytes(8));
     }
 
-    $jti = Base62::encode(random_bytes(8) . date('_YmdHs_'));
     $key = $jti . '.' . getenv('S3_EXTENSION');
     $resolutions = explode(',',$res);
     $path = getenv('BUCKET_PATH') . '/' . $tag . '/';
