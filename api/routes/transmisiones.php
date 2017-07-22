@@ -268,7 +268,7 @@ $app->post("/transmisiones/sidebar", function ($request, $response, $arguments) 
         "panorams.brand_id > 0",
         "panorams.deleted = 0",
         "panorams.paused = 0",
-        "panorams.sold = 0",
+        "panorams.condition = 1",
         "panorams.price_ars >= 40000",
         "panorams.tel <> ''",
         "panorams.mt_year > 1950",
@@ -331,7 +331,7 @@ $app->post("/transmisiones/sidebar", function ($request, $response, $arguments) 
             'enabled' => 1,
             'deleted' => 0,
             'paused' => 0,
-            'sold' => 0,
+            'condition' => 1,
             'enabled_until <' => "now()",
             'warranty' => 1,
             'price >' => 0,
@@ -352,7 +352,7 @@ $app->post("/transmisiones/sidebar", function ($request, $response, $arguments) 
                 'enabled' => 1,
                 'deleted' => 0,
                 'paused' => 0,
-                'sold' => 0,
+                'condition' => 1,
                 'enabled_until <' => "now()",
                 'price >' => 0,
                 'tel <>' => "",
@@ -414,7 +414,7 @@ $app->post("/{slug}", function ($request, $response, $arguments) {
         "enabled" => 1,
         "deleted" => 0,
         "paused" => 0,
-        "sold" => 0,
+        "condition" => 1,
         'enabled_until <' => "now()"
     ]);
 
@@ -441,9 +441,9 @@ $app->post("/{slug}", function ($request, $response, $arguments) {
         $this->spot->mapper("App\Panoram")->save($vehicle);
 
         if(!empty($vehicle->city_id)){
-            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE (user_id = {$vehicle->user_id} OR city_id = '{$vehicle->city_id})' AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND sold = 0 AND enabled_until > now() ORDER BY CASE city_id WHEN {$vehicle->city_id} THEN 0 ELSE 2 END, CASE region_id WHEN {$vehicle->region_id} THEN 1 ELSE 2 END ASC, hits desc");
+            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE (user_id = {$vehicle->user_id} OR city_id = '{$vehicle->city_id})' AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND condition = 1 AND enabled_until > now() ORDER BY CASE city_id WHEN {$vehicle->city_id} THEN 0 ELSE 2 END, CASE region_id WHEN {$vehicle->region_id} THEN 1 ELSE 2 END ASC, hits desc");
         } else {
-            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE user_id = {$vehicle->user_id} AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND sold = 0 AND enabled_until > now() ORDER BY hits desc");
+            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE user_id = {$vehicle->user_id} AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND condition = 1 AND enabled_until > now() ORDER BY hits desc");
         }
 
         $fractal = new Manager();
