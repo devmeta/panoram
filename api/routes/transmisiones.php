@@ -441,9 +441,9 @@ $app->post("/{slug}", function ($request, $response, $arguments) {
         $this->spot->mapper("App\Panoram")->save($vehicle);
 
         if(!empty($vehicle->city_id)){
-            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE (user_id = {$vehicle->user_id} OR city_id = '{$vehicle->city_id})' AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND condition = 1 AND enabled_until > now() ORDER BY CASE city_id WHEN {$vehicle->city_id} THEN 0 ELSE 2 END, CASE region_id WHEN {$vehicle->region_id} THEN 1 ELSE 2 END ASC, hits desc");
+            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE (user_id = {$vehicle->user_id} OR city_id = '{$vehicle->city_id})' AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND `condition` = 1 AND enabled_until > now() ORDER BY CASE city_id WHEN {$vehicle->city_id} THEN 0 ELSE 2 END, CASE region_id WHEN {$vehicle->region_id} THEN 1 ELSE 2 END ASC, hits desc");
         } else {
-            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE user_id = {$vehicle->user_id} AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND condition = 1 AND enabled_until > now() ORDER BY hits desc");
+            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE user_id = {$vehicle->user_id} AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND `condition` = 1 AND enabled_until > now() ORDER BY hits desc");
         }
 
         $fractal = new Manager();
