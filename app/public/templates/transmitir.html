@@ -15,7 +15,7 @@
 
 {% block body %}
 
-<div class="header-top">
+<div class="toolbox-top">
     <a class="w-inline-block" href="/perfil-usuario/transmisiones">
       <img height="60" class="" src="/images/34865-200-white.png" title="Volver al listado">
     </a>
@@ -25,6 +25,9 @@
     <a id="snap" class="w-inline-block" href="#">
       <img height="40" class="" src="/images/684259_phone_512x512-w.png" title="Tomar foto manualmente">
     </a>    
+    <a id="pause" class="w-inline-block" href="#">
+      <img height="40" class="" src="/images/screen-recorder-no-root-logo.png" title="Iniciar transmisión">
+    </a>
 </div>
 
 <div class="toolbar-container">
@@ -63,9 +66,9 @@
             <div class="publish__section">
               <div class="publish__twoinone">
                 <div class="publish__section__field">
-                  <label class="form--label" for="ano">¿Cada cuántos segundos? <!--span class="publish--span">(*)</span-->
+                  <label class="form--label" for="ano">Cada cuántos segs? <!--span class="publish--span">(*)</span-->
                   </label>
-                  <input class="form__field w-input" type="number" data-name="periodicity" maxlength="5" name="periodicity" id="periodicity" max="9999" min="15" placeholder="min:15, max:9999" value="15">
+                  <input class="form__field w-input" type="number" data-name="periodicity" maxlength="5" name="periodicity" id="periodicity" max="9999" min="5" placeholder="min:5, max:9999" value="5">
                 </div>
                 <div class="publish__section__field">
                   <label class="form--label" for="name">SELECCIONA CÁMARA <!--span class="publish--span">(*)</span-->
@@ -85,7 +88,7 @@
           </form>
         </div>
       </div>
-      <-- END config panel -->      
+      <!-- END config panel -->
     </div>
   </div>
 </div>

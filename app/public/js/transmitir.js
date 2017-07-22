@@ -14,12 +14,10 @@ var canvas = document.getElementById('canvas')
 , markers = []
 , snapInterval = 0
 , snapIndex = 0
-, snapPeriodicity = 15
+, snapPeriodicity = 5
 , posIndex = 0
 , upload_in_progress = 0 
 , transmitir_clock = function(){
-    console.log(pause)
-    if(pause) return 
     if(snapInterval) clearInterval(snapInterval)
     snapInterval = setInterval(function(){ 
         snapIndex++
@@ -72,14 +70,20 @@ var canvas = document.getElementById('canvas')
               type: "input",
               showCancelButton: true,
               closeOnConfirm: false,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Iniciar",
+              cancelButtonText: "Cancelar",              
               inputPlaceholder: "La montaña desde la ventana"
             },
             function(inputValue){
-              //if (inputValue === false) return false;
-              transmitir_updateField('title',inputValue, function(){
-                swal.close()
-                transmitir_start()  
-              })
+                if (inputValue === false) {
+                    location.href = '/perfil-usuario/transmisiones'
+                    return false
+                }
+                transmitir_updateField('title',inputValue, function(){
+                    swal.close()
+                    transmitir_start()  
+                })
             })
         }
     })    
@@ -113,6 +117,7 @@ var canvas = document.getElementById('canvas')
     videoElement.removeEventListener('playing', getVideoSize, false);
 }
 , snapshot = function(){
+    if(pause) return 
     $('canvas').show()
     context.drawImage(videoElement, 0, 0)
     var data = canvas.toDataURL()
@@ -220,6 +225,16 @@ marker = L.marker([0,0], {icon:geo.icon({displayName:"",className:'me',colorId:1
 
 document.getElementById("snap").addEventListener("click", function() {
     snapshot()      
+})
+
+document.getElementById("pause").addEventListener("click", function() {
+    if($(this).css("opacity")==1){
+        pause = 1
+        $(this).css({opacity:0.5})
+    } else {
+        pause = 0
+        $(this).css({opacity:1})
+    }
 })
 
 navigator.mediaDevices.enumerateDevices()
