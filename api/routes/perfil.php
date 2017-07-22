@@ -81,6 +81,7 @@ $app->post("/perfil/transmisiones", function ($request, $response, $arguments) {
     ];
 
     $order = [
+        'paused' => "ASC",
         'updated' => "DESC"
     ];
 
