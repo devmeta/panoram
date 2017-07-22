@@ -411,16 +411,16 @@ function human_timespan_short($time){
     $Y = date('Y', $time);
     $n = date('n', $time);
     $w = date('w', $time);
-    $wdays = ['dom','lun','mar','mié','jue','sáb'];
+    $wdays = ['dom','lun','mar','mié','jue','vie','sáb'];
 
     //if($diff < 86400){
     if($diff < (86400 / 4)){
         $str = date('H:i',$time); 
     } elseif($diff < 604800){
         $str = $wdays[$w];
-    } elseif($Y <> date('Y')){
+    } elseif($Y != date('Y')){
         $str = date('j/n/y',$time);  
-    } elseif($n <> date('n')){
+    } elseif($n != date('n')){
         $str = date('j/n',$time); 
     } else {
         $str = date('j',$time);  
