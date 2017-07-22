@@ -2185,7 +2185,7 @@
             tram($newView)
               .add('opacity .3s')
               .add('transform .3s')
-              .set({x: index > previousIndex ? '80px' : '-80px'})
+              .set({x: index > previousIndex ? '0px' : '0px'})
               .start({opacity: 1, x: 0});
           } else {
             $newView.css('opacity', 1);
