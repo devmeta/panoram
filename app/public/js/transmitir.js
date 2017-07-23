@@ -116,8 +116,8 @@ var canvas = document.getElementById('canvas')
     $('#canvas').attr("height",videoHeight)
     videoElement.removeEventListener('playing', getVideoSize, false);
 }
-, snapshot = function(){
-    if(pause) return 
+, snapshot = function(force){
+    if( !force && pause) return 
     $('canvas').show()
     context.drawImage(videoElement, 0, 0)
     var data = canvas.toDataURL()
@@ -138,10 +138,10 @@ var canvas = document.getElementById('canvas')
                         , current = e.loaded
                         , percentage = parseInt(current * 99/max)
 
-                        console.log("Subiendo foto: " + percentage + "%")
+                        // console.log("Subiendo foto: " + percentage + "%")
 
                         if(percentage >= 99){
-                            console.log("Subido!")
+                            // console.log("Subido!")
                             $('canvas').fadeOut(1000)
                             $('#snap').removeClass('shake').addClass('shake')
                             showTick()  
@@ -204,14 +204,15 @@ var canvas = document.getElementById('canvas')
   console.log('Error: ', error);
 }
 , show_toolbox = function(){
+    pause = 1
     $('.toolbar-container').fadeIn('slow', function(){
         map.invalidateSize()
-        pause = 1
     })
 }
 , hide_toolbox = function(){
-    $('.toolbar-container').fadeOut()
-    pause = 0
+    $('.toolbar-container').fadeOut(1000, function(){
+        pause = 0
+    })    
 }
 
 videoElement.addEventListener('playing', getVideoSize, false);
@@ -223,19 +224,17 @@ map = L.mapbox.map('map', 'mapbox.streets');
 map.setView([0,0], 8);
 marker = L.marker([0,0], {icon:geo.icon({displayName:"",className:'me',colorId:1})}).addTo(map);
 
-document.getElementById("snap").addEventListener("click", function() {
-    snapshot()      
+document.getElementById("snap").addEventListener("click", function(e) {
+    snapshot(1)
 })
 
 document.getElementById("pause").addEventListener("click", function() {
     if($(this).hasClass('paused')){
+        $(this).removeClass('paused').attr("title","Transmitiendo EN VIVO")
         pause = 0
-        $(this).removeClass('paused')
-        $(this).attr("title","Transmitiendo EN VIVO")
     } else {
+        $(this).addClass('paused').attr("title","Transmisión EN PAUSA")
         pause = 1
-        $(this).addClass('paused')
-        $(this).attr("title","Transmisión EN PAUSA")
     }
 })
 
