@@ -228,12 +228,14 @@ document.getElementById("snap").addEventListener("click", function() {
 })
 
 document.getElementById("pause").addEventListener("click", function() {
-    if($(this).css("opacity")==1){
-        pause = 1
-        $(this).css({opacity:0.5})
-    } else {
+    if($(this).hasClass('paused')){
         pause = 0
-        $(this).css({opacity:1})
+        $(this).removeClass('paused')
+        $(this).attr("title","Transmitiendo EN VIVO")
+    } else {
+        pause = 1
+        $(this).addClass('paused')
+        $(this).attr("title","Transmisión EN PAUSA")
     }
 })
 

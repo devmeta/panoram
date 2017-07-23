@@ -77,13 +77,31 @@
   animation: shake 1s;
 }
 
-@keyframes flash{
+.paused {
+  animation: pulse 1s infinite; 
+}
+
+@keyframes flash {
   0%{
     background:orange;
   }
 
   100%{
     background:white;
+  }
+}
+
+@keyframes pulse {
+  0%{
+    opacity: 0.7
+  }
+  
+  50%{
+    opacity: 0.5
+  }
+
+  100%{
+    opacity: 0.7
   }
 }
 
