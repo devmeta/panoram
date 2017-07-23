@@ -575,7 +575,7 @@ var scroll_count = 0
 	}
 
 	$.server({
-		url: '/transmisiones/buscar',
+		url: '/panos/buscar',
 		data: location.hash + '&pos=' + pos + '&take=' + take,
 		success: function (response){
 			hideLoader()
@@ -630,7 +630,7 @@ var scroll_count = 0
 , sidebar = function () {
 	$.ajax({
 		type: "post",
-		url: endpoint + '/transmisiones/sidebar',
+		url: endpoint + '/panos/sidebar',
 		data: location.hash,
 		success: function (response){
 			

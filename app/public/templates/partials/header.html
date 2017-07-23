@@ -5,7 +5,7 @@
       <div class="_w-form2 w-form2">
         <form class="buscador__form" data-name="Email Form" id="email-form" name="email-form">
           <div class="buscador__fields"><img src="/images/magnifier.svg">
-            <input class="fields--input w-input" data-name="search" id="search" maxlength="256" name="search" placeholder="Buscar transmisiones" type="text">
+            <input class="fields--input w-input" data-name="search" id="search" maxlength="256" name="search" placeholder="Buscar panos" type="text">
             <!--select class="fields--select w-select" data-name="Desde" id="Desde" name="Desde">
               <option value="40000">Desde 40.000 ARS</option>
               <option value="100000">Desde 100.000 ARS</option>
@@ -47,7 +47,7 @@
 
   <script id="profileactions" type="text/x-jsrender">
   [[if ~is_token()]]
-    <a class="item-right item-w-image listnav--item logged w-inline-block button--profile" href="/perfil-usuario/transmisiones">
+    <a class="item-right item-w-image listnav--item logged w-inline-block button--profile" href="/perfil-usuario/panos">
       <div class="header--profilepicture"><img src="[[if picture]][[:~getBucketSize('80x80',picture)]][[else]][[:~is_dummy()]][[/if]]">
       </div>
       <div class="item-w-image--p">[[if first_name]][[:first_name]][[else]]Mi cuenta[[/if]]</div>

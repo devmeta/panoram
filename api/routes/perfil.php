@@ -67,7 +67,7 @@ $app->post("/perfil/reenviar-bienvenida", function ($request, $response, $argume
 });
 
 
-$app->post("/perfil/transmisiones", function ($request, $response, $arguments) {
+$app->post("/perfil/panos", function ($request, $response, $arguments) {
 
     // publicaciones
 
@@ -141,7 +141,7 @@ $app->post("/perfil/transmisiones", function ($request, $response, $arguments) {
         ->write(json_encode($data));    
 });
 
-$app->post("/perfil/transmisiones/eliminar/{code}", function ($request, $response, $arguments) {
+$app->post("/perfil/panos/eliminar/{code}", function ($request, $response, $arguments) {
 
     if (false === $this->token->decoded->uid) {
         throw new ForbiddenException("Token not allowed to update panorams.", 403);
@@ -190,7 +190,7 @@ $app->post("/perfil/transmisiones/eliminar/{code}", function ($request, $respons
         ->write(json_encode($data));  
 });
 
-$app->post("/perfil/transmisiones/pausar", function ($request, $response, $arguments) {
+$app->post("/perfil/panos/pausar", function ($request, $response, $arguments) {
     $body = $request->getParsedBody();
     $codes = $body['codes'];
 
@@ -224,7 +224,7 @@ $app->post("/perfil/transmisiones/pausar", function ($request, $response, $argum
         ->write(json_encode($data));
 });
 
-$app->post("/perfil/transmisiones/despausar", function ($request, $response, $arguments) {
+$app->post("/perfil/panos/despausar", function ($request, $response, $arguments) {
     $body = $request->getParsedBody();
     $codes = $body['codes'];
 
@@ -265,7 +265,7 @@ $app->post("/perfil/transmisiones/despausar", function ($request, $response, $ar
         ->write(json_encode($data));
 });
 
-$app->post("/perfil/transmisiones/vendido", function ($request, $response, $arguments) {
+$app->post("/perfil/panos/vendido", function ($request, $response, $arguments) {
     $body = $request->getParsedBody();
     $codes = $body['codes'];
     $data = [];
@@ -299,7 +299,7 @@ $app->post("/perfil/transmisiones/vendido", function ($request, $response, $argu
         ->write(json_encode($data));
 });
 
-$app->post("/perfil/transmisiones/disponible", function ($request, $response, $arguments) {
+$app->post("/perfil/panos/disponible", function ($request, $response, $arguments) {
     $body = $request->getParsedBody();
     $codes = $body['codes'];
 
@@ -330,7 +330,7 @@ $app->post("/perfil/transmisiones/disponible", function ($request, $response, $a
         ->write(json_encode($data));
 });
 
-$app->post("/perfil/transmisiones/renovar", function ($request, $response, $arguments) {
+$app->post("/perfil/panos/renovar", function ($request, $response, $arguments) {
     $body = $request->getParsedBody();
     $codes = $body['codes'];
 

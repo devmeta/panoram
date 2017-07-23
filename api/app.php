@@ -38,7 +38,7 @@ $app->get("/", function ($request, $response, $arguments) {
 
 require __DIR__ . "/routes/functions.php";
 require __DIR__ . "/routes/auth.php";
-require __DIR__ . "/routes/transmisiones.php";
+require __DIR__ . "/routes/panos.php";
 require __DIR__ . "/routes/perfil.php";
 require __DIR__ . "/routes/transmitir.php";
 require __DIR__ . "/routes/email.php";

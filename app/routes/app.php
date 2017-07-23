@@ -19,9 +19,9 @@ $app->get('/opener', function ($request, $response, $args) {
 })->setName('opener');
 
 $app->group('/perfil-usuario', function () use ($app) {
-    $app->get('/transmisiones', function ($request, $response, $args) {
-        return $this->view->render($response, 'perfil-usuario/transmisiones.html');
-    })->setName('perfil-usuario-transmisiones');
+    $app->get('/panos', function ($request, $response, $args) {
+        return $this->view->render($response, 'perfil-usuario/panos.html');
+    })->setName('perfil-usuario-panos');
 
     $app->get('/datos', function ($request, $response, $args) {
         return $this->view->render($response, 'perfil-usuario/datos.html');
@@ -69,7 +69,7 @@ $app->get('/{slug}', function ($request, $response, $args) {
 
     if($file_name) $photo = getenv('BUCKET_URL') . '/cams/' . $id . '/' . $file_name . ".jpg";
 
-    return $this->view->render($response, 'transmision.html',[
+    return $this->view->render($response, 'pano.html',[
         'shorturl' => $host.'/'.strtok($args['slug'],"---"),
         'url' => $host.'/'.$args['slug'],
         'photo' => $photo,

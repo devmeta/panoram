@@ -1,7 +1,7 @@
 function perfil_autos_fetch(){
 	$('.publicaciones__caritem__options').fadeOut()
 	$.server({
-		url : '/perfil/transmisiones', 
+		url : '/perfil/panos', 
 		success: function(response){
 			if( ! $.isEmptyObject(response.listing) && response.listing.data.length){
 				$('.content_publicaciones').html($.templates("#publicaciones").render(response.listing.data,helpers.listing))
@@ -127,7 +127,7 @@ $(document).on('click','.publicaciones__pausar',function(e){
 		showLoaderOnConfirm: true,
 	}, function(){   
 		$.server({ 
-			url: '/perfil/transmisiones/pausar',
+			url: '/perfil/panos/pausar',
 			data: {'codes':codes},
 			success: function(resp){
 				swal.close()
@@ -154,7 +154,7 @@ $(document).on('click','.publicaciones__despausar',function(e){
 		showLoaderOnConfirm: true,
 	}, function(){   
 		$.server({ 
-			url: '/perfil/transmisiones/despausar',
+			url: '/perfil/panos/despausar',
 			data: {'codes':codes},
 			success: function(resp){
 				swal.close()
@@ -181,7 +181,7 @@ $(document).on('click','.publicaciones__renovar',function(e){
 		showLoaderOnConfirm: true,
 	}, function(){   
 		$.server({ 
-			url: '/perfil/transmisiones/renovar',
+			url: '/perfil/panos/renovar',
 			data: {'codes':codes},
 			success: function(resp){
 				swal.close()
@@ -208,7 +208,7 @@ $(document).on('click','.publicaciones__vendido',function(e){
 		showLoaderOnConfirm: true,
 	}, function(){   
 		$.server({ 
-			url: '/perfil/transmisiones/vendido',
+			url: '/perfil/panos/vendido',
 			data: {'codes':codes},
 			success: function(resp){
 				swal.close()
@@ -235,7 +235,7 @@ $(document).on('click','.publicaciones__disponible',function(e){
 		showLoaderOnConfirm: true,
 	}, function(){   
 		$.server({ 
-			url: '/perfil/transmisiones/disponible',
+			url: '/perfil/panos/disponible',
 			data: {'codes':codes},
 			success: function(resp){
 				swal.close()
@@ -258,7 +258,7 @@ $(document).on('click','.caritem--eliminar',function(e){
 		showLoaderOnConfirm: true,
 	}, function(){   
 		$.server({ 
-			url: '/perfil/transmisiones/eliminar/' + code,
+			url: '/perfil/panos/eliminar/' + code,
 			success: function(){
 				$('.' + code).fadeOut(1000, function(){
 

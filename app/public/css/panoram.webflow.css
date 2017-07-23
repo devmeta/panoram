@@ -839,6 +839,7 @@ a.principalbutton.estoycubierto {text-align: center;
 
 .bestinfo__slider {
   width: 60%;
+  background: #000;
 }
 
 .bestinfo__slider--nav {
@@ -847,7 +848,7 @@ a.principalbutton.estoycubierto {text-align: center;
   display: -ms-flexbox;
   display: flex;
   overflow: hidden;
-  max-height: 100px;
+  height: 200px;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -1724,8 +1725,8 @@ a.principalbutton.estoycubierto {text-align: center;
 }
 
 .profile__menu--img {
-  width: 36px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
 }
 
 .profile__content__personal-info {

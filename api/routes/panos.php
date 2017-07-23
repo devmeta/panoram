@@ -32,7 +32,7 @@ use App\Tag;
 use App\File;
 use App\Banner;
 
-$app->post("/transmisiones/buscar", function ($request, $response, $arguments) {
+$app->post("/panos/buscar", function ($request, $response, $arguments) {
 
     $body = $request->getParsedBody();
     $maxprice = "500000";
@@ -251,7 +251,7 @@ $app->post("/transmisiones/buscar", function ($request, $response, $arguments) {
 });
 
 
-$app->post("/transmisiones/sidebar", function ($request, $response, $arguments) {
+$app->post("/panos/sidebar", function ($request, $response, $arguments) {
 
     $body = $request->getParsedBody();
     $ins = [];
@@ -420,13 +420,13 @@ $app->post("/{slug}", function ($request, $response, $arguments) {
         if( ! $item->active) {
             $data["status"] = "error";
             $data["title"] = "Tu publicación está caducada!";
-            $data["message"] = "Esta publicación ha caducado. Si es tu publicación y deseas renovarla <a href='/perfil-usuario/transmisiones'>podés ir a tu panel</a>";
+            $data["message"] = "Esta publicación ha caducado. Si es tu publicación y deseas renovarla <a href='/perfil-usuario/panos'>podés ir a tu panel</a>";
         }
 
         if($item->sold) {
             $data["status"] = "error";
             $data["title"] = "Tu publicación figura como vendida!";
-            $data["message"] = "Este vehículo figura como vendido. <a href='/perfil-usuario/transmisiones'>Volver a mis publicaciónes</a>";
+            $data["message"] = "Este vehículo figura como vendido. <a href='/perfil-usuario/panos'>Volver a mis publicaciónes</a>";
         }
 
         $vehicle->data(['hits' => $vehicle->hits + 1]);

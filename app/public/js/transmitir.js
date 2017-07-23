@@ -77,7 +77,7 @@ var canvas = document.getElementById('canvas')
             },
             function(inputValue){
                 if (inputValue === false) {
-                    location.href = '/perfil-usuario/transmisiones'
+                    location.href = '/perfil-usuario/panos'
                     return false
                 }
                 transmitir_updateField('title',inputValue, function(){

@@ -8,7 +8,7 @@
 {% block body %}
   <div class="profile__container">
     <div class="profile__menu">
-      <a class="profile__menu--item w-inline-block" href="/perfil-usuario/transmisiones"><img class="profile__menu--img" src="/images/publicaciones-active.svg">
+      <a class="profile__menu--item w-inline-block" href="/perfil-usuario/panos"><img class="profile__menu--img" src="/images/publicaciones-active.png">
       </a>
       <a class="profile__menu--item w-inline-block" href="/perfil-usuario/datos"><img class="profile__menu--img" src="/images/profile.svg">
       </a>
@@ -70,18 +70,14 @@
           </div>
           <div class="tabpane w-tab-pane tab-pane__fav" data-w-tab="tus favoritos">
             <div class="noinfo">Todavía no agregaste ningún auto a tus favoritos.
-              <br/>
-              <img src="/images/favoritos-empty.svg"  />
-              <a href="https://panoram.com" class="header-top--button">Agregar autos a mis favoritos</a>
+              <a href="https://panoram.com" class="header-top--button">Agregar transmisiones a mis favoritos</a>
             </div>
           </div>
           <div class="tabpane w-tab-pane" data-w-tab="configuración de alertas">
             <div class="caralerts tab-pane__alert">
             </div>
             <div class="noinfo">Cuando veas un auto que te guste agregalo a tus alertas para no perderte ninguna publicación similar.
-              <br/>
-              <img src="/images/alerta-noinfo.png"  />
-              <a href="https://panoram.com" class="header-top--button">Buscar autos para agregar autos a mis alertas</a>
+              <a href="https://panoram.com" class="header-top--button">Buscar transmisiones para agregar a mis alertas</a>
             </div>
           </div>
         </div>
@@ -199,5 +195,5 @@
 {% endblock %}
 
 {% block assets %}
-  <script src="/js/perfil-transmisiones.js?_={{ rev_parse }}" type="text/javascript"></script>
+  <script src="/js/perfil-panos.js?_={{ rev_parse }}" type="text/javascript"></script>
 {% endblock %}
