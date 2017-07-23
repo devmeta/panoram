@@ -78,7 +78,7 @@
 }
 
 .paused {
-  animation: pulse 1s infinite; 
+  animation: pulse 2s infinite; 
 }
 
 @keyframes flash {
@@ -95,7 +95,7 @@
   0%{
     opacity: 0.7
   }
-  
+
   50%{
     opacity: 0.5
   }

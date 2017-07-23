@@ -71,18 +71,18 @@ var canvas = document.getElementById('canvas')
               showCancelButton: true,
               closeOnConfirm: false,
               confirmButtonColor: "#DD6B55",
-              confirmButtonText: "Iniciar",
+              confirmButtonText: "OK",
               cancelButtonText: "Cancelar",              
               inputPlaceholder: "La montaña desde la ventana"
             },
             function(inputValue){
                 if (inputValue === false) {
-                    location.href = '/perfil-usuario/panos'
-                    return false
+                    return location.href = '/perfil-usuario/panos'
                 }
+
                 transmitir_updateField('title',inputValue, function(){
                     swal.close()
-                    transmitir_start()  
+                    $('.toogle-toolbox').click()
                 })
             })
         }
