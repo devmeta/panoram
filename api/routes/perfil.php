@@ -162,10 +162,10 @@ $app->post("/perfil/panos/eliminar/{code}", function ($request, $response, $argu
         "pan_id" => $mapper->id
     ]);
 
-    $path = getenv('BUCKET_PATH') . '/cams/' . $this->token->decoded->uid . '/' . $mapper->code . '/';
+    $path = getenv('BUCKET_PATH') . '/cams/' . $mapper->code . '/';
 
     foreach($photos as $photo) {
-        $fn = substr($photo->photo_url, strrpos($photo->photo_url, '/') + 1);
+        $fn = substr($photo->file_url, strrpos($photo->file_url, '/') + 1);
 
         unlink($path . $fn);
 
@@ -178,6 +178,8 @@ $app->post("/perfil/panos/eliminar/{code}", function ($request, $response, $argu
 
         $this->spot->mapper("App\File")->delete($photo);        
     }
+
+    rmdir($path);
 
     $vehicle = $mapper->data(['deleted' => 1]);
     $this->spot->mapper("App\Panoram")->save($vehicle);
