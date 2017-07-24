@@ -49,13 +49,14 @@ html, body {
 }
 
 .badge {
-	background-color: #fff;
-	color: #000;
-	border-radius: 10px;
-	position: absolute;
-	padding: 0 6px;
-	top: 0;
-	right: -5px;
+    background-color: #ff4700;
+    color: #fff;
+    border-radius: 10px;
+    position: absolute;
+    padding: 0 5px;
+    font-weight: 600;
+    top: 0;
+    right: -15px;
 }
 
 .w-inline-block {
