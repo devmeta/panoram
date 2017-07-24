@@ -23,7 +23,7 @@ var geo = {
 	        height: ${properties.size[data.sizeId] || '3rem'};
 	        display: block;
 	        left: -${parseInt(properties.size[data.sizeId])/2 || '1.5'}rem;
-	        top: -${parseInt(properties.size[data.sizeId])/2 || '1.5'}rem;
+	        top: -${parseInt(properties.size[data.sizeId])/2 || '2'}rem;
 	        position: relative;
 	        border-radius: ${properties.size[data.sizeId] || '3rem'} ${properties.size[data.sizeId] || '3rem'} 0;
 	        transform: rotate(45deg);

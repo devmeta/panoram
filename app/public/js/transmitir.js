@@ -24,8 +24,17 @@ var canvas = document.getElementById('canvas')
         snapshot()
     },snapPeriodicity * 1000)
 }
-, transmitir_start = function(){
+, transmitir_resume = function(){
+    pause = 0
+    $('#recording_state').addClass('recording').attr("title","Transmitiendo EN VIVO")
 
+}
+, transmitir_pause = function(){
+    pause = 1
+    $('#recording_state').removeClass('recording').attr("title","Transmisión EN PAUSA")
+}
+, transmitir_start = function(){
+    transmitir_resume()
     transmitir_clock()
 
     geo.track(function(position) {
@@ -62,6 +71,8 @@ var canvas = document.getElementById('canvas')
             $('#extrainfo').val(pan.extrainfo)
             $('#extrainfo').val(pan.extrainfo)
             $('.toolbar-container').fadeIn()
+
+            $('#title').focus()
         }
     })    
 }
@@ -183,14 +194,14 @@ var canvas = document.getElementById('canvas')
   console.log('Error: ', error);
 }
 , show_toolbox = function(){
-    pause = 1
+    transmitir_pause()
     $('.toolbar-container').fadeIn('slow', function(){
         map.invalidateSize()
     })
 }
 , hide_toolbox = function(){
     $('.toolbar-container').fadeOut(1000, function(){
-        pause = 0
+        transmitir_resume()
     })    
 }
 
@@ -207,13 +218,11 @@ document.getElementById("snap").addEventListener("click", function(e) {
     snapshot(1)
 })
 
-document.getElementById("pause").addEventListener("click", function() {
-    if($(this).hasClass('paused')){
-        $(this).removeClass('paused').attr("title","Transmitiendo EN VIVO")
-        pause = 0
+document.getElementById("recording_state").addEventListener("click", function() {
+    if($(this).hasClass('recording')){
+        transmitir_pause()
     } else {
-        $(this).addClass('paused').attr("title","Transmisión EN PAUSA")
-        pause = 1
+        transmitir_resume()
     }
 })
 
