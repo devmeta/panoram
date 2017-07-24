@@ -135,6 +135,7 @@ class Panoram extends \Spot\Entity
             "title" => (string) $pan->title ? substr($pan->title, strpos($pan->title, "--") + 2) : null,
             "extrainfo" => (string) $pan->extrainfo ?: null,
             "hits" => (integer) $pan->hits ?: 0,
+            "lifespan" => (integer) $pan->lifespan ?: 0,
             "enabled" => !!$pan->enabled,
             "paused" => !!$pan->paused,
             "condition" => (integer) $pan->condition ?: 0,

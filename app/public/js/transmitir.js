@@ -70,6 +70,7 @@ var canvas = document.getElementById('canvas')
             $('#title').val(pan.title)
             $('#extrainfo').val(pan.extrainfo)
             $('#extrainfo').val(pan.extrainfo)
+            $('#lifespan').val(pan.lifespan)
             $('.toolbar-container').fadeIn()
 
             $('#title').focus()
