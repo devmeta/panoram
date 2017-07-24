@@ -260,6 +260,7 @@ $(function(){
         transmitir_updateField('agent',navigator.userAgent)
         transmitir_updateField('interval',$('#interval').val())
         transmitir_updateField('camera',$('#videoSource').val())
+        transmitir_updateField('lifespan',$('#lifespan').val())
         hide_toolbox()
         transmitir_start()
     })

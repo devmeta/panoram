@@ -60,6 +60,7 @@ class Panoram extends \Spot\Entity
             "schedule" => ["type" => "string", "length" => 255, "value" => "", "notnull" => true],
             "currency_id" => ["type" => "integer", "unsigned" => true, "value" => 1, "default" => 1, 'index' => true],
             "mt_year" => ["type" => "integer", "unsigned" => true, "default" => 0],
+            "lifespan" => ["type" => "integer", "unsigned" => true, "default" => 0],
             "interval" => ["type" => "integer", "unsigned" => true, "default" => 15],
             "condition" => ["type" => "integer", "unsigned" => true, "value" => 1,"default" => 1, "notnull" => true],
             "geolocation" => ["type" => "integer", "unsigned" => true, "value" => 1,"default" => 1, "notnull" => true],

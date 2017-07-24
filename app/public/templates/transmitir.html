@@ -60,10 +60,25 @@
         <div class="publish--p">Elige un título y una descripción</div>
         <div class="w-form2">
           <div class="publish__section">
-            <div class="publish__section--title nomargin">
-              <label class="form--label" for="ano">Título <!--span class="publish--span">(*)</span-->
-              </label>
-              <input class="form__field w-input" type="text" data-name="title" maxlength="255" name="title" id="title" placeholder="Mi transmisón" value="">
+            <div class="publish__twoinone">
+              <div class="publish__section__field">          
+                <label class="form--label" for="ano">Título <!--span class="publish--span">(*)</span-->
+                </label>
+                <input class="form__field w-input" type="text" data-name="title" maxlength="255" name="title" id="title" placeholder="Mi transmisón" value="">
+              </div>
+              <div class="publish__section__field">          
+                <label class="form--label" for="ano">Vida <!--span class="publish--span">(*)</span-->
+                </label>
+                <select class="form__field w-select" data-name="lifespan" id="lifespan" name="lifespan">
+                  <option value="0">No caduca</option>
+                  <option value="10">10 minutos</option>
+                  <option value="60">1 hora</option>
+                  <option value="1440">1 día</option>
+                  <option value="10080">1 semana</option>
+                  <option value="20160">2 semanas</option>
+                  <option value="40320">1 mes</option>
+                </select>
+              </div>              
             </div>
             <div class="publish__section--title nomargin">
               <label class="form--label" for="name">Descripción <!--span class="publish--span">(*)</span-->

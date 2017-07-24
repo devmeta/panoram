@@ -302,6 +302,12 @@ $app->post("/update/{code}", function ($request, $response, $arguments) {
         $body['condition'] = 2;
     }
 
+    if(!empty($body['lifespan']) AND $body['lifespan']){
+        $body['enabled_until'] = new \DateTime('+' . $body['lifespan'] . ' minutes');
+    } else {
+        $body['enabled_until'] = new \DateTime('+20 years');
+    }
+
     $mapper->data($body);
     $this->spot->mapper("App\Panoram")->save($mapper);
 
