@@ -172,12 +172,12 @@ $app->post("/upload/{code}", function ($request, $response, $arguments) {
     $data = [];
 
     // generic upload method per file
-    $udata = bucket_store($request_body,getenv('S3_RESOLUTIONS'),$path);
+    $store = bucket_store($request_body,getenv('S3_RESOLUTIONS'),$path);
 
-    if(empty($udata['error'])) {
-        $data[$i] = upload_database($_FILES['uploads'],$i, $path . '/' . $udata['key'],$mapper);
+    if(empty($store['error'])) {
+        $data[$i] = upload_database($_FILES['uploads'],$i, $path . '/' . $store['key'],$store['started'],$mapper);
     } else {
-        $data[$i]['error'] = $udata['error'];
+        $data[$i]['error'] = $store['error'];
     }
 
     $body['title'] = \update_title($mapper);

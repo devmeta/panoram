@@ -161,13 +161,17 @@ function log2file($path, $data, $mode="a"){
    chmod($path, 0777);
 }
 
-function upload_database($files, $index, $url, $pan) {
+function upload_database($files, $index, $url, $started, $pan) {
 
     global $container;
+
+    $date = new DateTime();
+    $date->setTimestamp($started);
 
     $body = [
         'pan_id' => $pan->id,
         'file_url' => getenv('BUCKET_URL') . '/' . $url,
+        'created' => $date,
         'filesize' => $files['size'][$index]
     ];
 
@@ -182,6 +186,8 @@ function bucket_store($tmp_name,$res,$tag = ''){
     if(!$manager){
         $manager = new ImageManager();
     }
+
+    $started = time();
 
     $jti = Base62::encode(random_bytes(8));
 
@@ -205,6 +211,7 @@ function bucket_store($tmp_name,$res,$tag = ''){
     }
 
     $data['key'] = $key;
+    $data['started'] = $started;
 
     return $data;
 }

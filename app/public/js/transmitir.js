@@ -14,7 +14,7 @@ var canvas = document.getElementById('canvas')
 , markers = []
 , snapInterval = 0
 , snapIndex = 0
-, snapPeriodicity = 5
+, snapPeriodicity = 15
 , posIndex = 0
 , upload_in_progress = 0 
 , transmitir_clock = function(){
@@ -27,8 +27,6 @@ var canvas = document.getElementById('canvas')
 , transmitir_start = function(){
 
     transmitir_clock()
-
-    $('.publish__container').fadeIn(2000)
 
     geo.track(function(position) {
         posIndex++
@@ -43,9 +41,6 @@ var canvas = document.getElementById('canvas')
 
         pos = [latitude,longitude]
     })    
-    
-    transmitir_updateField('agent',navigator.userAgent)
-    map.invalidateSize()    
 }
 , transmitir_ask = function(){
 
@@ -55,7 +50,6 @@ var canvas = document.getElementById('canvas')
             var pan = response.vehicle.data
 
             // condition
-            console.log(pan.condition)
             if(pan.condition == 1){
                 $('.toggleused').hide()
                 $('.togglenew').css({display:'flex'})
@@ -63,28 +57,11 @@ var canvas = document.getElementById('canvas')
                 $('.togglenew div:eq(2), .togglenew div:eq(2) div').addClass('active')
             }
 
-            swal({
-              title: "Título de la transmisión",
-              text: "Elige un título para tu transmisión",
-              inputValue: pan.title,
-              type: "input",
-              showCancelButton: true,
-              closeOnConfirm: false,
-              confirmButtonColor: "#DD6B55",
-              confirmButtonText: "OK",
-              cancelButtonText: "Cancelar",              
-              inputPlaceholder: "La montaña desde la ventana"
-            },
-            function(inputValue){
-                if (inputValue === false) {
-                    return location.href = '/perfil-usuario/panos'
-                }
-
-                transmitir_updateField('title',inputValue, function(){
-                    swal.close()
-                    $('.toogle-toolbox').click()
-                })
-            })
+            $('.snapshot_count').text(pan.files.length)
+            $('#title').val(pan.title)
+            $('#extrainfo').val(pan.extrainfo)
+            $('#extrainfo').val(pan.extrainfo)
+            $('.toolbar-container').fadeIn()
         }
     })    
 }
@@ -142,8 +119,10 @@ var canvas = document.getElementById('canvas')
 
                         if(percentage >= 99){
                             // console.log("Subido!")
+                            var count = $('.snapshot_count').text();
                             $('canvas').fadeOut(1000)
                             $('#snap').removeClass('shake').addClass('shake')
+                            $('.snapshot_count').text(parseInt(count)+1)
                             showTick()  
                         }
                     }
@@ -245,12 +224,11 @@ videoSelect.onchange = getStream;
 
 $(function(){
 
-    $('#periodicity').change(function(){
-        if(name=="periodicity"){
-            var int = parseInt($(this).val())
-            snapPeriodicity = int
-            transmitir_clock()
-        }         
+    $('#interval').change(function(){
+        var int = parseInt($(this).val())
+        snapPeriodicity = int
+        transmitir_updateField('interval',snapPeriodicity)
+        transmitir_clock()
     })
 
     $('.toogle-toolbox').click(function(){
@@ -265,6 +243,16 @@ $(function(){
         if($(e.target).hasClass('toolbar-container')||$(e.target).hasClass('toolbar')){
             hide_toolbox()
         }
+    })
+
+    $('.start').click(function(){
+        transmitir_updateField('title',$('#title').val())
+        transmitir_updateField('extrainfo',$('#extrainfo').val())
+        transmitir_updateField('agent',navigator.userAgent)
+        transmitir_updateField('interval',$('#interval').val())
+        transmitir_updateField('camera',$('#videoSource').val())
+        hide_toolbox()
+        transmitir_start()
     })
 
     $('.publish__form--newornot div').click(function(){

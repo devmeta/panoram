@@ -48,12 +48,29 @@ html, body {
 	margin: auto;
 }
 
+.badge {
+	background-color: #fff;
+	color: #000;
+	border-radius: 10px;
+	position: absolute;
+	padding: 0 6px;
+	top: 0;
+	right: -5px;
+}
+
+.w-inline-block {
+	position: relative;
+}
+
 canvas {
 	z-index: 11;
 }
 
 #map {
-	width: 100%;
+	position: absolute;
+	left:0;
+	bottom: 0;
+	width: 200px;
 	height: 200px;
 }
 
@@ -67,7 +84,6 @@ canvas {
 	bottom:0;
 	padding:0 10px;
 }
-
 
 .bottom {
 	position: absolute;
