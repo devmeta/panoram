@@ -131,11 +131,6 @@ var canvas = document.getElementById('canvas')
 
                         if(percentage >= 99){
                             // console.log("Subido!")
-                            var count = $('.snapshot_count').text();
-                            $('canvas').fadeOut(1000)
-                            $('#snap').removeClass('shake').addClass('shake')
-                            $('.snapshot_count').text(parseInt(count)+1)
-                            showTick()  
                         }
                     }
                 }, false)
@@ -147,6 +142,11 @@ var canvas = document.getElementById('canvas')
         processData: false,  
         success:function(res){
             upload_in_progress = 0
+            var count = $('.snapshot_count').text();
+            $('canvas').fadeOut(1000)
+            $('#snap').removeClass('shake').addClass('shake')
+            $('.snapshot_count').text(parseInt(count)+1)
+            showTick() 
         },
         error: function(jqxhr,textStatus,errorThrown){
             swal("Error","Hubo un error al subir el archivo " + errorThrown,"error")
