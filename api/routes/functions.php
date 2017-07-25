@@ -165,18 +165,21 @@ function upload_database($files, $index, $url, $started, $pan) {
 
     global $container;
 
-    $date = new DateTime();
-    $date->setTimestamp($started);
+    $created = new DateTime();
+    $created->setTimestamp($started);
 
     $body = [
         'pan_id' => $pan->id,
         'file_url' => getenv('BUCKET_URL') . '/' . $url,
-        'created' => $date,
         'filesize' => $files['size'][$index]
     ];
 
     $photo = new File($body);
-    return $container["spot"]->mapper("App\File")->save($photo);
+    $id = $container["spot"]->mapper("App\File")->save($photo);
+    $data = $photo->data(['created' => $created]);
+    $container["spot"]->mapper("App\File")->save($data);
+
+    return (int) $id;
 }
 
 function bucket_store($tmp_name,$res,$tag = ''){

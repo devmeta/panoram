@@ -175,9 +175,9 @@ $app->post("/upload/{code}", function ($request, $response, $arguments) {
     $store = bucket_store($request_body,getenv('S3_RESOLUTIONS'),$path);
 
     if(empty($store['error'])) {
-        $data[$i] = upload_database($_FILES['uploads'],$i, $path . '/' . $store['key'],$store['started'],$mapper);
+        $data = upload_database($_FILES['uploads'],$i, $path . '/' . $store['key'],$store['started'],$mapper);
     } else {
-        $data[$i]['error'] = $store['error'];
+        $data['error'] = $store['error'];
     }
 
     $body['title'] = \update_title($mapper);
