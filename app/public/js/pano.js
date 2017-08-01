@@ -1,4 +1,4 @@
-var vehicle = undefined
+var pano = undefined
 , map
 , marker 
 , markers = []
@@ -24,21 +24,21 @@ var vehicle = undefined
 				return false
 			}
 
-			vehicle = response.vehicle.data
+			pano = response.pano.data
 			, token = get_token()
 			//hideLoader()
 
-			if(!$.isEmptyObject(vehicle)){
+			if(!$.isEmptyObject(pano)){
 
-				$('.car-info-info').html($.templates("#carinfo").render(vehicle))
-				$('.container-profile__detail--financiamiento').html((vehicle.financing?"Sí":"No"))
-				$('.datosvendedir').html($.templates("#datosvendedor").render(vehicle,helpers.users))
-				$('.bestinfo__profile').html($.templates("#profile").render(vehicle,helpers.listing)).promise().done(function(){
-					if(vehicle.lat && vehicle.lng){
+				$('.car-info-info').html($.templates("#carinfo").render(pano))
+				$('.container-profile__detail--financiamiento').html((pano.financing?"Sí":"No"))
+				$('.datosvendedir').html($.templates("#datosvendedor").render(pano,helpers.users))
+				$('.bestinfo__profile').html($.templates("#profile").render(pano,helpers.listing)).promise().done(function(){
+					if(pano.lat && pano.lng){
 						L.mapbox.accessToken = geo.mapbox.accessToken
 						map = L.mapbox.map('map', 'mapbox.streets');
-						marker = L.marker([vehicle.lat,vehicle.lng], {icon:geo.icon({displayName:"",className:'me',colorId:1})}).addTo(map);
-			        	map.setView([vehicle.lat,vehicle.lng], 8)
+						marker = L.marker([pano.lat,pano.lng], {icon:geo.icon({displayName:"",className:'me',colorId:1})}).addTo(map);
+			        	map.setView([pano.lat,pano.lng], 8)
 
 			        } else {
 						L.mapbox.accessToken = geo.mapbox.accessToken
@@ -54,32 +54,32 @@ var vehicle = undefined
 					$('.profile--button').attr('data-ix','register')
 				}
 
-				if($.inArray(vehicle.id,token.owned) > -1){
+				if($.inArray(pano.id,token.owned) > -1){
 					$('#form-message').remove()
 				}
 
-				if(!$.isEmptyObject(vehicle.props.sonido)){
-					$('.container-profile__detail--sonido').html($.templates("#props").render(vehicle.props.sonido))
+				if(!$.isEmptyObject(pano.props.sonido)){
+					$('.container-profile__detail--sonido').html($.templates("#props").render(pano.props.sonido))
 				}
 
-				if(!$.isEmptyObject(vehicle.props.exterior)){
-					$('.container-profile__detail--exterior').html($.templates("#props").render(vehicle.props.exterior))
+				if(!$.isEmptyObject(pano.props.exterior)){
+					$('.container-profile__detail--exterior').html($.templates("#props").render(pano.props.exterior))
 				}
 
-				if(!$.isEmptyObject(vehicle.props.confort)){
-					$('.container-profile__detail--confort').html($.templates("#props").render(vehicle.props.confort))
+				if(!$.isEmptyObject(pano.props.confort)){
+					$('.container-profile__detail--confort').html($.templates("#props").render(pano.props.confort))
 				}
 
-				if(!$.isEmptyObject(vehicle.props.seguridad)){
-					$('.container-profile__detail--seguridad').html($.templates("#props").render(vehicle.props.seguridad))
+				if(!$.isEmptyObject(pano.props.seguridad)){
+					$('.container-profile__detail--seguridad').html($.templates("#props").render(pano.props.seguridad))
 				}
 
-				if(!$.isEmptyObject(vehicle.props.estado)){
-					$('.container-profile__detail--estado').html($.templates("#props").render(vehicle.props.estado))
+				if(!$.isEmptyObject(pano.props.estado)){
+					$('.container-profile__detail--estado').html($.templates("#props").render(pano.props.estado))
 				}
 
-				$('.w-slider-mask').html($.templates("#slide").render(vehicle.files,helpers.listing)).promise().done(function(){
-					$('.bestinfo__slider--nav').html($.templates("#slide-nav").render(vehicle.files,helpers.listing)).promise().done(function(){
+				$('.w-slider-mask').html($.templates("#slide").render(pano.files,helpers.listing)).promise().done(function(){
+					$('.bestinfo__slider--nav').html($.templates("#slide-nav").render(pano.files,helpers.listing)).promise().done(function(){
 						webflow_reset()
 					});
 				});

@@ -56,7 +56,7 @@ var canvas = document.getElementById('canvas')
     $.server({
         url: location.pathname, 
         success: function(response){
-            var pan = response.vehicle.data
+            var pan = response.pano.data
 
             // condition
             if(pan.condition == 1){

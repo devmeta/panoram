@@ -438,13 +438,13 @@ $app->post("/transmitir/{code}", function ($request, $response, $arguments) {
     $fractal = new Manager();
     $fractal->setSerializer(new DataArraySerializer);
     $resource = new Item($mapper, new Panoram);
-    $data['vehicle'] = $fractal->createData($resource)->toArray();
+    $data['pano'] = $fractal->createData($resource)->toArray();
     
-    if( ! empty($data['vehicle']['data']['region']['id'])){
+    if( ! empty($data['pano']['data']['region']['id'])){
 
         // citites
         $mapper = $this->spot->mapper("App\City")
-            ->where(['region_id' => $data['vehicle']['data']['region']['id']])
+            ->where(['region_id' => $data['pano']['data']['region']['id']])
             ->order(["title" => "ASC"]);
 
         /* Serialize the response data. */

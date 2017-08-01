@@ -181,8 +181,8 @@ $app->post("/perfil/panos/eliminar/{code}", function ($request, $response, $argu
 
     rmdir($path);
 
-    $vehicle = $mapper->data(['deleted' => 1]);
-    $this->spot->mapper("App\Panoram")->save($vehicle);
+    $pano = $mapper->data(['deleted' => 1]);
+    $this->spot->mapper("App\Panoram")->save($pano);
 
     $data['status'] = 'ok';
     $data['message'] = 'El vehículo fue eliminado';
@@ -393,7 +393,7 @@ $app->post("/perfil/datos", function ($request, $response, $arguments) {
     $data['messages'] = $fractal->createData($resource)->toArray();
 
     foreach($data['messages']['data'] as $i => $usermessage){
-        $usermessagedata = $this->spot->mapper("App\UserMessage")->query("SELECT COUNT(*) as total FROM users_messages WHERE user_id = {$this->token->decoded->uid} OR recipient_id = {$this->token->decoded->uid} AND users_messages.pan_id = {$usermessage['vehicle']['id']}");
+        $usermessagedata = $this->spot->mapper("App\UserMessage")->query("SELECT COUNT(*) as total FROM users_messages WHERE user_id = {$this->token->decoded->uid} OR recipient_id = {$this->token->decoded->uid} AND users_messages.pan_id = {$usermessage['pano']['id']}");
         $data['messages']['data'][$i]['count'] = $usermessagedata[0]->total;
     }
 
@@ -672,7 +672,7 @@ $app->post("/perfil/mensajes/enviar/{code}", function ($request, $response, $arg
 $app->post("/perfil/{type}/{id}", function ($request, $response, $arguments) {
 
     if (false === $this->token->decoded->uid) {
-        throw new ForbiddenException("Token not allowed to update vehicle.", 403);
+        throw new ForbiddenException("Token not allowed to update pano.", 403);
     }
 
     $uid = $this->token->decoded->uid;
@@ -686,16 +686,16 @@ $app->post("/perfil/{type}/{id}", function ($request, $response, $arguments) {
         'type' => $type
     ];
 
-    $user_vehicle = $this->spot->mapper("App\UserPanoram")->first($body);
+    $user_pano = $this->spot->mapper("App\UserPanoram")->first($body);
 
     if($state){
-        if( ! $user_vehicle){
-            $user_vehicle = new UserPanoram($body);
-            $this->spot->mapper("App\UserPanoram")->save($user_vehicle);
+        if( ! $user_pano){
+            $user_pano = new UserPanoram($body);
+            $this->spot->mapper("App\UserPanoram")->save($user_pano);
         }
     } else {
-        if($user_vehicle){
-            $this->spot->mapper("App\UserPanoram")->delete($user_vehicle);
+        if($user_pano){
+            $this->spot->mapper("App\UserPanoram")->delete($user_pano);
         }
     }
 

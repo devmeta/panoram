@@ -401,7 +401,7 @@ $app->post("/{slug}", function ($request, $response, $arguments) {
     $code = strtok($code,'--');
     $data["status"] = "runtime";
 
-    $vehicle = $this->spot->mapper("App\Panoram")->first([
+    $pano = $this->spot->mapper("App\Panoram")->first([
         "code" => $code,
         "enabled" => 1,
         "deleted" => 0,
@@ -410,11 +410,11 @@ $app->post("/{slug}", function ($request, $response, $arguments) {
         'enabled_until <' => "now()"
     ]);
 
-    if($vehicle){
+    if($pano){
 
         $fractal = new Manager();
         $fractal->setSerializer(new DataArraySerializer);
-        $resource = new Item($vehicle, new Panoram);
+        $resource = new Item($pano, new Panoram);
         $item = $fractal->createData($resource)->toArray();
         
         if( ! $item->active) {
@@ -429,20 +429,20 @@ $app->post("/{slug}", function ($request, $response, $arguments) {
             $data["message"] = "Este vehículo figura como vendido. <a href='/perfil-usuario/panos'>Volver a mis publicaciónes</a>";
         }
 
-        $vehicle->data(['hits' => $vehicle->hits + 1]);
-        $this->spot->mapper("App\Panoram")->save($vehicle);
+        $pano->data(['hits' => $pano->hits + 1]);
+        $this->spot->mapper("App\Panoram")->save($pano);
 
-        if(!empty($vehicle->city_id)){
-            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE (user_id = {$vehicle->user_id} OR city_id = '{$vehicle->city_id})' AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND `condition` = 1 AND enabled_until > now() ORDER BY CASE city_id WHEN {$vehicle->city_id} THEN 0 ELSE 2 END, CASE region_id WHEN {$vehicle->region_id} THEN 1 ELSE 2 END ASC, hits desc");
+        if(!empty($pano->city_id)){
+            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE (user_id = {$pano->user_id} OR city_id = '{$pano->city_id})' AND id <> {$pano->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND `condition` = 1 AND enabled_until > now() ORDER BY CASE city_id WHEN {$pano->city_id} THEN 0 ELSE 2 END, CASE region_id WHEN {$pano->region_id} THEN 1 ELSE 2 END ASC, hits desc");
         } else {
-            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE user_id = {$vehicle->user_id} AND id <> {$vehicle->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND `condition` = 1 AND enabled_until > now() ORDER BY hits desc");
+            $related = $this->spot->mapper("App\Panoram")->query("SELECT panorams.* FROM panorams WHERE user_id = {$pano->user_id} AND id <> {$pano->id} AND enabled = 1 AND deleted = 0 AND paused = 0 AND `condition` = 1 AND enabled_until > now() ORDER BY hits desc");
         }
 
         $fractal = new Manager();
         $fractal->setSerializer(new DataArraySerializer);
         $resource = new Collection($related, new Panoram);
 
-        $data['vehicle'] = $item;
+        $data['pano'] = $item;
         $data['related'] = $fractal->createData($resource)->toArray();
         $data["status"] = "success";
 

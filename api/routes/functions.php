@@ -101,8 +101,8 @@ function sidebar_items($name,$filter){
     $mapper = $container["spot"]->mapper("App\Panoram")
         ->query("SELECT panorams.{$name} FROM panorams WHERE {$where} AND panorams.{$name} IS NOT NULL AND panorams.{$name} > 0 GROUP BY panorams.{$name} ORDER BY panorams.{$name} ASC");
     $items = [];
-    foreach($mapper as $vehicle){
-        $items[] = $vehicle->doors;
+    foreach($mapper as $pano){
+        $items[] = $pano->doors;
     }    
 
     return $items;
@@ -129,10 +129,10 @@ function sidebar_component($name,$filter,$limit=null){
 
     $items = [];
 
-    foreach($mapper as $vehicle){
+    foreach($mapper as $pano){
         $items[] = [
-            'id' => $vehicle->{$name},
-            'title' => strlen($vehicle->title) > 3 ? ucwords(strtolower($vehicle->title)) : $vehicle->title
+            'id' => $pano->{$name},
+            'title' => strlen($pano->title) > 3 ? ucwords(strtolower($pano->title)) : $pano->title
         ];
     }
 
