@@ -435,19 +435,24 @@ function human_timespan_short($time){
     $Y = date('Y', $time);
     $n = date('n', $time);
     $w = date('w', $time);
+    $j = date('j', $time);
+    $y = date('y', $time);
     $wdays = ['dom','lun','mar','mié','jue','vie','sáb'];
+    $months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+    $i = (int) date('n',$time);
+    $m = $months[$i-1];
 
     //if($diff < 86400){
     if($diff < (86400 / 4)){
         $str = date('H:i',$time); 
-    } elseif($diff < 604800){
+    } elseif($diff < 518400){
         $str = $wdays[$w];
     } elseif($Y != date('Y')){
-        $str = date('j/n/y',$time);  
+        $str = "{$j} {$m} {$y}";  
     } elseif($n != date('n')){
-        $str = date('j/n',$time); 
+        $str = "{$j} {$m}"; 
     } else {
-        $str = date('j',$time);  
+        $str = $j;
     }
 
     return $str;
