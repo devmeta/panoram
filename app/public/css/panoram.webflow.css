@@ -1810,8 +1810,16 @@ a.principalbutton.estoycubierto {text-align: center;
   background-color: #000080;
 }
 
-.textred {
+.textblue {
   color: #000080;
+}
+
+.textred {
+  color: #FF0000;
+}
+
+.textmuted {
+  color: #8994a0;
 }
 
 .dashboard--amount {

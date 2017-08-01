@@ -178,7 +178,7 @@ var scroll_count = 0
 			return '<span class="currency">' + price + '</span> '
 		}
 		, decode : function(a){
-			return decodeURIComponent(a)
+			return a&&a.length?decodeURIComponent(a):'<span class="textmuted">Sin título</span>'
 		}
 		, getBucketSize : getBucketSize
 		, isFav : function (id){
