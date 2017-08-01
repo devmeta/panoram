@@ -442,7 +442,6 @@ function human_timespan_short($time){
     $i = (int) date('n',$time);
     $m = $months[$i-1];
 
-    //if($diff < 86400){
     if($diff < (86400 / 4)){
         $str = date('H:i',$time); 
     } elseif($diff < 518400){
