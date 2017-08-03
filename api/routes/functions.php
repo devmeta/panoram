@@ -16,6 +16,47 @@ use Intervention\Image\ImageManager;
 
 $manager = NULL;
 
+
+function update_title($mapper,$initial_title=""){
+
+    $photo = "";
+    $photo_name = "";
+    $description = "";
+    $titlechunk = [];
+    $ctl = 0;
+
+    foreach($mapper->files as $mphoto){
+        if(!$ctl AND $mphoto->file_url){
+            $photo_name = $mphoto->file_url;
+            $ctl = 1;
+        }
+    }
+
+    if(strlen($photo_name)){
+        $photo_name = substr($photo_name, strrpos($photo_name, '/') + 1);
+        $photo_name = strtok($photo_name, ".");
+        $photo = $photo_name;
+    }
+
+    if($mapper->extrainfo){
+        $description = $mapper->extrainfo;
+    }
+
+    if(!empty($initial_title) AND trim($initial_title)!=""){
+        $title = $initial_title;
+    } else {
+        $photo_id = strtok($args['slug'],"--");
+        $parts = explode('--',$mapper->title);
+        unset($parts[0]);
+        $title = implode('--',$parts);
+    }
+
+    $title = str_replace(['---','/'],'-',implode('--',[$photo,$title]));
+    $title = substr($title,0,255);
+
+    return $title;
+}
+
 function auth_endpoints(){
     global $container; 
 

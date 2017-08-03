@@ -62,6 +62,7 @@ $console
         $container["spot"]->mapper("App\UserPanoram")->migrate();
         $container["spot"]->mapper("App\Cron")->migrate();
         $container["spot"]->mapper("App\Email")->migrate();
+        $container["spot"]->mapper("App\Quote")->migrate();
         $container["spot"]->mapper("App\Banner")->migrate();
     })
 ;

@@ -7,15 +7,6 @@ var pano = undefined
 		url: location.pathname,
 		success: function(response){
 
-			$('.auto-loader').delay(500).fadeOut(500,function(){
-				$('#map').hide()
-				$('.auto-container').fadeIn(500, function(){
-					$('#map').show()
-					map.invalidateSize()		
-					webflow_reset()			
-				})
-			})
-
 			if(response.status == 'error'){
 				$("body").addClass('momargin').load("/message", function(){
 					parseMessage(response)
@@ -90,7 +81,19 @@ var pano = undefined
 				} else {
 					$('.relacionados').remove()
 				}
+
+
 			}
+
+			$('.spinner').delay(500).fadeOut(500,function(){
+				$('#map, .auto-loader').hide()
+				$('.auto-container').fadeIn(500, function(){
+					$('#map').show()
+					map.invalidateSize()		
+					webflow_reset()			
+				})
+			})
+
 		}
 	})
 }
@@ -138,4 +141,7 @@ $(document).on('submit','#form-message', function(){
 	return false
 }) 
 
-$(auto)
+$(function(){
+	showLoader()
+	auto()
+})

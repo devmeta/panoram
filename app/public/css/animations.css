@@ -1,3 +1,238 @@
+.spinner{
+  display: none;
+  width:128px;
+  margin-left:-64px;
+}
+
+.spinner-message{
+  position:absolute;
+  left:50%;
+  margin-top:50%;
+  width:300px;
+  font-size:127%;
+  line-height:182%;
+  margin-left:-150px;
+  display:none;
+  text-align:center;
+  background-color:black;
+  opacity:.5
+}
+
+.spinner-container{
+  pointer-events:none;
+  position:fixed;
+  width:100%;
+  z-index: 100;
+  padding-bottom:100%;
+  top:50%;
+  left:50%;
+  margin-top:-50%;
+  margin-left:-50%;
+  animation:spinner-linspin 1568.23529647ms linear infinite;
+  -webkit-animation:spinner-linspin 1568.23529647ms linear infinite
+}
+
+.spinner-rotator{
+  position:absolute;
+  width:100%;
+  height:100%;
+  -webkit-animation:spinner-easespin 5332ms cubic-bezier(0.4,0.0,0.2,1) infinite both;
+  animation:spinner-easespin 5332ms cubic-bezier(0.4,0.0,0.2,1) infinite both
+}
+
+.spinner-left{
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  overflow:hidden
+}
+
+.spinner-right{
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  overflow:hidden
+}
+
+.spinner-left{
+  right:49%
+}
+
+.spinner-right{
+  left:49%
+}
+
+.spinner-circle{
+  box-sizing:border-box;
+  position:absolute;
+  width:200%;
+  height:100%;
+  border-style:solid;
+  /*border-color:#f24052 #f24052 transparent;*/
+  border-color:#20206b #20206b transparent;
+  border-radius:50%;
+  border-width:6px
+}
+
+.big-mode .spinner-circle{
+  border-width:12px
+}
+
+.spinner-left .spinner-circle{
+  border-right-color:transparent;
+  -webkit-animation:spinner-left-spin 1333ms cubic-bezier(0.4,0.0,0.2,1) infinite both;
+  animation:spinner-left-spin 1333ms cubic-bezier(0.4,0.0,0.2,1) infinite both
+}
+
+.spinner-right .spinner-circle{
+  left:-100%;
+  border-left-color:transparent;
+  -webkit-animation:right-spin 1333ms cubic-bezier(0.4,0.0,0.2,1) infinite both;
+  animation:right-spin 1333ms cubic-bezier(0.4,0.0,0.2,1) infinite both
+}
+
+@-webkit-keyframes spinner-linspin{
+  to{
+    -webkit-transform:rotate(360deg)
+  }
+}
+
+@keyframes spinner-linspin{
+  to{
+    transform:rotate(360deg)
+  }
+}
+
+@-webkit-keyframes spinner-easespin{
+  12.5%{
+    -webkit-transform:rotate(135deg)
+  }
+  25%{
+    -webkit-transform:rotate(270deg)
+  }
+  37.5%{
+    -webkit-transform:rotate(405deg)
+  }
+  50%{
+    -webkit-transform:rotate(540deg)
+  }
+  62.5%{
+    -webkit-transform:rotate(675deg)
+  }
+  75%{
+    -webkit-transform:rotate(810deg)
+  }
+  87.5%{
+    -webkit-transform:rotate(945deg)
+  }
+  to{
+    -webkit-transform:rotate(1080deg)
+  }
+}
+
+@keyframes spinner-easespin{
+  12.5%{
+    transform:rotate(135deg)
+  }
+  25%{
+    transform:rotate(270deg)
+  }
+  37.5%{
+    transform:rotate(405deg)
+  }
+  50%{
+    transform:rotate(540deg)
+  }
+  62.5%{
+    transform:rotate(675deg)
+  }
+  75%{
+    transform:rotate(810deg)
+  }
+  87.5%{
+    transform:rotate(945deg)
+  }
+  to{
+    transform:rotate(1080deg)
+  }
+}
+
+@-webkit-keyframes spinner-left-spin{
+  0%{
+    -webkit-transform:rotate(130deg)
+  }
+  50%{
+    -webkit-transform:rotate(-5deg)
+  }
+  to{
+    -webkit-transform:rotate(130deg)
+  }
+}
+
+@keyframes spinner-left-spin{
+  0%{
+    transform:rotate(130deg)
+  }
+  50%{
+    transform:rotate(-5deg)
+  }
+  to{
+    transform:rotate(130deg)
+  }
+}
+
+@-webkit-keyframes right-spin{
+  0%{
+    -webkit-transform:rotate(-130deg)
+  }
+  50%{
+    -webkit-transform:rotate(5deg)
+  }
+  to{
+    -webkit-transform:rotate(-130deg)
+  }
+}
+
+@keyframes right-spin{
+  0%{
+    transform:rotate(-130deg)
+  }
+  50%{
+    transform:rotate(5deg)
+  }
+  to{
+    transform:rotate(-130deg)
+  }
+}
+
+.normal-css-loaded{
+  display:none
+}
+
+.spinner-container{
+  width:50px;
+  padding-bottom:50px;
+  margin-top:-25px;
+  margin-left:-25px
+}
+
+.big-mode .watch-later-icon .spinner-container{
+  width:35px;
+  padding-bottom:35px;
+  margin-top:-17.5px;
+  margin-left:-17.5px
+}
+
+.watch-later-icon .spinner-circle{
+  border-width:3px
+}
+
+.big-mode .watch-later-icon .spinner-circle{
+  border-width:5px
+}
+
 .anim-asset {
     width: 75px;
     height: 75px;

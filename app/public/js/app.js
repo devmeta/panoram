@@ -343,11 +343,11 @@ var scroll_count = 0
 	}
 }
 , showLoader = function () {
-	$('#loader').fadeIn(250)
+	$('.spinner').fadeIn(250)
 }
 , hideLoader = function () {
-	$('#loader').fadeOut(500, function (){
-		$('.anim-asset').hide()
+	$('.spinner').fadeOut(500, function (){
+		$('.spinner').hide()
 	})	
 }
 , showTick = function () {

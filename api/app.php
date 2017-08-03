@@ -42,5 +42,6 @@ require __DIR__ . "/routes/panos.php";
 require __DIR__ . "/routes/perfil.php";
 require __DIR__ . "/routes/transmitir.php";
 require __DIR__ . "/routes/email.php";
+require __DIR__ . "/routes/quotes.php";
 
 $app->run();
