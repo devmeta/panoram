@@ -117,11 +117,11 @@ img {
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
   align-self: stretch;
-  border: 1px solid #1189e2;
+  border: 2px solid #1189e2;
   border-radius: 6px;
   background-color: #ffffff;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, .1);
-  color: #0462a9;
+  color: #1189e2;
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
