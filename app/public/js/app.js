@@ -564,7 +564,7 @@ var scroll_count = 0
 	if(pos==0) {
 		scroll_count = 0
 		ads_inserted = 0
-		sidebar()
+		//sidebar()
 	} 
 
 	$('.noinfo').hide()
