@@ -145,3 +145,14 @@ $(function(){
 	showLoader()
 	auto()
 })
+
+$(document).on("click",".pano-download", function(e){
+	e.preventDefault()
+	$.post( endpoint + '/descargar/' + $(this).attr('id'), function(response){
+		if(response.status=='success'){
+			location.href = response.message
+			//$.get(response.message)
+		}
+	})
+	return false;
+})

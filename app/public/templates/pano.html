@@ -100,14 +100,19 @@
       <div class="profile__alertas--text">Recibir alertas por email sobre autos similares</div>
     </div-->
     <div class="profile__etiquetas">
-      <h5 class="etiquetas--h">etiquetas</h5>
+      <!--h5 class="etiquetas--h">etiquetas</h5>
       <div class="etiquetas__etiquetas">
       [[for props.etiquetas]]
         <a class="etiquetas--tag w-inline-block">
           <div>[[>#data]]</div>
         </a>
       [[/for]]
-      </div>
+      </div-->
+      <div class="profile__share">
+        <a href="#" target="_blank" class="zip-share pano-download" id="[[:code]]">
+          <img src="../images/zip-flat.png" /> Descargar
+        </a>
+      </div>      
     </div>
     [[if ~isOwned(id) == false]]
     <div class="profile--favorite" data-ix="favorite">

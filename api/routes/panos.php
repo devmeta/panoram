@@ -395,6 +395,53 @@ $app->post("/panos/sidebar", function ($request, $response, $arguments) {
 });
 
 
+$app->post("/descargar/{slug}", function ($request, $response, $arguments) {
+        
+    $code = $request->getAttribute('slug');
+    $path = getenv('BUCKET_PATH');
+    $file = $path . '/downloads/' . $code . '.zip';
+
+    if(!file_exists($file)){
+        $dest = $path . '/cams/' . $code;
+        exec("zip -r -j $file $dest");
+    } else {
+/*
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        header("Cache-Control: public"); 
+        header("Content-Description: File Transfer"); 
+        header("Content-Type: application/octet-stream"); 
+        header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+        header("Content-Transfer-Encoding: binary");
+         
+        ob_clean();
+        flush();
+        readfile($file);
+        exit;        
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment;filename="'.basename($file).'"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($file));
+        readfile($file);
+        exit;
+
+*/
+    }
+
+    $pubfile = getenv('BUCKET_URL') . '/downloads/' . $code . '.zip';
+    $data['status'] = "success";
+    $data['message'] = $pubfile;
+
+    return $response->withStatus(200)
+        ->withHeader("Content-Type", "application/json")
+        ->write(json_encode($data));      
+});
+
+
 $app->post("/{slug}", function ($request, $response, $arguments) {
 
     $code = $request->getAttribute('slug');

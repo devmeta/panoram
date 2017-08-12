@@ -66,6 +66,12 @@ img {
   align-items: center;
 }
 
+.w-button {
+  font-weight: 700;
+  border-radius: 6px;
+  background-color: #1189e2;
+}
+
 .header-bottom {
   display: -webkit-box;
   display: -webkit-flex;
@@ -950,6 +956,21 @@ a.principalbutton.estoycubierto {text-align: center;
   cursor: pointer;
   font-size: 12px;
 }
+
+.profile__share .zip-share {width: 99%;
+  text-decoration: none;
+  border: 1px solid #3b5998;
+  color:#3b5998;
+  height: 34px;
+  float: left;
+  padding: 6px;
+  margin-left: 1%;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
 .profile__share .email {
   text-decoration: none;
   width: 49%;
@@ -1417,6 +1438,13 @@ a.principalbutton.estoycubierto {text-align: center;
 .form__buttons {
   margin-top: 20px;
   float: right;
+}
+
+.form__buttons--center {
+  margin-top: 20px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
 }
 
 .register.modalwrapper {

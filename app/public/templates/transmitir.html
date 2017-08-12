@@ -8,8 +8,7 @@
   <meta property="og:image" itemprop="image primaryImageOfPage" content="https://panoram.com/images/IMG_3505bfree.jpg" />
   <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
   <script>
-    var code = '{{ code }}'
-    , title = '{{ title }}';
+    var code = '{{ code }}', title = '{{ title }}';
   </script>
 {% endblock %}
 
@@ -17,7 +16,7 @@
 
 <div class="toolbox-top">
     <a class="w-inline-block" href="/perfil-usuario/panos">
-      <img height="60" class="" src="/images/34865-200-white.png" title="Volver al listado">
+      <img height="60" class="" src="/images/34865-200-white.png" title="Finalizar transmisión">
     </a>
     <a class="w-inline-block toogle-toolbox" href="#" title="Ver opciones">
       <img height="40" class="" src="/images/hamburger-512-w.png">
@@ -57,6 +56,24 @@
             </div>
           </div>
         </div>
+        <div class="publish--p">Cada cuanto debe tomar una captura y con qué cámara?</div>
+        <div class="w-form2">
+          <div class="publish__section">
+            <div class="publish__twoinone">
+              <div class="publish__section__field">
+                <label class="form--label" for="ano">Cada cuántos segs? <!--span class="publish--span">(*)</span-->
+                </label>
+                <input class="form__field w-input" type="number" data-name="interval" maxlength="5" name="interval" id="interval" max="9999" min="15" placeholder="min:15, max:9999" value="30">
+              </div>
+              <div class="publish__section__field">
+                <label class="form--label" for="name">SELECCIONA CÁMARA <!--span class="publish--span">(*)</span-->
+                </label>
+                <select class="form__field w-select" data-name="videoSource" id="videoSource" name="videoSource">
+                </select>
+              </div>              
+            </div>
+          </div>
+        </div>        
         <div class="publish--p">Elegí un título, descripción y caducación.</div>
         <div class="w-form2">
           <div class="publish__section">
@@ -89,26 +106,11 @@
               </div>
             </div>              
           </div>
-        </div>        
-        <div class="publish--p">Cada cuanto debe tomar una captura y con qué cámara?</div>
-        <div class="w-form2">
-          <div class="publish__section">
-            <div class="publish__twoinone">
-              <div class="publish__section__field">
-                <label class="form--label" for="ano">Cada cuántos segs? <!--span class="publish--span">(*)</span-->
-                </label>
-                <input class="form__field w-input" type="number" data-name="interval" maxlength="5" name="interval" id="interval" max="9999" min="15" placeholder="min:15, max:9999" value="15">
-              </div>
-              <div class="publish__section__field">
-                <label class="form--label" for="name">SELECCIONA CÁMARA <!--span class="publish--span">(*)</span-->
-                </label>
-                <select class="form__field w-select" data-name="videoSource" id="videoSource" name="videoSource">
-                </select>
-              </div>              
-            </div>
-          </div>
           <div class="publish--p"><span class="publish--span">Tip</span> Si ponés el teléfono en modo horizontal se apreciará mejor la visualización.</div>                  
-        </div><a class="active inactivebutton w-button start" href="#">Continuar</a>
+        </div>        
+        <div class="form__buttons--center"> 
+        <a class="active w-button start" href="#">Comenzar a transmitir</a>
+        </div>
       </div>
       <!-- END config panel -->
     </div>
@@ -116,10 +118,11 @@
 </div>
 
 <div class="videoContainer">
-  <div id='map'></div>
   <canvas id="canvas" hidden></canvas>
   <video id="video" autoplay></video>
 </div>
+
+<div id='map'></div>
 
 {% endblock %}
 
