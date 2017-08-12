@@ -70,8 +70,8 @@
   width:200%;
   height:100%;
   border-style:solid;
-  /*border-color:#f24052 #f24052 transparent;*/
-  border-color:#20206b #20206b transparent;
+  border-color:#1189e2 #1189e2 transparent;
+  box-shadow: 0 0 5px #fff;
   border-radius:50%;
   border-width:6px
 }
