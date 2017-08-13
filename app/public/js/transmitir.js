@@ -43,7 +43,7 @@ var canvas = document.getElementById('canvas')
         , longitude = position.coords.longitude
 
         marker.setLatLng([latitude, longitude]).update()
-        map.setView([latitude,longitude], 15)
+        map.setView([latitude,longitude], 3)
 
         transmitir_updateField('lat',latitude)
         transmitir_updateField('lng',longitude)

@@ -30,7 +30,7 @@ var pano = undefined
 						L.mapbox.accessToken = geo.mapbox.accessToken
 						map = L.mapbox.map('map', 'mapbox.streets');
 						marker = L.marker([pano.lat,pano.lng], {icon:geo.icon({displayName:"",className:'me',colorId:1})}).addTo(map);
-			        	map.setView([pano.lat,pano.lng], 8)
+			        	map.setView([pano.lat,pano.lng], 3)
 
 			        } else {
 						L.mapbox.accessToken = geo.mapbox.accessToken

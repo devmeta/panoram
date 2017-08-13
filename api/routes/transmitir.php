@@ -48,13 +48,8 @@ $app->post("/upload/remove/{id}", function ($request, $response, $arguments) {
     $fn = substr($photo->photo_url, strrpos($photo->photo_url, '/') + 1);
     $path = getenv('BUCKET_PATH') . '/panorams/' . $this->token->decoded->uid . '/' . $pan->code . '/';
 
-    unlink(__DIR__ . '/../bucket/' . $fn);
-
-    $resolutions = explode(',',getenv('S3_RESOLUTIONS'));
-
-    foreach($resolutions as $res){
-        $parts = explode('x',$res);
-        unlink(__DIR__ . '/../bucket/' . $parts[0] . 'x' . $parts[1] . $fn);
+    if(file_exists($path)){
+        unlink($path);
     }
 
     $this->spot->mapper("App\File")->delete($photo);
