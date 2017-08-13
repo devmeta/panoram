@@ -238,13 +238,7 @@ function bucket_store($tmp_name,$index,$res,$tag = ''){
 
     $started = time();
     $prefix = $index . '-';
-
-    $jti = $prefix . Base62::encode(random_bytes(8));
-
-    while(is_file(getenv('BUCKET_PATH') . '/users/' . $jti . '.' . getenv('S3_EXTENSION')) ){
-        $jti = Base62::encode(random_bytes(8));
-    }
-
+    $jti = $prefix . date('ymdHis',$started);
     $key = $jti . '.' . getenv('S3_EXTENSION');
     $resolutions = explode(',',$res);
     $path = getenv('BUCKET_PATH') . '/' . $tag . '/';
