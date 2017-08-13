@@ -401,38 +401,19 @@ $app->post("/descargar/{slug}", function ($request, $response, $arguments) {
     $path = getenv('BUCKET_PATH');
     $file = $path . '/downloads/' . $code . '.zip';
 
-    if(!file_exists($file)){
+    if( ! file_exists($file)){
         $dest = $path . '/panorams/' . $code;
-        // --exclude=*.svn* 
-        var_dump("zip -r -j -x '800x600*' $file $dest");
-        exit;
-        exec("zip -r -j -x '800x600*' $file $dest");
-    } else {
-/*
-        header("Pragma: public");
-        header("Expires: 0");
-        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-        header("Cache-Control: public"); 
-        header("Content-Description: File Transfer"); 
-        header("Content-Type: application/octet-stream"); 
-        header('Content-Disposition: attachment; filename="' . basename($file) . '"');
-        header("Content-Transfer-Encoding: binary");
-         
-        ob_clean();
-        flush();
-        readfile($file);
-        exit;        
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment;filename="'.basename($file).'"');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($file));
-        readfile($file);
-        exit;
+        $resolutions = explode(',',getenv('S3_RESOLUTIONS'));
+        $cmd = "zip -r ";
 
-*/
+        foreach($resolutions as $res){
+            $parts = explode('x',$res);
+            $cmd .= ' --exclude=*' . $parts[0] . 'x' . $parts[1] . '*';
+        }
+
+        $cmd .= " -j ";
+
+        exec("$cmd $file $dest");
     }
 
     $pubfile = getenv('BUCKET_URL') . '/downloads/' . $code . '.zip';

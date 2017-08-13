@@ -237,7 +237,7 @@ function bucket_store($tmp_name,$index,$res,$tag = ''){
     }
 
     $started = time();
-    $prefix = $index . '---';
+    $prefix = $index . '-';
 
     $jti = $prefix . Base62::encode(random_bytes(8));
 
