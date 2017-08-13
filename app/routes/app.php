@@ -67,7 +67,7 @@ $app->get('/{slug}', function ($request, $response, $args) {
     $host = $request->getUri()->getScheme().'://'.$request->getUri()->getHost();
     $photo = "";
 
-    if($file_name) $photo = getenv('BUCKET_URL') . '/cams/' . $id . '/' . $file_name . ".jpg";
+    if($file_name) $photo = getenv('BUCKET_URL') . '/panorams/' . $id . '/' . $file_name . ".jpg";
 
     return $this->view->render($response, 'pano.html',[
         'shorturl' => $host.'/'.strtok($args['slug'],"---"),

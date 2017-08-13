@@ -202,28 +202,33 @@ function log2file($path, $data, $mode="a"){
    chmod($path, 0777);
 }
 
-function upload_database($files, $index, $url, $started, $pan) {
+function upload_database($files, $index, $url, $store, $pan) {
 
     global $container;
 
     $created = new DateTime();
-    $created->setTimestamp($started);
+    $created->setTimestamp($store['started']);
 
     $body = [
         'pan_id' => $pan->id,
         'file_url' => getenv('BUCKET_URL') . '/' . $url,
-        'filesize' => $files['size'][$index]
+        'position' => $index,
+        'filesize' => $store['filesize']
     ];
 
     $photo = new File($body);
     $id = $container["spot"]->mapper("App\File")->save($photo);
-    $data = $photo->data(['created' => $created]);
+    $data = $photo->data([
+        'created' => $created,
+
+    ]);
+
     $container["spot"]->mapper("App\File")->save($data);
 
     return (int) $id;
 }
 
-function bucket_store($tmp_name,$res,$tag = ''){
+function bucket_store($tmp_name,$index,$res,$tag = ''){
 
     global $container, $manager;
 
@@ -232,8 +237,9 @@ function bucket_store($tmp_name,$res,$tag = ''){
     }
 
     $started = time();
+    $prefix = $index . '---';
 
-    $jti = Base62::encode(random_bytes(8));
+    $jti = $prefix . Base62::encode(random_bytes(8));
 
     while(is_file(getenv('BUCKET_PATH') . '/users/' . $jti . '.' . getenv('S3_EXTENSION')) ){
         $jti = Base62::encode(random_bytes(8));
@@ -242,6 +248,7 @@ function bucket_store($tmp_name,$res,$tag = ''){
     $key = $jti . '.' . getenv('S3_EXTENSION');
     $resolutions = explode(',',$res);
     $path = getenv('BUCKET_PATH') . '/' . $tag . '/';
+
     $orig = $manager->make($tmp_name)
         ->orientate()
         ->save($path . $key, (int) getenv('S3_QUALITY'));
@@ -256,6 +263,7 @@ function bucket_store($tmp_name,$res,$tag = ''){
 
     $data['key'] = $key;
     $data['started'] = $started;
+    $data['filesize'] = filesize($path . $key);
 
     return $data;
 }

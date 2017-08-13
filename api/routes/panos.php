@@ -396,14 +396,17 @@ $app->post("/panos/sidebar", function ($request, $response, $arguments) {
 
 
 $app->post("/descargar/{slug}", function ($request, $response, $arguments) {
-        
+    
     $code = $request->getAttribute('slug');
     $path = getenv('BUCKET_PATH');
     $file = $path . '/downloads/' . $code . '.zip';
 
     if(!file_exists($file)){
-        $dest = $path . '/cams/' . $code;
-        exec("zip -r -j $file $dest");
+        $dest = $path . '/panorams/' . $code;
+        // --exclude=*.svn* 
+        var_dump("zip -r -j -x '800x600*' $file $dest");
+        exit;
+        exec("zip -r -j -x '800x600*' $file $dest");
     } else {
 /*
         header("Pragma: public");

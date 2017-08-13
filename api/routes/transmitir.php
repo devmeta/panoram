@@ -46,7 +46,7 @@ $app->post("/upload/remove/{id}", function ($request, $response, $arguments) {
     }
 
     $fn = substr($photo->photo_url, strrpos($photo->photo_url, '/') + 1);
-    $path = getenv('BUCKET_PATH') . '/cams/' . $this->token->decoded->uid . '/' . $pan->code . '/';
+    $path = getenv('BUCKET_PATH') . '/panorams/' . $this->token->decoded->uid . '/' . $pan->code . '/';
 
     unlink(__DIR__ . '/../bucket/' . $fn);
 
@@ -116,7 +116,7 @@ $app->post("/upload/{code}", function ($request, $response, $arguments) {
     }
 
     $request_body = file_get_contents('php://input');
-    $path = 'cams/' . $request->getAttribute('code');
+    $path = 'panorams/' . $request->getAttribute('code');
     $mapper = $this->spot->mapper("App\Panoram")->first([
         "code" => $request->getAttribute('code'),
         "user_id" => $this->token->decoded->uid
@@ -128,14 +128,18 @@ $app->post("/upload/{code}", function ($request, $response, $arguments) {
 
     $valid_exts = explode(',',getenv('S3_EXTENSIONS')); // valid extensions
     $max_size = getenv('APP_IMAGE_UPLOAD_MAX') * 1024; // max file size in bytes
+    // calculate index
+    $count = $this->spot->mapper("App\File")->query("SELECT COUNT(*) as count FROM files WHERE pan_id = " . $mapper->id);
+    $index = sprintf("%'.04d", $count[0]->count + 1);
+
     $keys = [];
     $data = [];
 
     // generic upload method per file
-    $store = bucket_store($request_body,getenv('S3_RESOLUTIONS'),$path);
+    $store = bucket_store($request_body,$index,getenv('S3_RESOLUTIONS'),$path);
 
     if(empty($store['error'])) {
-        $data = upload_database($_FILES['uploads'],$i, $path . '/' . $store['key'],$store['started'],$mapper);
+        $data = upload_database($_FILES['uploads'],$index,$path . '/' . $store['key'],$store,$mapper);
     } else {
         $data['error'] = $store['error'];
     }
@@ -292,7 +296,7 @@ $app->post("/transmitir/inicio", function ($request, $response, $arguments) {
     }
 
     $oldmask = umask(0);
-    mkdir(getenv('BUCKET_PATH') . '/cams/' . $code, 0777);
+    mkdir(getenv('BUCKET_PATH') . '/panorams/' . $code, 0777);
     umask($oldmask);
 
     $body = [

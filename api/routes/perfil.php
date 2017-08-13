@@ -162,7 +162,7 @@ $app->post("/perfil/panos/eliminar/{code}", function ($request, $response, $argu
         "pan_id" => $mapper->id
     ]);
 
-    $path = getenv('BUCKET_PATH') . '/cams/' . $mapper->code . '/';
+    $path = getenv('BUCKET_PATH') . '/panorams/' . $mapper->code . '/';
 
     foreach($photos as $photo) {
         $fn = substr($photo->file_url, strrpos($photo->file_url, '/') + 1);
