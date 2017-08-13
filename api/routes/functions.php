@@ -220,7 +220,6 @@ function upload_database($files, $index, $url, $store, $pan) {
     $id = $container["spot"]->mapper("App\File")->save($photo);
     $data = $photo->data([
         'created' => $created,
-
     ]);
 
     $container["spot"]->mapper("App\File")->save($data);
@@ -228,7 +227,7 @@ function upload_database($files, $index, $url, $store, $pan) {
     return (int) $id;
 }
 
-function bucket_store($tmp_name,$index,$res,$tag = ''){
+function bucket_store($tmp_name,$res,$tag = ''){
 
     global $container, $manager;
 
@@ -237,8 +236,7 @@ function bucket_store($tmp_name,$index,$res,$tag = ''){
     }
 
     $started = time();
-    $prefix = $index . '-';
-    $jti = $prefix . date('ymdHis',$started);
+    $jti = date('ymdHis',$started);
     $key = $jti . '.' . getenv('S3_EXTENSION');
     $resolutions = explode(',',$res);
     $path = getenv('BUCKET_PATH') . '/' . $tag . '/';

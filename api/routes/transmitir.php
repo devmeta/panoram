@@ -131,7 +131,7 @@ $app->post("/upload/{code}", function ($request, $response, $arguments) {
     $data = [];
 
     // generic upload method per file
-    $store = bucket_store($request_body,$index,getenv('S3_RESOLUTIONS'),$path);
+    $store = bucket_store($request_body,getenv('S3_RESOLUTIONS'),$path);
 
     if(empty($store['error'])) {
         $data = upload_database($_FILES['uploads'],$index,$path . '/' . $store['key'],$store,$mapper);
