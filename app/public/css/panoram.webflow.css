@@ -66,6 +66,14 @@ img {
   align-items: center;
 }
 
+.showifloggedin {
+  display: none;
+}
+
+.w-form2 {
+  width: 100%;
+}
+
 .w-button {
   font-weight: 700;
   border-radius: 6px;
@@ -258,6 +266,10 @@ a.principalbutton.estoycubierto {text-align: center;
 
 ._w-form {
   margin-bottom: 0px;
+}
+
+.w-right {
+  float: right;
 }
 
 .w-alert {
@@ -845,7 +857,7 @@ a.principalbutton.estoycubierto {text-align: center;
 
 .bestinfo__slider {
   width: 60%;
-  background: #000;
+  /*background: #000;*/
 }
 
 .bestinfo__slider--nav {

@@ -1,13 +1,17 @@
 {% extends "layouts/default.html" %}
 
 {% block head %}
+
   <title>{{app_title}} {{title}}</title>
+
   <meta name="description" content="{{title}}">
   <meta property="og:type" content="article" />
   <meta property="og:title" content="{{title}}" />
   <meta property="og:description" content="{{description}}" />
   <meta property="og:image" itemprop="image primaryImageOfPage" content="{{photo}}" />
+
   <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+
   <script id="carinfo" type="text/x-jsrender">
   [[if extrainfo]]
     <div class="container-profile justone">
@@ -36,24 +40,21 @@
   </script>
 
   <script id="datosvendedor" type="text/x-jsrender">
-      <div class="modalwrapper__container textoleft"><img class="close" data-ix="close" src="/images/cancel.svg">
-      <h3>Datos del vendedor</h3>
+    <div class="container-profile justone">
+      <div class="container-profile__title">
+        <h5 class="container-profile--h">COMENTARIOS</h5>
+      </div>
+      <div class="container-profile__detail">
       [[if ~isValidated()]]
-      <ul class="w-list-unstyled">
-        <li><strong>Nombre:</strong> [[:user.title]]</li>
-        <li><strong>Email:</strong> [[:user.email]]</li>
-        <li><strong>Teléfono:</strong> <a href="tel:[[:tel]]">[[:tel]]</a></li>
-        <li><strong>Horario de contacto:</strong> [[:schedule]]</li>
-      </ul>
       <div class="w-form2">
         <form class="w-clearfix" id="form-message">
           <input type="hidden" name="recipient_id" value="[[:user.id]]">
-          <label class="form--label" for="name-2">Dejale un mensaje:</label>
-          <textarea class="form-area w-input" maxlength="5000" name="message" placeholder="Escribí tu mensaje..." required></textarea>
+          <label class="form--label" for="name-2">Escribí tu comentario:</label>
+          <textarea class="form-area w-input" maxlength="5000" name="message" placeholder="Escribí tu comentario..." required></textarea>
           <input class="principalbutton totheright w-button" data-wait="Enviando..." type="submit" value="Enviar">
         </form>
         <div class="form__succes w-form-done">
-          <div>Listo. Chequea tu casilla de email o los mensajes dentro de tu perfil para leer la respuesta del vendedor.</div>
+          <div>Tu comentario ha sido enviado</div>
         </div>
         <div class="form__error w-form-fail">
           <div>Ups, algo salió mal. Por favor volvé a intentarlo.</div>
@@ -64,6 +65,7 @@
           <div>Por favor valida tu email para ver la información del contacto. Para esto, localizá el email que te hemos enviado y hacé click en el enlace.</div>
       </div>
       [[/if]]
+      </div>
     </div>
   </script>
 
@@ -97,7 +99,7 @@
         <div class="buttontoggle[[if ~isAlert(id)]] checked[[/if]][[if ~isGuest()]] disabled[[/if]]"></div>
         <div class="buttontext-off[[if ~isAlert(id)]] checked[[/if]][[if ~isGuest()]] disabled[[/if]]">off</div>
       </div>
-      <div class="profile__alertas--text">Recibir alertas por email sobre autos similares</div>
+      <div class="profile__alertas--text">Seguir a [[:user.title]]</div>
     </div-->
     <div class="profile__etiquetas">
       <!--h5 class="etiquetas--h">etiquetas</h5>
@@ -108,9 +110,9 @@
         </a>
       [[/for]]
       </div-->
-      <div class="profile__share">
-        <a href="#" target="_blank" class="zip-share pano-download" id="[[:code]]">
-          <img src="../images/zip-flat.png" /> Descargar
+      <div class="profile__share showifloggedin">
+        <a href="#" target="_blank" class="zip-share" id="[[:code]]">
+          <!--img src="../images/zip-flat.png" /--> Descargar carpeta
         </a>
       </div>      
     </div>
@@ -195,8 +197,6 @@
 
 {% block body %}
   
-  <div class="auto-loader"></div>
-
   <div class="auto-container">
     <!--div class="advice">
       <div>¿Cuánto pagas por el seguro de tu auto? Obtené la mejor cobertura hasta un 30% más barato.</div><a class="advice__button w-button" href="/asegura-con-nosotros">Conoce más</a>
@@ -214,14 +214,16 @@
           </div>
           <div class="w-slider-nav"></div>
         </div>
-        <div class="bestinfo__slider--nav w-hidden-important">
-        </div>
+        <!--div class="w-control-nav">
+          <div class="w-control-button play-pause"><img src="/images/159142-200r.png"></div>
+          <div class="w-control-button cinema-mode w-right"><img src="/images/rounded-rectangle-toolw.png"></div>
+        </div-->
+        <div class="bestinfo__slider--nav w-hidden-important"></div>
       </div>
-      <div class="bestinfo__profile">
-      </div>
+      <div class="bestinfo__profile"></div>
     </div>
-    <div class="car-info-info">
-    </div>
+    <div class="car-info-info"></div>
+
     <!--div class="car-info-boxes">
       <div class="container-profile">
         <div class="container-profile__title"><img class="container-profile--img" src="/images/volume.svg">
@@ -271,7 +273,8 @@
         </div>
       </div>
     </div-->
-
+    <div class="car-info-info comentarios showifloggedin">
+    </div>
     <div class="relacionados">
       <h5 class="relacionados--h">Publicaciones relacionadas</h5>
     </div>

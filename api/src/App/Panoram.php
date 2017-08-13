@@ -105,6 +105,7 @@ class Panoram extends \Spot\Entity
                 'photo_url' => $photo->file_url,
                 'position' => $photo->position,
                 'created' => $created_date,
+                'created_readable' => date('Y m d H:i:s',$created_date),
                 'filesize'  => $photo->filesize
             ];
         }

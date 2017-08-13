@@ -693,15 +693,35 @@ textarea.w-select {
   left: 0;
   /*top: auto;
   bottom: 0;*/
-  margin: auto;
-  padding-top: 10px;
-  padding-right: 5px;
-  padding-left: 5px;
-  /* height: 40px;*/
+  margin: 0;
+  white-space: nowrap;
+  background-color: #000;
+  height: 14px;
   text-align: center;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   tap-highlight-color: rgba(0, 0, 0, 0);
 }
+.w-control-nav {
+  display: inline-block;
+  background: #000;
+  width: 100%;  
+  margin: auto;
+  padding-top: 25px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  /* height: 40px;*/
+  text-align: left;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.w-control-button {
+  float: left;
+}
+.w-control-button img{
+  height: 30px;
+}
+
 .w-slider-nav.w-round > div {
   border-radius: 100%;
 }
@@ -724,18 +744,17 @@ textarea.w-select {
 .w-slider-nav-invert > div.w-active {
   background-color: #222;
 }
+/*---*/
 .w-slider-dot {
-  position: relative;
   display: inline-block;
-  width: 1em;
-  height: 1em;
-  background-color: rgba(255, 255, 255, 0.4);
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.15);
   cursor: pointer;
-  margin: 0 3px 0.1em;
+  /*margin: 0 2px 0.1em;*/
   transition: background-color 100ms, color 100ms;
 }
 .w-slider-dot.w-active {
-  background-color: #fff;
+  background-color: red;
 }
 .w-slider-arrow-left,
 .w-slider-arrow-right {

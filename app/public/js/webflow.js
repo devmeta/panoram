@@ -3766,7 +3766,7 @@
 
       // Select page nav
       var active = data.nav.children().eq(data.index).addClass('w-active');
-      data.nav.children().not(active).removeClass('w-active');
+      data.nav.children(":gt("+data.index+")").removeClass('w-active');
 
       // Hide arrows
       if (config.hideArrows) {

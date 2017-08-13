@@ -17,13 +17,14 @@ var pano = undefined
 
 			pano = response.pano.data
 			, token = get_token()
-			//hideLoader()
+
+			hideLoader()
 
 			if(!$.isEmptyObject(pano)){
 
 				$('.car-info-info').html($.templates("#carinfo").render(pano))
 				$('.container-profile__detail--financiamiento').html((pano.financing?"Sí":"No"))
-				$('.datosvendedir').html($.templates("#datosvendedor").render(pano,helpers.users))
+				$('.comentarios').html($.templates("#datosvendedor").render(pano,helpers.users))
 				$('.bestinfo__profile').html($.templates("#profile").render(pano,helpers.listing)).promise().done(function(){
 					if(pano.lat && pano.lng){
 						L.mapbox.accessToken = geo.mapbox.accessToken
@@ -71,7 +72,14 @@ var pano = undefined
 
 				$('.w-slider-mask').html($.templates("#slide").render(pano.files,helpers.listing)).promise().done(function(){
 					$('.bestinfo__slider--nav').html($.templates("#slide-nav").render(pano.files,helpers.listing)).promise().done(function(){
-						webflow_reset()
+						//webflow_reset()
+						setTimeout(function(){
+							var w = $('.w-slider').width() / pano.files.length
+							$('.w-slider-dot').each(function(){
+								$(this).width(w +'px')
+							})
+							showifloggedin()
+						},2000)
 					});
 				});
 
@@ -81,8 +89,6 @@ var pano = undefined
 				} else {
 					$('.relacionados').remove()
 				}
-
-
 			}
 
 			$('.spinner').delay(500).fadeOut(500,function(){
@@ -93,7 +99,6 @@ var pano = undefined
 					webflow_reset()			
 				})
 			})
-
 		}
 	})
 }
@@ -146,12 +151,16 @@ $(function(){
 	auto()
 })
 
-$(document).on("click",".pano-download", function(e){
+$(document).on("click",".play-pause", function(e){
+	console.log("play-pause")
+	webflow_reset()
+})
+
+$(document).on("click",".zip-share", function(e){
 	e.preventDefault()
 	$.post( endpoint + '/descargar/' + $(this).attr('id'), function(response){
 		if(response.status=='success'){
 			location.href = response.message
-			//$.get(response.message)
 		}
 	})
 	return false;

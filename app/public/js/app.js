@@ -23,6 +23,12 @@ var scroll_count = 0
 , fix_date_zeros = function (date){
 	return date < 10 ? "0" + date : date 
 }
+, showifloggedin = function(){
+	var token = get_token()
+	if(!$.isEmptyObject(token)){
+		$('.showifloggedin').show()
+	}
+}
 , get_timestamp = function (){
 	var currentdate = new Date()
 	, timestamp = currentdate.getFullYear() + "/"
@@ -706,6 +712,10 @@ $(function (){
 			}
 			location.hash=''
 		},200)
+	}
+
+	if(!$.isEmptyObject(token)){
+		$('.showifloggedin').show()
 	}
 
 	$('.container--profile').html($.templates("#profileactions").render(token,helpers.token))
